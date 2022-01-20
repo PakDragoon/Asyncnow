@@ -8,6 +8,8 @@ import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
 import Login from "./components/loginPage/login.component"
+import Modal from './components/modalComponent/modal.component'
+import Thanks from './components/thanksPage/thanks.component'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="login" element={<Login />} />
+          <Route path="thanks" element={<Thanks />} />
+          <Route path="modal" element={<Modal />} />
         </Routes>
         <Footer />
       </BrowserRouter>
