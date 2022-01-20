@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Overlay from "react-overlay-component";
-import ModalComponent from '../modalComponent/modal.component';
 
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
@@ -17,15 +16,6 @@ function Header() {
         clickDismiss: true,
         escapeDismiss: true,
     };
-    // if(location.pathname === '/'){
-    //     const headerLink = <Link to='login' className="nav-link login w-nav-link">Login</Link>
-    // }
-    // if(location.pathname === 'login'){
-    //     const headerLink = <Link to='login' className="nav-link login w-nav-link">Login</Link>
-    // }
-    // if(location.pathname === 'thanks'){
-    //     const headerLink = <Link to='login' className="nav-link login w-nav-link">Login</Link>
-    // }
   return (
     <>
     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navbar w-nav">
