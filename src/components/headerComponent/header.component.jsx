@@ -19,13 +19,13 @@ function Header() {
     };
   return (
     <>
-    <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" 
-        className={`w-nav ${location.pathname === '/dashboard' ? 'navbbar-app' : 'navbar'}`}>
-        <div className={`w-container ${location.pathname === '/dashboard' ? 'container-4' : 'nav-container'}`}>
+    <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner"
+        className={`w-nav ${location.pathname.match(/^.*dashboard.*$/) ? 'navbbar-app' : 'navbar'} ${location.pathname === '/checkout' || location.pathname === '/paypal' || location.pathname === '/order' || location.pathname === '/protected' || location.pathname === '/error' ? 'none' : ''}`}>
+        <div className={`w-container ${location.pathname.match(/^.*dashboard.*$/) ? 'container-4' : 'nav-container'}`}>
             <Link to="/" aria-current="page" className="brand w-nav-brand w--current">
-                <div className={`brand-logo ${location.pathname === '/dashboard' ? 'app' : ''}`}>async<span className="text-span">.</span></div>
+                <div className={`brand-logo ${location.pathname.match(/^.*dashboard.*$/) ? 'app' : ''}`}>async<span className="text-span">.</span></div>
             </Link>
-            <nav role="navigation" className={`${location.pathname === '/dashboard' ? '' : 'nav-menu'} w-nav-menu`}>
+            <nav role="navigation" className={`${location.pathname.match(/^.*dashboard.*$/) ? '' : 'nav-menu'} w-nav-menu`}>
             {location.pathname === '/' ?
                 <Link to='login' className="nav-link login w-nav-link">Login</Link>
             : location.pathname === '/login' || location.pathname === '/register' ?
@@ -62,7 +62,7 @@ function Header() {
                     </div>
                     <div className="form-block w-form">
                         <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/thanks" data-redirect="/thanks" method="get" className="form join">
-                            <label for="Email-2" className="field-label">YOUR EMAIL</label>
+                            <label for="Email-2" className="field-label">YOUR EMAIL</label>
                             <input type="email" className="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="a.lovelace@email.com" id="Email" required="" />
                             <div className="div-block-12">
                                 <input type="submit" value="Join for FREE!" data-wait="Please wait..." className="submit-button w-button" />

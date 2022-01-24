@@ -1,6 +1,4 @@
-import "../../../assets/css/normalize.css"
-import "../../../assets/css/asyncnow.webflow.css"
-import "../../../assets/css/webflow.css"
+
 import playVideo from "../../../assets/images/play-button.png"
 
 function HomeComponentTwo() {

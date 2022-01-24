@@ -2,6 +2,7 @@ import React from 'react'
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
 class Register extends React.Component {
     constructor(props) {

@@ -1,6 +1,4 @@
-import '../../../assets/css/normalize.css'
-import '../../../assets/css/asyncnow.webflow.css'
-import '../../../assets/css/webflow.css'
+
 import mainPageImage from '../../../assets/images/laura-adai-enkfbbb9yf8-unsplash-2.jpg'
 import mainSmallImage1 from '../../../assets/images/cazoo_brand_logo.svg'
 import mainSmallImage2 from '../../../assets/images/deliveroo.svg'

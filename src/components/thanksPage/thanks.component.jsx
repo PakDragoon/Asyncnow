@@ -5,8 +5,10 @@ import '../../assets/css/webflow.css'
 import socialLinkedin from '../../assets/images/linkedin-6.png'
 import socialTwitter from '../../assets/images/twitter-3.png'
 import socialAsync from '../../assets/images/medium.png'
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
-function Thanks() {
+function Thanks(props) {
+    PageTitle(props.title)
     const linkedinUrl = () => window.open("https://www.linkedin.com/company/asyncnowcom");
     const twitterUrl = () => window.open("https://twitter.com/asyncnow");
     const asyncUrl = () => window.open("https://medium.com/@asyncnow");

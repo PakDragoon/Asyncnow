@@ -1,5 +1,7 @@
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import Overlay from "react-overlay-component";
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
@@ -13,10 +15,21 @@ import DashboardVideos from './dashboardVideos/dashboardVideos.component';
 import DashboardMain from './dashboardMain/dashboardMain.component';
 import DashboardInsights from './dashboardInsights/dashboardInsights.component';
 import DashboardSettings from './dashboardSettings/dashboardSettings.component';
+import CreateVideo from '../createVideoModal/create.video.component';
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
-function Dashboard() {
+function Dashboard(props) {
+    PageTitle(props.title)
     const location = useLocation();
+    const [isOpen, setOverlay] = useState(false);
+    const closeOverlay = () => setOverlay(false);
+    const configs = {
+        animate: true,
+        clickDismiss: true,
+        escapeDismiss: true,
+    };
   return (
+    <>
     <div className="container-3 w-container">
         <div className="div-block-36">
             <div className="div-block-37">
@@ -32,7 +45,7 @@ function Dashboard() {
                 </div>
                 <div className="div-block-40">
                     <div className="text-block-10">Create a new video</div>
-                    <a data-w-id="83de8771-2499-14e9-2e83-580013f06173" href="#" className="link-block-2 video w-inline-block">
+                    <a data-w-id="83de8771-2499-14e9-2e83-580013f06173" href="#" onClick={() => {setOverlay(true);}} className="link-block-2 video w-inline-block">
                         <img src={createIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
                 </div>
             </div>
@@ -44,6 +57,12 @@ function Dashboard() {
                 : <DashboardMain />}
         </div>
     </div>
+        <div>
+        <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay}>
+            <CreateVideo />
+        </Overlay>
+    </div>
+    </>
   )
 }
 

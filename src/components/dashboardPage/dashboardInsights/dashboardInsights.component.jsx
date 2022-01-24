@@ -8,6 +8,7 @@ import settingsIcon from '../../../assets/images/more.png'
 
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
+import PageTitle from '../../pageTitlesComponent/pageTitles.component'
 
 class DashboardInsights extends React.Component {
     constructor(props) {

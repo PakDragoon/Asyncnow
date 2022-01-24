@@ -2,16 +2,21 @@ import React from 'react'
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
-    
+        this.state = {
+          value: '',
+          title:this.props.title
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
-    
+    // componentDidMount(){
+    //   PageTitle(this.state.title);
+    // }
       handleChange(event) {
         this.setState({value: event.target.value});
       }

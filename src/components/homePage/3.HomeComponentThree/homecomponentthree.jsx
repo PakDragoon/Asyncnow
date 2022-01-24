@@ -1,6 +1,4 @@
-import "../../../assets/css/normalize.css"
-import "../../../assets/css/asyncnow.webflow.css"
-import "../../../assets/css/webflow.css"
+
 import slideImage1 from "../../../assets/images/laura-adai-BFmhzQNLyaA-unsplash-2.jpg"
 import slideImage2 from "../../../assets/images/laura-adai-AF50O2MtgOU-unsplash-2.jpg"
 import slideImage3 from "../../../assets/images/laura-adai-O0bNT7gH1xg-unsplash-3.jpg"

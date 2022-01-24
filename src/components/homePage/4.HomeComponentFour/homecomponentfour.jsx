@@ -1,6 +1,3 @@
-import "../../../assets/css/normalize.css"
-import "../../../assets/css/asyncnow.webflow.css"
-import "../../../assets/css/webflow.css"
 
 function HomeComponentFour() {
   return (

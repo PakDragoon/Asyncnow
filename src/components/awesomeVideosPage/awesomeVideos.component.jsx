@@ -2,8 +2,10 @@ import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
 import awesomeVid from '../../assets/images/play-button.png'
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
-function AwesomeVideos() {
+function AwesomeVideos(props) {
+  PageTitle(props.title)
   return (
   <div className="container-3 w-container">
     <div className="div-block-36 video">
