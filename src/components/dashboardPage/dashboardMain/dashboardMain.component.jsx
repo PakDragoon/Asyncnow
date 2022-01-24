@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import '../../../assets/css/normalize.css'
 import '../../../assets/css/asyncnow.webflow.css'
 import '../../../assets/css/webflow.css'
@@ -9,6 +10,8 @@ import settingsIcon from '../../../assets/images/more.png'
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
 
+const title = 'Dashboard | Main'
+
 class DashboardMain extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +19,9 @@ class DashboardMain extends React.Component {
       render(){
         return (
             <>
+            <Helmet>
+              <title>{ title }</title>
+            </Helmet>
             <div className="div-block-39">
                 <DashboardSubTitle subTitle='Dashboard' />
                 <DashboardSubText subText='Hey Jonathan, welcome to async. Let&#x27;s get started 🚀' />

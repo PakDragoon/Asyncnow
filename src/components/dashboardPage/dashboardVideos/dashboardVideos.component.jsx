@@ -5,6 +5,9 @@ import '../../../assets/css/webflow.css'
 import videosIcon from '../../../assets/images/focus.png'
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
+import { Helmet } from 'react-helmet'
+
+const title = 'Dashbaord | Videos'
 
 class DashboardVideos extends React.Component {
     constructor(props) {
@@ -13,6 +16,9 @@ class DashboardVideos extends React.Component {
       render(){
         return (
             <>
+            <Helmet>
+                <title>{ title }</title>
+            </Helmet>
             <div className="div-block-39">
             <DashboardSubTitle subTitle='Videos' />
             <DashboardSubText subText='Manage sent videos, record and send new ones 🎬' />

@@ -2,7 +2,9 @@ import React from 'react'
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
-import PageTitle from '../pageTitlesComponent/pageTitles.component'
+import { Helmet } from 'react-helmet'
+
+const title = 'Login'
 
 class Login extends React.Component {
     constructor(props) {
@@ -14,9 +16,6 @@ class Login extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
-    // componentDidMount(){
-    //   PageTitle(this.state.title);
-    // }
       handleChange(event) {
         this.setState({value: event.target.value});
       }
@@ -27,6 +26,10 @@ class Login extends React.Component {
       }
 render(){
     return (
+      <>
+        <Helmet>
+          <title>{ title }</title>
+        </Helmet>
         <div className="section-white wf-section">
         <div className="hero-container fixed w-container">
           <div className="w-row">
@@ -55,7 +58,7 @@ render(){
           </div>
         </div>
       </div>
-      
+      </>
         );
 }
 }

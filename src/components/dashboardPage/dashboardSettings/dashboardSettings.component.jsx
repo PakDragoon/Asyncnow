@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import '../../../assets/css/normalize.css'
 import '../../../assets/css/asyncnow.webflow.css'
 import '../../../assets/css/webflow.css'
@@ -10,6 +11,8 @@ import linkIcon from '../../../assets/images/link.png'
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
 
+const title = 'Dashboard | Settings'
+
 class DashboardSettings extends React.Component {
     constructor(props) {
         super(props);
@@ -17,6 +20,9 @@ class DashboardSettings extends React.Component {
       render(){
         return (
             <>
+            <Helmet>
+              <title>{ title }</title>
+            </Helmet>
             <div className="div-block-39">
         <DashboardSubTitle subTitle='Setting' />
         <DashboardSubText subText='Update your personal details and account settings ⚙️' />

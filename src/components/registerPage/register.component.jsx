@@ -2,7 +2,9 @@ import React from 'react'
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
-import PageTitle from '../pageTitlesComponent/pageTitles.component'
+import { Helmet } from 'react-helmet'
+
+const title = 'Register'
 
 class Register extends React.Component {
     constructor(props) {
@@ -23,6 +25,10 @@ class Register extends React.Component {
       }
 render(){
     return (
+    <>
+    <Helmet>
+        <title>{ title }</title>
+    </Helmet>
     <div className="section-white wf-section">
         <div className="hero-container fixed w-container">
             <div className="w-row">
@@ -53,6 +59,7 @@ render(){
             </div>
         </div>
     </div>
+    </>
     );
 }
 }
