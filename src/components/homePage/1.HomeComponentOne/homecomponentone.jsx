@@ -16,7 +16,7 @@ function HomeComponentOne() {
           <h1 className="heading-hero">Get your message across faster.</h1>
           <div className="text-block-2">Simple video messaging made for sales and marketing teams who want to better engage leads and clients.</div>
           <div className="div-block-2 hero">
-            <a data-w-id="ace441d6-3eec-823d-c13d-306c9ae6ad33" href="#" className="button w-button">Join for FREE →</a>
+            <a data-w-id="ace441d6-3eec-823d-c13d-306c9ae6ad33" href="#" className="button w-button bg-home-color">Join for FREE →</a>
             <a data-w-id="66fc2f41-5935-02f1-a35d-2bab6367ba82" href="#" className="button transparent w-button">Watch Demo</a>
           </div>
         </div>

@@ -45,7 +45,6 @@ function App() {
             <Route path="settings" element={<DashboardSettings />}/>
           </Route>
           <Route path="createvideo" element={<CreateVideo />} />
-          <Route path='error' element={<Error title="404" />} />
           <Route path='*' exact={true} element={<Error title="404" />} />
         </Routes>
         <Footer />
