@@ -17,7 +17,6 @@ import DashboardInsights from "./components/dashboardPage/dashboardInsights/dash
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
 import Register from './components/registerPage/register.component'
 import AwesomeVideos from "./components/awesomeVideosPage/awesomeVideos.component"
-import CreateVideo from "./components/createVideoModal/create.video.component"
 import ProtectedComponent from "./components/ProtectedComponent/401protected.component"
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
@@ -44,7 +43,6 @@ function App() {
             <Route path="insights" element={<DashboardInsights />}/>
             <Route path="settings" element={<DashboardSettings />}/>
           </Route>
-          <Route path="createvideo" element={<CreateVideo />} />
           <Route path='*' exact={true} element={<Error title="404" />} />
         </Routes>
         <Footer />
