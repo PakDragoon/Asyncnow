@@ -6,6 +6,7 @@ import Overlay from "react-overlay-component";
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
+import './header.style.css'
 
 function Header() {
     const location = useLocation();
@@ -18,26 +19,33 @@ function Header() {
     };
   return (
     <>
-    <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" className="navbar w-nav">
-        <div className="nav-container w-container">
+    <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" 
+        className={`w-nav ${location.pathname === '/dashboard' ? 'navbbar-app' : 'navbar'}`}>
+        <div className={`w-container ${location.pathname === '/dashboard' ? 'container-4' : 'nav-container'}`}>
             <Link to="/" aria-current="page" className="brand w-nav-brand w--current">
-                <div className="brand-logo">async<span className="text-span">.</span></div>
+                <div className={`brand-logo ${location.pathname === '/dashboard' ? 'app' : ''}`}>async<span className="text-span">.</span></div>
             </Link>
-            <nav role="navigation" className="nav-menu w-nav-menu">
-            {location.pathname === '/thanks' ? (
-                ''
-            ) : (
-                location.pathname === '/' ? (
-                    <Link to='login' className="nav-link login w-nav-link">Login</Link>
-                ) : (
-                    <Link to='/' className="nav-link login w-nav-link">Home</Link>
-                )
-            )}
-            {location.pathname === '/thanks' ? (
-                <Link to="/" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Return Home →</Link>
-            ) : (
+            <nav role="navigation" className={`${location.pathname === '/dashboard' ? '' : 'nav-menu'} w-nav-menu`}>
+            {location.pathname === '/' ?
+                <Link to='login' className="nav-link login w-nav-link">Login</Link>
+            : location.pathname === '/login' || location.pathname === '/register' ?
+                <Link to='/' className="nav-link login w-nav-link">Home</Link>
+            : ''
+            }
+            {location.pathname === '/' ?
                 <a href="#top" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" onClick={() => {setOverlay(true);}} className="nav-link w-nav-link">Join for FREE →</a>
-            )}
+            : location.pathname === '/thanks' ? 
+                <Link to="/" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Return Home →</Link>
+            : location.pathname === '/login' ?
+                <Link to="/register" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Register for FREE →</Link>
+            : location.pathname === '/register' ?
+                <Link to="/login" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Back to Login →</Link>
+            : location.pathname === '/awesome' ?
+                <a href="../index.html" class="nav-link-3 b-nav-link">Visit asyncnow.com</a>
+            : location.pathname.match(/^.*dashboard.*$/) ?
+                <Link to='/' className="nav-link-3 b-nav-link">Sign Out</Link>
+            :   ''
+            }
             </nav>
             <div className="menu-button w-nav-button">
                 <div className="icon w-icon-nav-menu"></div>

@@ -16,6 +16,8 @@ import DashboardMain from './components/dashboardPage/dashboardMain/dashboardMai
 import DashboardVideos from './components/dashboardPage/dashboardVideos/dashboardVideos.component'
 import DashboardInsights from "./components/dashboardPage/dashboardInsights/dashboardInsights.component"
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
+import Register from './components/registerPage/register.component'
+import AwesomeVideos from "./components/awesomeVideosPage/awesomeVideos.component"
 
 function App() {
   return (
@@ -25,9 +27,10 @@ function App() {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="thanks" element={<Thanks />} />
+          <Route path="awesome" element={<AwesomeVideos />} />
           <Route path="modal" element={<Modal />} />
-          <Route path="error" element={<Error />} />
           <Route path='*' exact={true} element={<Error />} />
           <Route path="dashboard" element={<Dashboard />}>
             <Route path="main" element={<DashboardMain />}/>
