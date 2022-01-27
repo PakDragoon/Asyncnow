@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Overlay from "react-overlay-component";
+import { Container, Row, Col } from 'react-bootstrap';
 
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'

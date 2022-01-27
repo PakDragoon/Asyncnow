@@ -592,7 +592,7 @@ textarea.w-select {
 .w-hidden-main {
   display: none !important;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 991px) and (min-width: 767px){
   .w-container {
     max-width: 728px;
   }
@@ -644,7 +644,7 @@ textarea.w-select {
     right: auto;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) and (min-width: 479px) {
   .w-hidden-main {
     display: inherit !important;
   }
@@ -1127,7 +1127,7 @@ textarea.w-select {
 .w-dropdown-link:focus {
   outline: 0;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) and (min-width: 479px){
   .w-nav-brand {
     padding-left: 10px;
   }
@@ -1416,7 +1416,7 @@ textarea.w-select {
 .w-lightbox-noscroll {
   overflow: hidden;
 }
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 991px){
   .w-lightbox-content {
     height: 96vh;
     margin-top: 2vh;
@@ -1704,7 +1704,7 @@ textarea.w-select {
 .w--nav-dropdown-list-open {
   position: static;
 }
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 991px) and (min-width: 767px) {
   .w-nav[data-collapse="medium"] .w-nav-menu {
     display: none;
   }
@@ -1712,7 +1712,7 @@ textarea.w-select {
     display: block;
   }
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) and (min-width: 479px) {
   .w-nav[data-collapse="small"] .w-nav-menu {
     display: none;
   }

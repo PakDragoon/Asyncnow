@@ -1522,7 +1522,7 @@
   background-color: #ffdede;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) and (min-width: 479px) {
   .w-commerce-commercelayoutcontainer {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
