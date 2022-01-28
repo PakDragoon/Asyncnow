@@ -4205,7 +4205,7 @@ border: 2px solid #454ade !important;
   }
 
   .pup-up-modal {
-    display: none;
+    display: block;
   }
 
   .pup-up-modal.oops {
@@ -4253,7 +4253,7 @@ border: 2px solid #454ade !important;
   }
 
   .pop-up-modal-content {
-    left: 0%;
+    left: 8%;
     top: 10%;
     right: 0%;
     bottom: auto;
@@ -5005,6 +5005,9 @@ border: 2px solid #454ade !important;
   }
 
   .navbbar-app {
+    display: block;
+  }
+  .div-block-37 {
     display: none;
   }
 
@@ -5013,7 +5016,7 @@ border: 2px solid #454ade !important;
   }
 
   .container-3 {
-    display: none;
+    display: block;
     padding-right: 20px;
     padding-left: 20px;
   }

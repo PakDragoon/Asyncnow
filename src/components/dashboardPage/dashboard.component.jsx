@@ -44,6 +44,37 @@ function Dashboard(props) {
     
   return (
     <>
+    <div data-animation="default" data-collapse="medium" data-duration={400} data-easing="ease" data-easing2="ease" role="banner" className="navbar-4 w-nav">
+        <div className="container-8 w-container">
+            <div className="div-block-59">
+                <div className="div-block-63">
+                    <Link to='main' aria-current="page" className="link-block-2 inline mobile app w-inline-block w--current">
+                        <img src={dashboardIcon} loading="lazy" sizes="(max-width: 479px) 45px, 100vw" alt="" /></Link>
+                </div>
+                <div className="div-block-60" />
+                <div className="div-block-63">
+                    <Link to='videos' className="link-block-2 inline mobile app w-inline-block">
+                        <img src={videosIcon} loading="lazy" sizes="(max-width: 479px) 45px, 100vw" alt="" /></Link>
+                </div>
+                <div className="div-block-60" />
+                <div className="div-block-63">
+                    <a data-w-id="1dcf8c3a-263a-bca4-53ba-8783240c6109" href='#' onClick={() => {setOverlay(true);}} className="link-block-2 inline mobile app main w-inline-block">
+                        <img src={createIcon} loading="lazy" sizes="(max-width: 479px) 55px, 100vw" alt="" /></a>
+                    <div className="text-block-25">NEW&nbsp;VIDEO</div>
+                </div>
+                <div className="div-block-60" />
+                <div className="div-block-63">
+                    <Link to='insights' className="link-block-2 inline mobile app w-inline-block">
+                        <img src={insightsIcon} loading="lazy" sizes="(max-width: 479px) 45px, 100vw" alt="" /></Link>
+                </div>
+                <div className="div-block-60" />
+                <div className="div-block-63">
+                    <Link to='settings' className="link-block-2 inline mobile app w-inline-block">
+                        <img src={settingsIcon} loading="lazy" sizes="(max-width: 479px) 45px, 100vw" alt="" /></Link>
+                </div>
+            </div>
+        </div>
+    </div>
     <div className="container-3 w-container">
         <div className="div-block-36">
             <div className="div-block-37">
