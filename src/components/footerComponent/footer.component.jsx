@@ -20,16 +20,7 @@ function Footer() {
             <div className="text-block-4 company flag"><span className="text-span-3">🇪🇺</span></div>
           </div>
         </div>
-        <div className="column-13 w-col w-col-2">
-          <div className="text-block-4 footer">Other Stuff</div>
-          <div className="text-block-4 footer link">
-            <a href="documents/async_privacy_policy.pdf" target="_blank" className="link-2">Privacy policy</a>
-          </div>
-          <div className="text-block-4 footer link">
-            <a href="documents/async_terms_of_use.pdf" target="_blank" className="link-2">Terms of use</a>
-          </div>
-        </div>
-        <div className="column-14 w-col w-col-2">
+        <div className="column-14 footer-col w-col w-col-2">
           <div className="text-block-4 footer">Company</div>
           <div className="text-block-4 footer link">
             <a href="https://www.linkedin.com/company/asyncnowcom" target="_blank" className="link-2">About async</a>
@@ -53,6 +44,16 @@ function Footer() {
             <a href="https://join.com/companies/asyncnow" target="_blank" className="link-2">Work with us</a>
           </div>
         </div>
+        <div className="column-13 footer-col w-col w-col-2">
+          <div className="text-block-4 footer">Other Stuff</div>
+          <div className="text-block-4 footer link">
+            <a href="documents/async_privacy_policy.pdf" target="_blank" className="link-2">Privacy policy</a>
+          </div>
+          <div className="text-block-4 footer link">
+            <a href="documents/async_terms_of_use.pdf" target="_blank" className="link-2">Terms of use</a>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

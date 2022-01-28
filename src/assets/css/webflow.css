@@ -592,9 +592,20 @@ textarea.w-select {
 .w-hidden-main {
   display: none !important;
 }
-@media screen and (max-width: 991px) and (min-width: 767px){
+/* @media screen and (min-width: 991px) {
   .w-container {
-    max-width: 728px;
+    max-width: 1200px;
+  }
+} */
+@media screen and (max-width: 991px) and (min-width: 767px){
+  .heading {
+    margin-bottom: 0px !important;
+  }
+  .column-5 {
+    top: 110px !important;
+  }
+  .w-container {
+    max-width: 904px;
   }
   .w-hidden-main {
     display: inherit !important;
@@ -701,9 +712,16 @@ textarea.w-select {
     width: 100%;
   }
 }
+@media screen and (max-width: 479px) and (min-width: 451px) {
+  .w-container {
+    max-width: none;
+    margin-left: 0.6rem;
+  }
+}
 @media screen and (max-width: 479px) {
   .w-container {
     max-width: none;
+    margin-left: auto;
   }
   .w-hidden-main {
     display: inherit !important;
