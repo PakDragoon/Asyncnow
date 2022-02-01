@@ -20,13 +20,13 @@
     "react-sticky": "6.0.3",
     "web-vitals": "2.1.3"
   },
+  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://192.168.1.16:3000",
   "eslintConfig": {
     "extends": [
       "react-app",

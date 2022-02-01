@@ -7,12 +7,18 @@ const sharp = require('sharp')
 
 //Create User
 router.post('/users', async (req, res) => {
-    const user = new User(req.body)
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        company: req.body.company,
+        password: req.body.password
+    })
     try {
         await user.save()
         const token = await user.generateAuthToken()
         res.status(200).send({user, token})
     } catch (error) {
+        console.log(req.body)
         res.status(400).send(error)
     }
 })

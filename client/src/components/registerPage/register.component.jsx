@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
@@ -15,9 +14,18 @@ class Register extends React.Component {
       email: "",
       company: "",
       password: "",
+      loading: false,
+      success: false,
+      fail: false,
+      message: "",
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+  handleChange = (event) => {
+    const { name, value } = event.target
+    this.setState({ [name]: value })
+    console.log(`${name}: ${value}`)
   }
   handleSubmit = async (event) => {
     event.preventDefault()
@@ -25,28 +33,39 @@ class Register extends React.Component {
     const email = this.state.email
     const company = this.state.company
     const password = this.state.password
+    console.log(`name: ${name} | email: ${email} | company: ${company} | password: ${password}`)
+    this.setState({ loading: true })
+    const data = {
+      name,
+      email,
+      company,
+      password,
+    }
     axios({
       method: "post",
-      url: "/users",
+      url: "http://localhost:3000/users",
       data: {
         name,
         email,
         company,
         password,
       },
-      headers: { "Content-Type": "multipart/form-data" },
     })
       .then((res) => {
         console.log(res)
+        this.setState({ loading: false, success: true, message: res.data })
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err.response.data)
+        this.setState({ loading: false, fail: true })
       })
   }
-  handleChange = (event) => {
-    const { name, value } = event.target
-    this.setState({ [name]: value })
-    console.log(`${name}: ${value}`)
+  showMsg() {
+    if (this.state.loading) {
+      return <p>Loading . . .</p>
+    } else {
+        <p>{this.state.message}</p>
+    }
   }
   render() {
     return (
@@ -78,17 +97,16 @@ class Register extends React.Component {
                       PASSWORD
                     </label>
                     <input value={this.state.password} onChange={this.handleChange} type="password" className="text-field w-input" maxLength="256" name="password" data-name="password" placeholder="***********" id="password" />
+                    <input type="submit" className="button w-button" value="Register Now →" />
                   </form>
-                  <div className="w-form-done">
+                  {this.showMsg()}
+                  <div className={`${this.state.success ? 'w-form-done' : '.w-condition-invisible'}`}>
                     <div>Thank you! Your submission has been received!</div>
                   </div>
-                  <div className="w-form-fail">
+                  <div className={`${this.state.fail ? 'w-form-fail' : '.w-condition-invisible'}`}>
                     <div>Oops! Something went wrong while submitting the form.</div>
                   </div>
                 </div>
-                <Link to="/login" className="button w-button">
-                  Register Now →
-                </Link>
               </div>
               <div className="column-16 w-col w-col-6"></div>
             </div>
