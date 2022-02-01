@@ -41,9 +41,9 @@ function CreateVideo() {
             <div className="form-block w-form">
                 <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/app/videos" data-redirect="/app/videos" method="get" className="form join">
                     <label for="Title" className="field-label">VIDEO TITLE</label>
-                    <input type="text" className="text-field w-input" maxlength="256" name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required=""/>
+                    <input type="text" className="text-field w-input" maxLength="256" name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required=""/>
                     <label for="CTA" className="field-label">CTA (OPTIONAL)</label>
-                    <input type="text" className="text-field w-input" maxlength="256" name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required=""/>
+                    <input type="text" className="text-field w-input" maxLength="256" name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required=""/>
                     <label for="Title" className="field-label">VIDEO LINK</label>
                     <div className="div-block-51">
                         <div className="text-block-12 video">/@alovelace/save-10%</div>

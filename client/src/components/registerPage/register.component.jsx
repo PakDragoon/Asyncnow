@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
@@ -9,37 +10,29 @@ const title = 'Register'
 class Register extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
-    
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.registerHandler = this.registerHandler.bind(this);
+        this.state = {
+            name: '',
+            email: '',
+            company: '',
+            password: ''
+          };
+
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
       }
     
-      handleChange(event) {
-        this.setState({value: event.target.value});
-      }
-    
-      handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
+      handleSubmit = async event => {
         event.preventDefault();
-      }
-      registerHandler(e) {
-        e.preventDefault();
-        axios.post('/user', {
-            name: 'Fred',
-            email: 'Flintstone',
-            company: 'CompanyA',
-            password: 'qwerty123456'
-          })
-          .then(function (response) {
-            console.log(response);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+      };
+    
+      handleChange = event => {
+        const { name, value } = event.target;
+        this.setState({ [name]: value });
+        console.log(value)
+        console.log(name)
+      };
 render(){
+    const { name, email, company, password } = this.state;
     return (
     <>
     <Helmet>
@@ -52,15 +45,15 @@ render(){
                     <h1 className="heading-hero">Let&#x27;s get started!</h1>
                     <div className="text-block-3">We need some details to set up your FREE account.</div>
                     <div className="form-block w-form">
-                        <form onSubmit={registerHandler()} id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" method="get" className="form login app">
-                            <label for="Name" className="field-label">FULL NAME</label>
-                            <input type="text" className="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="Ada Lovelace" id="name"/>
-                            <label for="Email-2" className="field-label">WORK EMAIL</label>
-                            <input type="email" className="text-field w-input" maxlength="256" name="email" data-name="Email 2" placeholder="a.lovelace@google.com" id="email"/>
-                            <label for="Name-2" className="field-label">COMPANY NAME</label>
-                            <input type="text" className="text-field w-input" maxlength="256" name="company" data-name="Name 2" placeholder="Google Inc." id="company"/>
-                            <label for="Password" className="field-label">PASSWORD</label>
-                            <input type="password" className="text-field w-input" maxlength="256" name="password" data-name="password" placeholder="***********" id="password"/>
+                        <form id="registerForm" onSubmit={this.handleSubmit} name="registerForm" data-name="Email Form" method="get" className="form login app">
+                            <label htmlFor="Name" className="field-label">FULL NAME</label>
+                            <input value={name} onChange={this.handleChange} type="text" className="text-field w-input" maxLength="256" name="name" data-name="Name" placeholder="Ada Lovelace" id="name"/>
+                            <label htmlFor="Email-2" className="field-label">WORK EMAIL</label>
+                            <input value={email} onChange={this.handleChange} type="email" className="text-field w-input" maxLength="256" name="email" data-name="Email 2" placeholder="a.lovelace@google.com" id="email"/>
+                            <label htmlFor="Name-2" className="field-label">COMPANY NAME</label>
+                            <input value={company} onChange={this.handleChange} type="text" className="text-field w-input" maxLength="256" name="company" data-name="Name 2" placeholder="Google Inc." id="company"/>
+                            <label htmlFor="Password" className="field-label">PASSWORD</label>
+                            <input value={password} onChange={this.handleChange} type="password" className="text-field w-input" maxLength="256" name="password" data-name="password" placeholder="***********" id="password"/>
                         </form>
                         <div className="w-form-done">
                             <div>Thank you! Your submission has been received!</div>
@@ -69,7 +62,7 @@ render(){
                             <div>Oops! Something went wrong while submitting the form.</div>
                         </div>
                     </div>
-                    <a href="../app/dashboard.html" className="button w-button">Register Now →</a>
+                    <Link to="/dashboard" className="button w-button">Register Now →</Link>
                 </div>
                 <div className="column-16 w-col w-col-6"></div>
             </div>

@@ -38,10 +38,10 @@ render(){
               <div className="text-block-3">Start by logging into your async account.</div>
               <div className="form-block w-form">
                 <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" method="get" className="form login">
-                    <label for="Email" className="field-label">EMAIL</label>
-                    <input type="email" className="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="a.lovelace@email.com" id="Email" required=""/>
-                    <label for="Password" className="field-label">PASSWORD</label>
-                    <input type="password" className="text-field w-input" maxlength="256" name="Password" data-name="Password" placeholder="***********" id="Password" required=""/>
+                    <label htmlFor="Email" className="field-label">EMAIL</label>
+                    <input type="email" className="text-field w-input" maxLength="256" name="Email" data-name="Email" placeholder="a.lovelace@email.com" id="Email" required=""/>
+                    <label htmlFor="Password" className="field-label">PASSWORD</label>
+                    <input type="password" className="text-field w-input" maxLength="256" name="Password" data-name="Password" placeholder="***********" id="Password" required=""/>
                     <input type="submit" value="Login Now →" data-wait="Please wait..." className="submit-button login w-button"/>
                 </form>
                 <div className="w-form-done">

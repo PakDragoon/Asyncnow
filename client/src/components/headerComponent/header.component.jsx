@@ -63,8 +63,8 @@ function Header() {
                     </div>
                     <div className="form-block w-form">
                         <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/thanks" data-redirect="/thanks" method="get" className="form join">
-                            <label for="Email-2" className="field-label">YOUR EMAIL</label>
-                            <input type="email" className="text-field w-input" maxlength="256" name="Email" data-name="Email" placeholder="a.lovelace@email.com" id="Email" required="" />
+                            <label htmlFor="Email-2" className="field-label">YOUR EMAIL</label>
+                            <input type="email" className="text-field w-input" maxLength="256" name="Email" data-name="Email" placeholder="a.lovelace@email.com" id="Email" required="" />
                             <div className="div-block-12">
                                 <input type="submit" value="Join for FREE!" data-wait="Please wait..." className="submit-button w-button" />
                                 <a data-w-id="87ebe9d9-68f2-8d77-ddec-e4e3da0d8fe5" href="#top" onClick={() => {setOverlay(false);}} className="link-7">Erm, no thanks!</a>
