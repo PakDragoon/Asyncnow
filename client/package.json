@@ -1,6 +1,7 @@
 {
   "name": "asyncnow",
   "homepage": "http://Async.reownlogics.com",
+  "proxy": "localhost:3001",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

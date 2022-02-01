@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
                 }
             }
         },
+        company: {
+            type: String,
+            required: true,
+            trim: true
+        },
         password: {
             type: String, 
             required: true,
@@ -32,18 +37,6 @@ const userSchema = new mongoose.Schema({
                     throw new Error(`Password cannot be 'password'`)
                 }
             }
-        },
-        age: {
-            type: Number,
-            default: 0,
-            validate(value){
-                if(value < 0) {
-                    throw new Error('Age cannot be negative ')
-                }
-            }
-        },
-        avatar: {
-            type: Buffer
         },
         tokens: [{
             token: {
@@ -68,7 +61,6 @@ userSchema.methods.toJSON = function () {
     const userObject = user.toObject()
     delete userObject.password
     delete userObject.tokens
-    delete userObject.avatar
     return userObject
 }
 userSchema.methods.generateAuthToken = async function () {
