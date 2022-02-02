@@ -33,14 +33,7 @@ class Register extends React.Component {
     const email = this.state.email
     const company = this.state.company
     const password = this.state.password
-    console.log(`name: ${name} | email: ${email} | company: ${company} | password: ${password}`)
     this.setState({ loading: true })
-    const data = {
-      name,
-      email,
-      company,
-      password,
-    }
     axios({
       method: "post",
       url: "http://localhost:3000/users",
@@ -64,7 +57,7 @@ class Register extends React.Component {
     if (this.state.loading) {
       return <p>Loading . . .</p>
     } else {
-        <p>{this.state.message}</p>
+      ;<p>{this.state.message}</p>
     }
   }
   render() {
@@ -100,10 +93,10 @@ class Register extends React.Component {
                     <input type="submit" className="button w-button" value="Register Now →" />
                   </form>
                   {this.showMsg()}
-                  <div className={`${this.state.success ? 'w-form-done' : '.w-condition-invisible'}`}>
+                  <div className={`${this.state.success ? "w-form-done" : "w-condition-invisible"}`}>
                     <div>Thank you! Your submission has been received!</div>
                   </div>
-                  <div className={`${this.state.fail ? 'w-form-fail' : '.w-condition-invisible'}`}>
+                  <div className={`${this.state.fail ? "w-form-fail" : "w-condition-invisible"}`}>
                     <div>Oops! Something went wrong while submitting the form.</div>
                   </div>
                 </div>

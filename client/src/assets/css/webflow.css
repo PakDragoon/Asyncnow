@@ -305,10 +305,13 @@ input[type='reset'] {
 .w-form {
   margin: 0 0 15px;
 }
+.login-success-color {
+  color: green;
+}
 .w-form-done {
   padding: 20px;
   text-align: center;
-  background-color: #dddddd;
+  background-color: #a1db9be0;
 }
 .w-form-fail {
   margin-top: 10px;

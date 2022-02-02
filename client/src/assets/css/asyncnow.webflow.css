@@ -2474,10 +2474,9 @@ border: 2px solid #454ade !important;
 }
 
 .form.login {
-  margin-bottom: 40px;
-  padding-bottom: 40px;
+  margin-bottom: 0px;
+  padding-bottom: 15px;
 }
-
 .form.login.app {
   margin-bottom: 0px;
 }
