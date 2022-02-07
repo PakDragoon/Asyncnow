@@ -5,6 +5,7 @@ import "./assets/css/normalize.css"
 import "./assets/css/asyncnow.webflow.css"
 import "./assets/css/webflow.css"
 
+import ProtectedRoute from './components/protectedRoutes/protected.component'
 import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
@@ -38,12 +39,14 @@ function App() {
           <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
           <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
           <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
-          <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
-            <Route path="main" element={<DashboardMain />} />
-            <Route path="videos" element={<DashboardVideos />} />
-            <Route path="insights" element={<DashboardInsights />} />
-            <Route path="settings" element={<DashboardSettings />} />
-          </Route>
+          {/* <Route path="dashboard" element={<ProtectedRoute />}> */}
+            <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
+              <Route path="main" element={<DashboardMain />} />
+              <Route path="videos" element={<DashboardVideos />} />
+              <Route path="insights" element={<DashboardInsights />} />
+              <Route path="settings" element={<DashboardSettings />} />
+            </Route>
+          {/* </Route> */}
           <Route path="*" exact={true} element={<Error title="404" />} />
         </Routes>
         <Footer />
