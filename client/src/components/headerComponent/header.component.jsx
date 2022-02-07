@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Overlay from "react-overlay-component";
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -11,6 +11,7 @@ import './header.style.css'
 
 function Header() {
     const location = useLocation();
+    const navigate = useNavigate();
     const [isOpen, setOverlay] = useState(false);
     const closeOverlay = () => setOverlay(false);
     const configs = {
@@ -18,6 +19,11 @@ function Header() {
         clickDismiss: true,
         escapeDismiss: true,
     };
+    const Logout = (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        navigate('/login', { replace: true })
+    }
   return (
     <>
     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner"
@@ -44,7 +50,7 @@ function Header() {
             : location.pathname === '/awesome' ?
                 <a href="../index.html" class="nav-link-3 b-nav-link">Visit asyncnow.com</a>
             : location.pathname.match(/^.*dashboard.*$/) ?
-                <Link to='/' className="nav-link-3 b-nav-link">Sign Out</Link>
+                <Link to='/' onClick={Logout} className="nav-link-3 b-nav-link">Sign Out</Link>
             :   ''
             }
             </nav>

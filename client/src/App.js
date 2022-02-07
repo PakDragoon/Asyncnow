@@ -1,11 +1,11 @@
-import React from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import React, { useState, useEffect, Fragment } from "react"
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "./assets/css/normalize.css"
-import "./assets/css/asyncnow.webflow.css"
-import "./assets/css/webflow.css"
+import ".//assets/css/normalize.css"
+import ".//assets/css/asyncnow.webflow.css"
+import ".//assets/css/webflow.css"
 
-import ProtectedRoute from './components/protectedRoutes/protected.component'
+import ProtectedRoute from "./components/protectedRoutes/protected.component"
 import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
@@ -18,38 +18,55 @@ import DashboardVideos from "./components/dashboardPage/dashboardVideos/dashboar
 import DashboardInsights from "./components/dashboardPage/dashboardInsights/dashboardInsights.component"
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
 import Register from "./components/registerPage/register.component"
-import AwesomeVideos from "./components/awesomeVideosPage/awesomeVideos.component"
+// import AwesomeVideos from "./components/awesomeVideosPage/awesomeVideos.component"
 import ProtectedComponent from "./components/ProtectedComponent/401protected.component"
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
 
 function App() {
+  // const [auth, setAuth] = useState(null)
+  // const navigate = useNavigate()
+
+  // useEffect(() => {
+  //   let user = localStorage.getItem("user")
+  //   user && JSON.parse(user) ? setAuth(true) : setAuth(false)
+  // }, [])
+
+  // useEffect(() => {
+  //   localStorage.setItem("user", auth)
+  // }, [auth])
   return (
     <div>
       <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route exact path="/" element={<HomePage title="Home" />} />
-          <Route path="login" element={<Login title="Login" />} />
-          <Route path="register" element={<Register title="Register" />} />
-          <Route path="thanks" element={<Thanks title="Thanks" />} />
-          <Route path="awesome" element={<AwesomeVideos title="Awesome Videos" />} />
-          <Route path="protected" element={<ProtectedComponent title="Protected Page" />} />
-          <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
-          <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
-          <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
-          {/* <Route path="dashboard" element={<ProtectedRoute />}> */}
-            <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
-              <Route path="main" element={<DashboardMain />} />
-              <Route path="videos" element={<DashboardVideos />} />
-              <Route path="insights" element={<DashboardInsights />} />
-              <Route path="settings" element={<DashboardSettings />} />
-            </Route>
-          {/* </Route> */}
-          <Route path="*" exact={true} element={<Error title="404" />} />
-        </Routes>
-        <Footer />
+        <Fragment>
+          <Header />
+          <Routes>
+            <Route exact path="/" element={<HomePage title="Home" />} />
+            <Route path="login" element={<Login title="Login" />} />
+            <Route path="register" element={<Register title="Register" />} />
+
+            <Route path="thanks" element={<Thanks title="Thanks" />} />
+            {/* {auth ? (
+              <> */}
+                <Route path="protected" element={<ProtectedComponent title="Protected Page" />} />
+                <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
+                <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
+                <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
+                <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
+                  <Route path="main" element={<DashboardMain />} />
+                  <Route path="videos" element={<DashboardVideos />} />
+                  <Route path="insights" element={<DashboardInsights />} />
+                  <Route path="settings" element={<DashboardSettings />} />
+                </Route>
+              {/* </>
+            ) : (
+              navigate("/login", { replace: true })
+            )} */}
+            <Route path="*" exact={true} element={<Error title="404" />} />
+          </Routes>
+          <Footer />
+        </Fragment>
       </BrowserRouter>
     </div>
   )
