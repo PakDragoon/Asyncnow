@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react"
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import ".//assets/css/normalize.css"
 import ".//assets/css/asyncnow.webflow.css"
@@ -25,17 +25,8 @@ import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheck
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
 
 function App() {
-  // const [auth, setAuth] = useState(null)
+  const isAuthenticated = localStorage.getItem("isAuthenticated")
   // const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   let user = localStorage.getItem("user")
-  //   user && JSON.parse(user) ? setAuth(true) : setAuth(false)
-  // }, [])
-
-  // useEffect(() => {
-  //   localStorage.setItem("user", auth)
-  // }, [auth])
   return (
     <div>
       <BrowserRouter>
@@ -45,10 +36,9 @@ function App() {
             <Route exact path="/" element={<HomePage title="Home" />} />
             <Route path="login" element={<Login title="Login" />} />
             <Route path="register" element={<Register title="Register" />} />
-
             <Route path="thanks" element={<Thanks title="Thanks" />} />
-            {/* {auth ? (
-              <> */}
+            {isAuthenticated ? (
+              <>
                 <Route path="protected" element={<ProtectedComponent title="Protected Page" />} />
                 <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
                 <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
@@ -59,10 +49,10 @@ function App() {
                   <Route path="insights" element={<DashboardInsights />} />
                   <Route path="settings" element={<DashboardSettings />} />
                 </Route>
-              {/* </>
+              </>
             ) : (
-              navigate("/login", { replace: true })
-            )} */}
+              <Route path="dashboard" element={<Navigate to="/login" />} />
+            )}
             <Route path="*" exact={true} element={<Error title="404" />} />
           </Routes>
           <Footer />
