@@ -29,9 +29,9 @@ function Login (props) {
         data
         })
         .then((res) => {
-          console.log(res)
-          var result = res
-          console.log(result)
+          const result = res; 
+          const token = result.data.token
+          sessionStorage.setItem("token", token)
           sessionStorage.setItem("isAuthenticated", "true");
           setSuccess(true)
           setFail(false)

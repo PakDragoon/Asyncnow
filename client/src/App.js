@@ -25,7 +25,7 @@ import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheck
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
 
 function App() {
-  const isAuthenticated = localStorage.getItem("isAuthenticated")
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated")
   // const navigate = useNavigate()
   return (
     <div>

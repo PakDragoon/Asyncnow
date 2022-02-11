@@ -20,25 +20,26 @@ function Header() {
     };
     const Logout = (event) => {
         event.preventDefault();
+        const token = sessionStorage.getItem("token")
         const config = {
             method: 'post',
             url: 'http://localhost:3000/users/logoutall',
             headers: { 
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhMmJhYzM0MjUwYzIyYTBhMDEzYzAiLCJpYXQiOjE2NDQyNDQzNzR9.lFgsqyrTiIZfbzyZVdfDl8RMy128vVD_cSdCe03mRmg'
+              'Authorization': `Bearer ${token}`
             }
           };
           
           axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
+            sessionStorage.removeItem("token")
+            sessionStorage.removeItem("isAuthenticated");
+            navigate('/login', { replace: true })
           })
           .catch(function (error) {
             console.log(error);
           });
-          
-
-        localStorage.removeItem("isAuthenticated");
-        navigate('/login', { replace: true })
+        
     }
   return (
     <>
