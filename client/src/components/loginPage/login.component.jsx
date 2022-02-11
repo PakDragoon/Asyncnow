@@ -5,6 +5,7 @@ import '../../assets/css/webflow.css'
 import { Helmet } from 'react-helmet'
 import { authData } from './data';
 import { useNavigate } from "react-router-dom";
+
 const axios = require("axios")
 const title = 'Login'
 
@@ -29,8 +30,9 @@ function Login (props) {
         })
         .then((res) => {
           console.log(res)
-          //Signin Success
-          localStorage.setItem("isAuthenticated", "true");
+          var result = res
+          console.log(result)
+          sessionStorage.setItem("isAuthenticated", "true");
           setSuccess(true)
           setFail(false)
           setLoading(false)

@@ -17,7 +17,6 @@ import DashboardVideos from './dashboardVideos/dashboardVideos.component';
 import DashboardMain from './dashboardMain/dashboardMain.component';
 import DashboardInsights from './dashboardInsights/dashboardInsights.component';
 import DashboardSettings from './dashboardSettings/dashboardSettings.component';
-import CreateVideo from '../createVideoModal/create.video.component';
 import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
 function Dashboard(props) {

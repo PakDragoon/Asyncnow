@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Overlay from "react-overlay-component";
-import { Container, Row, Col } from 'react-bootstrap';
-
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
 import './header.style.css'
+const axios = require('axios');
 
 function Header() {
     const location = useLocation();
@@ -21,7 +20,24 @@ function Header() {
     };
     const Logout = (event) => {
         event.preventDefault();
-        localStorage.clear();
+        const config = {
+            method: 'post',
+            url: 'http://localhost:3000/users/logoutall',
+            headers: { 
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZhMmJhYzM0MjUwYzIyYTBhMDEzYzAiLCJpYXQiOjE2NDQyNDQzNzR9.lFgsqyrTiIZfbzyZVdfDl8RMy128vVD_cSdCe03mRmg'
+            }
+          };
+          
+          axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+          
+
+        localStorage.removeItem("isAuthenticated");
         navigate('/login', { replace: true })
     }
   return (
