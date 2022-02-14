@@ -65,6 +65,15 @@ router.patch('/users/me', auth, async (req, res) =>{
         res.status(400).send(error)
     }
 })
+//Get all Users
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({})
+        res.status(201).send(users)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
 // //Upload Profile picture
 // const upload = multer({
 //     limits: {

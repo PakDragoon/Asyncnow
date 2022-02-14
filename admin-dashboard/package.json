@@ -36,6 +36,7 @@
     ]
   },
   "dependencies": {
+    "@material-ui/core": "4.11.3",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@iconify/icons-ant-design": "^1.1.0",
@@ -44,7 +45,9 @@
     "@iconify/react": "^3.0.1",
     "@mui/lab": "^5.0.0-alpha.47",
     "@mui/material": "^5.0.0",
+    "@mui/styles": "^5.4.1",
     "@mui/utils": "^5.0.0",
+    "@mui/x-data-grid": "^5.5.1",
     "@testing-library/jest-dom": "^5.14.1",
     "apexcharts": "^3.28.3",
     "axios": "^0.25.0",

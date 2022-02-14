@@ -9,6 +9,7 @@ import DashboardApp from './pages/DashboardApp';
 import Products from './pages/Products';
 import Blog from './pages/Blog';
 import User from './pages/User';
+// import Temp from './pages/temp';
 import NotFound from './pages/Page404';
 
 // ----------------------------------------------------------------------
