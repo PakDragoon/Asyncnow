@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { Icon } from '@iconify/react';
-import { sentenceCase } from 'change-case';
+// import { sentenceCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink } from 'react-router-dom';
@@ -26,7 +26,6 @@ import Scrollbar from '../components/Scrollbar';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/user';
 //
-import { getUsers } from '../_mocks_/user';
 
 const axios = require('axios');
 
@@ -70,7 +69,6 @@ function applySortFilter(array, comparator, query) {
   }
   return stabilizedThis.map((el) => el[0]);
 }
-const rows = [];
 
 export default function User() {
   const [page, setPage] = useState(0);
@@ -80,6 +78,7 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState('');
   useEffect(() => {
     axios
       .get('http://localhost:3000/users')
@@ -90,7 +89,7 @@ export default function User() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [data]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -155,7 +154,6 @@ export default function User() {
           <Button
             variant="contained"
             component={RouterLink}
-            onClick={getUsers}
             to="#"
             startIcon={<Icon icon={plusFill} />}
           >
@@ -183,26 +181,39 @@ export default function User() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {data.map((row) => (
-                    <TableRow key={row.id}>
-                      <TableCell padding="checkbox">
-                        <Checkbox />
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell>{row.email}</TableCell>
-                      <TableCell>{row.company}</TableCell>
-                      <TableCell>
-                        <Label variant="ghost" color="success">
-                          Active
-                        </Label>
-                      </TableCell>
-                      <TableCell>
-                        <UserMoreMenu />
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const isItemSelected = selected.indexOf(row.name) !== -1;
+                    return (
+                      <TableRow
+                        key={row.id}
+                        hover
+                        tabIndex={-1}
+                        role="checkbox"
+                        selected={isItemSelected}
+                        aria-checked={isItemSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            checked={isItemSelected}
+                            onChange={(event) => handleClick(event, row.name)}
+                          />
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell>{row.email}</TableCell>
+                        <TableCell>{row.company}</TableCell>
+                        <TableCell>
+                          <Label variant="ghost" color="success">
+                            Active
+                          </Label>
+                        </TableCell>
+                        <TableCell>
+                          <UserMoreMenu />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -213,7 +224,7 @@ export default function User() {
                   <TableBody>
                     <TableRow>
                       <TableCell align="center" colSpan={6} sx={{ py: 3 }}>
-                        <SearchNotFound searchQuery={filterName} />
+                        <SearchNotFound searchQuery={data} />
                       </TableCell>
                     </TableRow>
                   </TableBody>

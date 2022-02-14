@@ -20,3 +20,13 @@ export const getUsers = async () => {
     console.error(error);
   }
 };
+const users = [...Array(10)].map((_, index) => ({
+  id: faker.datatype.uuid(),
+  avatarUrl: mockImgAvatar(index + 1),
+  name: faker.name.findName(),
+  company: faker.company.companyName(),
+  status: sample(['active', 'banned']),
+  email: 'abcd@gmail.com'
+}));
+
+export default users;
