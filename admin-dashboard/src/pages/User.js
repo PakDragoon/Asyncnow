@@ -78,7 +78,6 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [data, setData] = useState([]);
-  const [search, setSearch] = useState('');
   useEffect(() => {
     axios
       .get('http://localhost:3000/users')
@@ -89,7 +88,7 @@ export default function User() {
       .catch((error) => {
         console.log(error);
       });
-  }, [data]);
+  });
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -181,39 +180,41 @@ export default function User() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const isItemSelected = selected.indexOf(row.name) !== -1;
-                    return (
-                      <TableRow
-                        key={row.id}
-                        hover
-                        tabIndex={-1}
-                        role="checkbox"
-                        selected={isItemSelected}
-                        aria-checked={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isItemSelected}
-                            onChange={(event) => handleClick(event, row.name)}
-                          />
-                        </TableCell>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell>{row.email}</TableCell>
-                        <TableCell>{row.company}</TableCell>
-                        <TableCell>
-                          <Label variant="ghost" color="success">
-                            Active
-                          </Label>
-                        </TableCell>
-                        <TableCell>
-                          <UserMoreMenu />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
+                  {filteredUsers
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      const isItemSelected = selected.indexOf(row.name) !== -1;
+                      return (
+                        <TableRow
+                          key={row.id}
+                          hover
+                          tabIndex={-1}
+                          role="checkbox"
+                          selected={isItemSelected}
+                          aria-checked={isItemSelected}
+                        >
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              checked={isItemSelected}
+                              onChange={(event) => handleClick(event, row.name)}
+                            />
+                          </TableCell>
+                          <TableCell component="th" scope="row">
+                            {row.name}
+                          </TableCell>
+                          <TableCell>{row.email}</TableCell>
+                          <TableCell>{row.company}</TableCell>
+                          <TableCell>
+                            <Label variant="ghost" color="success">
+                              Active
+                            </Label>
+                          </TableCell>
+                          <TableCell>
+                            <UserMoreMenu />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />

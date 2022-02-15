@@ -16,6 +16,7 @@ export const getUsers = async () => {
     );
     console.log(registeredUsers);
     console.log(result);
+    console.log(users);
   } catch (error) {
     console.error(error);
   }
