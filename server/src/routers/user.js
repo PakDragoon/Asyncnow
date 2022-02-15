@@ -11,7 +11,8 @@ router.post('/users', async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         company: req.body.company,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role
     })
     try {
         await user.save()
@@ -41,10 +42,24 @@ router.get('/users/me', auth, async (req, res) => {
     }    
 })
 //Delete User
-router.delete('/users/me', auth, async (req, res) => {
+// router.delete('/users/me', auth, async (req, res) => {
+//     try {
+//         await req.user.remove()
+//         res.status(200).send(req.user)
+//     } catch (error) {
+//         res.status(400).send(error)
+//     }
+// })
+//Delete User By ID
+router.delete('/users/:id', async (req, res) => {
     try {
-        await req.user.remove()
-        res.status(200).send(req.user)
+        const id = req.params.id
+        console.log(id)
+        const deleteUser = await User.findByIdAndDelete(req.params.id)
+        if (!deleteUser){
+            return res.status(404).send()
+        }
+        res.status(200).send(deleteUser)
     } catch (error) {
         res.status(400).send(error)
     }
@@ -52,7 +67,7 @@ router.delete('/users/me', auth, async (req, res) => {
 //Update User
 router.patch('/users/me', auth, async (req, res) =>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'email', 'password', 'age']
+    const allowedUpdates = ['name', 'email', 'password', 'company', 'role']
     const isValid = updates.every((update) => allowedUpdates.includes(update))
     if(!isValid){
         return res.status(400).send({error: 'Not allowed to update this'})

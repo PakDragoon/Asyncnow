@@ -33,6 +33,7 @@ function Header() {
           .then(function (response) {
             console.log(JSON.stringify(response.data));
             sessionStorage.removeItem("token")
+            sessionStorage.removeItem("role")
             sessionStorage.removeItem("isAuthenticated");
             navigate('/login', { replace: true })
           })

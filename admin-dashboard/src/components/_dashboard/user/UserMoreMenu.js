@@ -6,12 +6,41 @@ import trash2Outline from '@iconify/icons-eva/trash-2-outline';
 import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
 // material
 import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
+import PropTypes from 'prop-types';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+
+const axios = require('axios');
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu() {
+export default function UserMoreMenu(props) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+  function DeleteUserById(userId) {
+    confirmAlert({
+      title: 'Confirm to proceed',
+      message: 'Are you sure to delete this user?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            axios
+              .delete(`http://localhost:3000/users/${userId}`)
+              .then((res) => {
+                console.log('Result:', res);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+  }
 
   return (
     <>
@@ -33,7 +62,13 @@ export default function UserMoreMenu() {
           <ListItemIcon>
             <Icon icon={trash2Outline} width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText
+            primary="Delete"
+            onClick={() => {
+              DeleteUserById(props.Id);
+            }}
+            primaryTypographyProps={{ variant: 'body2' }}
+          />
         </MenuItem>
 
         <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
@@ -46,3 +81,6 @@ export default function UserMoreMenu() {
     </>
   );
 }
+UserMoreMenu.propType = {
+  Id: PropTypes.Object
+};

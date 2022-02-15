@@ -1,11 +1,11 @@
-import React, { useState, useEffect, Fragment } from "react"
-import { BrowserRouter, Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom"
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Fragment } from "react"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+//styles
 import ".//assets/css/normalize.css"
 import ".//assets/css/asyncnow.webflow.css"
 import ".//assets/css/webflow.css"
-
-import ProtectedRoute from "./components/protectedRoutes/protected.component"
+//components
+// import ProtectedRoute from "./components/protectedRoutes/protected.component"
 import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
@@ -18,7 +18,6 @@ import DashboardVideos from "./components/dashboardPage/dashboardVideos/dashboar
 import DashboardInsights from "./components/dashboardPage/dashboardInsights/dashboardInsights.component"
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
 import Register from "./components/registerPage/register.component"
-// import AwesomeVideos from "./components/awesomeVideosPage/awesomeVideos.component"
 import ProtectedComponent from "./components/ProtectedComponent/401protected.component"
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
@@ -26,7 +25,7 @@ import OrderConfirmationComponent from "./components/orderConfirmationPage/order
 
 function App() {
   const isAuthenticated = sessionStorage.getItem("isAuthenticated")
-  // const navigate = useNavigate()
+  const isRole = sessionStorage.getItem("role")
   return (
     <div>
       <BrowserRouter>
@@ -37,9 +36,9 @@ function App() {
             <Route path="login" element={<Login title="Login" />} />
             <Route path="register" element={<Register title="Register" />} />
             <Route path="thanks" element={<Thanks title="Thanks" />} />
-            {isAuthenticated ? (
+            {isAuthenticated && isRole === "User" ? (
               <>
-                <Route path="protected" element={<ProtectedComponent title="Protected Page" />} />
+                {/* <Route path="protected" element={<ProtectedComponent title="Protected Page" />} /> */}
                 <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
                 <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
                 <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
@@ -50,6 +49,8 @@ function App() {
                   <Route path="settings" element={<DashboardSettings />} />
                 </Route>
               </>
+            ) : isAuthenticated && isRole === "Admin" ? (
+                  <Route path="admin" element={<ProtectedComponent />} />
             ) : (
               <Route path="dashboard" element={<Navigate to="/login" />} />
             )}
