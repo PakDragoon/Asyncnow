@@ -47,7 +47,7 @@ function Login(props) {
         setFail(false)
         setLoading(false)
         if (userRole === "Admin") {
-          navigate("/admin", { replace: true })
+          navigate("/dashboard/user", { replace: true })
         } else if (userRole === "User") {
           navigate("/dashboard", { replace: true })
         } else {

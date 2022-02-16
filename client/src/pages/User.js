@@ -35,6 +35,7 @@ const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
   { id: 'email', label: 'Email', alignRight: false },
   { id: 'company', label: 'Company', alignRight: false },
+  { id: 'role', label: 'Role', alignRight: false },
   { id: 'status', label: 'Status', alignRight: false },
   { id: '' }
 ];
@@ -83,12 +84,12 @@ export default function User() {
       .get('http://localhost:3000/users')
       .then((res) => {
         setData(res.data);
-        console.log('Result:', data);
+        // console.log('Result:', data);
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, [data]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -204,13 +205,14 @@ export default function User() {
                           </TableCell>
                           <TableCell>{row.email}</TableCell>
                           <TableCell>{row.company}</TableCell>
+                          <TableCell>{row.role}</TableCell>
                           <TableCell>
                             <Label variant="ghost" color="success">
                               Active
                             </Label>
                           </TableCell>
                           <TableCell>
-                            <UserMoreMenu />
+                            <UserMoreMenu Id={row._id} />
                           </TableCell>
                         </TableRow>
                       );

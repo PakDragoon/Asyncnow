@@ -39,7 +39,20 @@ function App() {
   const isRole = userRole
   return (
     <div>
-        <Fragment>
+      {isAuthenticated && isRole === "Admin" ? (
+        <ThemeConfig>
+          <ScrollToTop />
+          <GlobalStyles />
+          <BaseOptionChartStyle />
+          <Routes>
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route path="app" element={<DashboardApp />} />
+              <Route path="user" element={<User />} />
+            </Route>
+          </Routes>
+        </ThemeConfig>
+      ) : (
+<Fragment>
           <Header />
           <Routes>
             <Route exact path="/" element={<HomePage title="Home" />} />
@@ -59,19 +72,6 @@ function App() {
                   <Route path="settings" element={<DashboardSettings />} />
                 </Route>
               </>
-            ) : isAuthenticated && isRole === "Admin" ? (
-                  <Route path="admin" element={<ProtectedComponent />} />
-                  // <ThemeConfig>
-                  //   <ScrollToTop />
-                  //   <GlobalStyles />
-                  //   <BaseOptionChartStyle />
-                  //   <Routes>
-                  //     <Route path="/admindashboard" element={<DashboardLayout />}>
-                  //       <Route path="app" element={<DashboardApp />} />
-                  //       <Route path="user" element={<User />} />
-                  //     </Route>
-                  //   </Routes>
-                  // </ThemeConfig>
             ) : (
               <Route path="dashboard" element={<Navigate to="/login" />} />
             )}
@@ -79,6 +79,8 @@ function App() {
           </Routes>
           <Footer />
         </Fragment>
+      )}
+        
     </div>
   )
 }

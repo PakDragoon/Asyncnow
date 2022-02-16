@@ -5,13 +5,16 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { RecoilRoot } from "recoil"
 import { BrowserRouter } from "react-router-dom"
+import { HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
+      <HelmetProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+      </HelmetProvider>
     </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")

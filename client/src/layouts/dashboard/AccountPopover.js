@@ -3,7 +3,9 @@ import { useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { userDataRecoil } from "../../components/data/atom"
+import { useRecoilValue } from "recoil"
 // material
 import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
@@ -13,6 +15,8 @@ import MenuPopover from '../../components/MenuPopover';
 import account from '../../_mocks_/account';
 
 // ----------------------------------------------------------------------
+
+const axios = require('axios');
 
 const MENU_OPTIONS = [
   {
@@ -36,14 +40,35 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const anchorRef = useRef(null);
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  const { userToken } = useRecoilValue(userDataRecoil)
+  const Logout = (event) => {
+    event.preventDefault();
+    const token = userToken
+    const config = {
+      method: 'post',
+      url: 'http://localhost:3000/users/logoutall',
+      headers: { 
+        'Authorization': `Bearer ${token}`
+      }
+    };
+    axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      sessionStorage.clear()
+      navigate('/login', { replace: true })
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   return (
     <>
@@ -110,7 +135,7 @@ export default function AccountPopover() {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="inherit" variant="outlined">
+          <Button fullWidth color="inherit" variant="outlined" onClick={Logout}>
             Logout
           </Button>
         </Box>
