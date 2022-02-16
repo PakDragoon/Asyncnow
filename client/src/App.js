@@ -22,10 +22,13 @@ import ProtectedComponent from "./components/ProtectedComponent/401protected.com
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
+import { userDataRecoil } from "./components/data/atom"
 
 function App() {
+  const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
   const isAuthenticated = sessionStorage.getItem("isAuthenticated")
-  const isRole = sessionStorage.getItem("role")
+  const isRole = userRole
   return (
     <div>
       <BrowserRouter>

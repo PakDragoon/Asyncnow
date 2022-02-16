@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Overlay from "react-overlay-component";
+import { userDataRecoil } from "../data/atom"
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
@@ -13,6 +15,7 @@ function Header() {
     const navigate = useNavigate();
     const [isOpen, setOverlay] = useState(false);
     const closeOverlay = () => setOverlay(false);
+    const { userToken } = useRecoilValue(userDataRecoil)
     const configs = {
         animate: true,
         clickDismiss: true,
@@ -20,7 +23,7 @@ function Header() {
     };
     const Logout = (event) => {
         event.preventDefault();
-        const token = sessionStorage.getItem("token")
+        const token = userToken
         const config = {
             method: 'post',
             url: 'http://localhost:3000/users/logoutall',
@@ -32,9 +35,7 @@ function Header() {
           axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
-            sessionStorage.removeItem("token")
-            sessionStorage.removeItem("role")
-            sessionStorage.removeItem("isAuthenticated");
+            sessionStorage.clear()
             navigate('/login', { replace: true })
           })
           .catch(function (error) {

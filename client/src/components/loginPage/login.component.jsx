@@ -2,6 +2,8 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import { useNavigate } from "react-router-dom"
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
+import { userDataRecoil } from "../data/atom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
@@ -16,6 +18,8 @@ function Login(props) {
   const [success, setSuccess] = useState(false)
   const [fail, setFail] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [userData, setUserData] = useRecoilState(userDataRecoil)
+  const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
   const handleSubmit = async (event) => {
     event.preventDefault()
     const data = {
@@ -29,19 +33,23 @@ function Login(props) {
       data,
     })
       .then((res) => {
-        const token = res.data.token
-        const role = res.data.user.role
-        sessionStorage.setItem("token", token)
-        sessionStorage.setItem("role", role)
+        setUserData((obj) => ({
+          userId: res.data.user._id,
+          userName: res.data.user.name,
+          userEmail: res.data.user.email,
+          userCompany: res.data.user.company,
+          userToken: res.data.token,
+          userRole: res.data.user.role,
+        }))
+        console.log(userId)
+        console.log(userName)
+        console.log(userEmail)
+        console.log(userCompany)
         sessionStorage.setItem("isAuthenticated", "true")
-        console.log(res.data)
-        console.log(role)
-        console.log(typeof res.data)
-        console.log(typeof role)
         setSuccess(true)
         setFail(false)
         setLoading(false)
-        if (role === "Admin") {
+        if (userRole === "Admin") {
           navigate("/admin", { replace: true })
         } else {
           navigate("/dashboard", { replace: true })
