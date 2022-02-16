@@ -5,7 +5,6 @@ import ".//assets/css/normalize.css"
 import ".//assets/css/asyncnow.webflow.css"
 import ".//assets/css/webflow.css"
 //components
-// import ProtectedRoute from "./components/protectedRoutes/protected.component"
 import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
@@ -22,16 +21,24 @@ import ProtectedComponent from "./components/ProtectedComponent/401protected.com
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilValue } from "recoil"
 import { userDataRecoil } from "./components/data/atom"
+// theme
+import ThemeConfig from './theme';
+import GlobalStyles from './theme/globalStyles';
+// components
+import ScrollToTop from './components/ScrollToTop';
+import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
+import DashboardLayout from './layouts/dashboard';
+import DashboardApp from './pages/DashboardApp';
+import User from './pages/User';
 
 function App() {
-  const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
+  const { userRole } = useRecoilValue(userDataRecoil)
   const isAuthenticated = sessionStorage.getItem("isAuthenticated")
   const isRole = userRole
   return (
     <div>
-      <BrowserRouter>
         <Fragment>
           <Header />
           <Routes>
@@ -54,6 +61,17 @@ function App() {
               </>
             ) : isAuthenticated && isRole === "Admin" ? (
                   <Route path="admin" element={<ProtectedComponent />} />
+                  // <ThemeConfig>
+                  //   <ScrollToTop />
+                  //   <GlobalStyles />
+                  //   <BaseOptionChartStyle />
+                  //   <Routes>
+                  //     <Route path="/admindashboard" element={<DashboardLayout />}>
+                  //       <Route path="app" element={<DashboardApp />} />
+                  //       <Route path="user" element={<User />} />
+                  //     </Route>
+                  //   </Routes>
+                  // </ThemeConfig>
             ) : (
               <Route path="dashboard" element={<Navigate to="/login" />} />
             )}
@@ -61,7 +79,6 @@ function App() {
           </Routes>
           <Footer />
         </Fragment>
-      </BrowserRouter>
     </div>
   )
 }

@@ -48,8 +48,11 @@ function Login(props) {
         setLoading(false)
         if (userRole === "Admin") {
           navigate("/admin", { replace: true })
-        } else {
+        } else if (userRole === "User") {
           navigate("/dashboard", { replace: true })
+        } else {
+          navigate("/login", { replace: true })
+          alert('Something went wrong, Try again.')
         }
       })
       .catch((err) => {
@@ -107,5 +110,4 @@ function Login(props) {
     </>
   )
 }
-
 export default Login

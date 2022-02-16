@@ -33,8 +33,6 @@ class Register extends React.Component {
       length: 6,
       prefix: `@${this.state.name}/`
     })
-    let wordsToRemove = [`["`, `"]`];
-	  const expStr = wordsToRemove.join("|");
     const codeString = JSON.stringify(codeObj);
     const code = codeString.replace('["', '').replace('"]', '').replace(/\s+/g, '');
     const name = this.state.name
