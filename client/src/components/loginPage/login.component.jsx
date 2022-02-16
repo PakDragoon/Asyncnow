@@ -19,7 +19,7 @@ function Login(props) {
   const [fail, setFail] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useRecoilState(userDataRecoil)
-  const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
+  const { userId, userName, userCompany, userRole, userEmail, userCode } = useRecoilValue(userDataRecoil)
   const handleSubmit = async (event) => {
     event.preventDefault()
     const data = {
@@ -40,11 +40,8 @@ function Login(props) {
           userCompany: res.data.user.company,
           userToken: res.data.token,
           userRole: res.data.user.role,
+          userCode: res.data.user.code,
         }))
-        console.log(userId)
-        console.log(userName)
-        console.log(userEmail)
-        console.log(userCompany)
         sessionStorage.setItem("isAuthenticated", "true")
         setSuccess(true)
         setFail(false)

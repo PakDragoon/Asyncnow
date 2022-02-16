@@ -5,7 +5,7 @@ import "../../assets/css/webflow.css"
 import { Helmet } from "react-helmet"
 const axios = require("axios")
 const title = "Register"
-
+var referralCodes = require("referral-codes")
 class Register extends React.Component {
   constructor(props) {
     super(props)
@@ -25,10 +25,18 @@ class Register extends React.Component {
   handleChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value })
-    console.log(`${name}: ${value}`)
   }
   handleSubmit = async (event) => {
     event.preventDefault()
+    const codeObj = referralCodes.generate({
+      count: 1,
+      length: 6,
+      prefix: `@${this.state.name}/`
+    })
+    let wordsToRemove = [`["`, `"]`];
+	  const expStr = wordsToRemove.join("|");
+    const codeString = JSON.stringify(codeObj);
+    const code = codeString.replace('["', '').replace('"]', '').replace(/\s+/g, '');
     const name = this.state.name
     const email = this.state.email
     const company = this.state.company
@@ -42,6 +50,7 @@ class Register extends React.Component {
         email,
         company,
         password,
+        code
       },
     })
       .then((res) => {

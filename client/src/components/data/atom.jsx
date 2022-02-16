@@ -8,6 +8,7 @@ export const userDataRecoil = atom({
         userEmail: "",
         userCompany: "",
         userRole: "",
+        userCode: "",
         userToken: ""
     }
 });

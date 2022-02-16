@@ -20,6 +20,7 @@
     "react-scripts": "5.0.0",
     "react-sticky": "6.0.3",
     "recoil": "^0.6.1",
+    "referral-codes": "^2.0.1",
     "web-vitals": "2.1.3"
   },
   "proxy": "http://localhost:3000",

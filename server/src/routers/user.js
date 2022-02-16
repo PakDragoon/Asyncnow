@@ -12,7 +12,8 @@ router.post('/users', async (req, res) => {
         email: req.body.email,
         company: req.body.company,
         password: req.body.password,
-        role: req.body.role
+        role: req.body.role,
+        code: req.body.code
     })
     try {
         await user.save()

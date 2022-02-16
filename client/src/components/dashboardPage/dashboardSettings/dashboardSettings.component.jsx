@@ -1,76 +1,145 @@
-import React from 'react'
-import { Helmet } from 'react-helmet'
-import '../../../assets/css/normalize.css'
-import '../../../assets/css/asyncnow.webflow.css'
-import '../../../assets/css/webflow.css'
-import userIcon from '../../../assets/images/user.png'
-import emailIcon from '../../../assets/images/email-3.png'
-import eyeIcon from '../../../assets/images/eyeglasses.png'
-import linkIcon from '../../../assets/images/link.png'
+import React, {useState} from "react"
+import { Helmet } from "react-helmet"
+import { userDataRecoil } from "../../data/atom"
+import { useRecoilState, useRecoilValue } from "recoil"
+import DashboardSubTitle from "../title.component"
+import DashboardSubText from "../subtext.component"
+import userIcon from "../../../assets/images/user.png"
+import Overlay from "react-overlay-component";
+import emailIcon from "../../../assets/images/email-3.png"
+import eyeIcon from "../../../assets/images/eyeglasses.png"
+import linkIcon from "../../../assets/images/link.png"
+import "../../../assets/css/normalize.css"
+import "../../../assets/css/asyncnow.webflow.css"
+import "../../../assets/css/webflow.css"
 
-import DashboardSubTitle from '../title.component'
-import DashboardSubText from '../subtext.component'
+const axios = require("axios")
+const title = "Dashboard | Settings"
 
-const title = 'Dashboard | Settings'
+function DashboardSettings() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [company, setCompany] = useState("")
+  const [userData, setUserData] = useRecoilState(userDataRecoil)
+  const [isOpen, setOverlay] = useState(false);
+  const configs = {
+      animate: true,
+      clickDismiss: true,
+      escapeDismiss: true,
+  };
+  const { userName, userCompany, userEmail, userToken, userCode } = useRecoilValue(userDataRecoil)
 
-class DashboardSettings extends React.Component {
-    constructor(props) {
-        super(props);
-      }
-      render(){
-        return (
-            <>
-            <Helmet>
-              <title>{ title }</title>
-            </Helmet>
-            <div className="div-block-39">
-        <DashboardSubTitle subTitle='Setting' />
-        <DashboardSubText subText='Update your personal details and account settings ⚙️' />
+  const handleUpdate = async (event) => {
+    event.preventDefault()
+    const token = userToken
+    const data = {
+      name: name,
+      email: email,
+      company: company
+    }
+    axios({
+      method: "patch",
+      url: "http://localhost:3000/users/me",
+      headers: { 
+        'Authorization': `Bearer ${token}`
+      },
+      data
+    })
+      .then((res) => {
+        // setUserData((obj) => ({
+        //   userName: res.data.name,
+        //   userEmail: res.data.email,
+        //   userCompany: res.data.company
+        // }))
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err.res.data)
+      })
+  }
+  return (
+    <>
+      <Helmet>
+        <title>{title}</title>
+      </Helmet>
+      <div className="div-block-39">
+        <DashboardSubTitle subTitle="Setting" />
+        <DashboardSubText subText="Update your personal details and account settings ⚙️" />
         <div className="div-block-41">
           <div className="div-block-42">
             <a data-w-id="6c1ab2ed-325a-4759-0792-678146ef4f08" href="#" className="link-block-2 inline w-inline-block">
-                <img src={userIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
-            <div className="text-block-10">Ada Lovelace</div>
+              <img src={userIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
+            </a>
+            <div className="text-block-10">{userName}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="6c1ab2ed-325a-4759-0792-678146ef4f12" className="link-11">Update</a>
+            <a href="#" data-w-id="6c1ab2ed-325a-4759-0792-678146ef4f12" className="link-11" onClick={() => {setOverlay(true);}}>
+              Update
+            </a>
           </div>
         </div>
         <div className="div-block-41">
           <div className="div-block-42">
             <a data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51cd" href="#" className="link-block-2 inline w-inline-block">
-                <img src={emailIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
-            <div className="text-block-10">alovelace@google.com</div>
+              <img src={emailIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
+            </a>
+            <div className="text-block-10">{userEmail}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51d2" className="link-11">Update</a>
+            <a href="#" data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51d2" className="link-11">
+              Update
+            </a>
           </div>
         </div>
         <div className="div-block-41">
           <div className="div-block-42">
             <a data-w-id="1d238b13-8207-3da3-6897-9ddf61c52676" href="#" className="link-block-2 inline w-inline-block">
-                <img src={eyeIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
-            <div className="text-block-10">Google Inc.</div>
+              <img src={eyeIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
+            </a>
+            <div className="text-block-10">{userCompany}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="1d238b13-8207-3da3-6897-9ddf61c5267b" className="link-11">Update</a>
+            <a href="#" data-w-id="1d238b13-8207-3da3-6897-9ddf61c5267b" className="link-11">
+              Update
+            </a>
           </div>
         </div>
         <div className="div-block-41 end">
           <div className="div-block-42">
             <a data-w-id="70d5e562-7fa1-d234-68f8-7b7e440688d3" href="#" className="link-block-2 inline w-inline-block">
-                <img src={linkIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
-            <div className="text-block-10">@alovelace</div>
+              <img src={linkIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
+            </a>
+            <div className="text-block-10">{userCode}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="70d5e562-7fa1-d234-68f8-7b7e440688d8" className="link-11">Update</a>
+            <a href="#" data-w-id="70d5e562-7fa1-d234-68f8-7b7e440688d8" className="link-11">
+              Update
+            </a>
           </div>
         </div>
       </div>
-            </>
-          )
-      }
-  
+      <>
+        <Overlay configs={configs} isOpen={isOpen}>
+          <div style={{opacity: '1'}} className="pup-up-modal">
+            <div style={{}} className="pop-up-modal-content video step-one">
+              <form id="loginForm" onSubmit={handleUpdate} name="loginForm" data-name="Email Form" method="get" className="form login">
+                <label htmlFor="name" className="field-label">Name</label>
+                <input type="name" onChange={(e) => setName(e.target.value)} className="text-field w-input" maxLength="256" name="name" data-name="name" placeholder="a.lovelace@email.com" id="email" required="" />
+                <label htmlFor="email" className="field-label">Email</label>
+                <input type="email" onChange={(e) => setEmail(e.target.value)} className="text-field w-input" maxLength="256" name="email" data-name="email" placeholder="***********" id="password" required="" />
+                <label htmlFor="company" className="field-label">Company</label>
+                <input type="company" onChange={(e) => setCompany(e.target.value)} className="text-field w-input" maxLength="256" name="company" data-name="company" placeholder="***********" id="password" required="" />
+                <div className="div-block-2 hero video">
+                  <input type="submit" className="button w-button" value="Save Changes" />
+                  <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332da" href="#" className="link-7" onClick={() => {setOverlay(false);}}>Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Overlay>
+      </>
+    </>
+  )
 }
 
 export default DashboardSettings
