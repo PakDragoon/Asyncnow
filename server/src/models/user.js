@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
                 }
             }
         },
+        status: {
+            type: Boolean,
+            default: true
+        },
         tokens: [{
             token: {
                 type: String,

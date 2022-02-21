@@ -18,11 +18,14 @@ function Login(props) {
   const [password, setPassword] = useState("")
   const [success, setSuccess] = useState(false)
   const [fail, setFail] = useState(false)
+  const [banned, setBanned] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useRecoilState(userDataRecoil)
   const { userId, userName, userCompany, userRole, userEmail, userCode } = useRecoilValue(userDataRecoil)
 
   const handleSubmit = async (event) => {
+    setBanned(false)
+    setFail(false)
     event.preventDefault()
     const data = {
       email: email,
@@ -46,15 +49,16 @@ function Login(props) {
         }))
         sessionStorage.setItem("isAuthenticated", "true")
         setSuccess(true)
-        setFail(false)
         setLoading(false)
         if (res.data.user.role === "Admin") {
           navigate("/dashboard/user", { replace: true })
-        } else if (res.data.user.role === "User") {
+        } else if (res.data.user.role === "User" && res.data.user.status ) {
           navigate("/dashboard", { replace: true })
         } else {
           navigate("/login", { replace: true })
-          alert('Something went wrong, Try again.')
+          setFail(false)
+          setSuccess(false)
+          setBanned(true)
         }
       })
       .catch((err) => {
@@ -63,9 +67,11 @@ function Login(props) {
         setFail(true)
         setLoading(false)
       })
-    setSuccess(false)
-    setFail(true)
-    setLoading(false)
+      if(!banned){
+        setSuccess(false)
+        setFail(true)
+        setLoading(false)
+      }    
   }
   return (
     <>
@@ -95,6 +101,9 @@ function Login(props) {
                 </div>
                 <div className={`${fail ? "w-form-fail" : "w-condition-invisible"}`}>
                   <div>Wrong email or password!</div>
+                </div>
+                <div className={`${banned ? "w-form-fail" : "w-condition-invisible"}`}>
+                  <div>Account is suspended! Contact Admin.</div>
                 </div>
               </div>
               <div className="text-block-3">

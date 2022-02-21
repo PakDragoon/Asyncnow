@@ -13,7 +13,8 @@ router.post('/users', async (req, res) => {
         company: req.body.company,
         password: req.body.password,
         role: req.body.role,
-        code: req.body.code
+        code: req.body.code,
+        status: req.body.status
     })
     try {
         await user.save()
@@ -68,7 +69,7 @@ router.delete('/users/:id', async (req, res) => {
 //Update User
 router.patch('/users/me', auth, async (req, res) =>{
     const updates = Object.keys(req.body)
-    const allowedUpdates = ['name', 'email', 'password', 'company', 'role']
+    const allowedUpdates = ['name', 'email', 'password', 'company', 'role', 'status']
     const isValid = updates.every((update) => allowedUpdates.includes(update))
     if(!isValid){
         return res.status(400).send({error: 'Not allowed to update this'})
