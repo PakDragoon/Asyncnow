@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import '../../../assets/css/normalize.css'
 import '../../../assets/css/asyncnow.webflow.css'
 import '../../../assets/css/webflow.css'
@@ -14,6 +15,8 @@ class DashboardVideos extends React.Component {
         super(props);
       }
       render(){
+      const videoTitle = '1st Recorded Video'
+      const createdAt = '01.01.2022'
         return (
             <>
             <Helmet>
@@ -26,7 +29,7 @@ class DashboardVideos extends React.Component {
             <div className="div-block-42">
                 <a href="../app/awesome-video.html" target="_blank" className="link-block-2 inline w-inline-block">
                 <img src={videosIcon} loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 7vw, 40px" alt=""/></a>
-                <div className="text-block-10">Awesome video title 1 | Created 01.01.2022 | <a href="#" data-w-id="cdf8e958-4979-1242-fa13-88ab444c05f7" className="link-13">Delete</a>
+                <div className="text-block-10">{videoTitle} | Created {createdAt} | <a href="#" data-w-id="cdf8e958-4979-1242-fa13-88ab444c05f7" className="link-13">Delete</a>
                 </div>
             </div>
             <div className="div-block-47">

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { Helmet } from "react-helmet"
 import { userDataRecoil } from "../../data/atom"
 import { useRecoilState, useRecoilValue } from "recoil"
@@ -20,22 +20,49 @@ function DashboardSettings() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [company, setCompany] = useState("")
-  const [userData, setUserData] = useRecoilState(userDataRecoil)
+  const [nameChange, setNameChange] = useState("")
+  const [emailChange, setEmailChange] = useState("")
+  const [companyChange, setCompanyChange] = useState("")
   const [isOpen, setOverlay] = useState(false);
   const configs = {
       animate: true,
       clickDismiss: true,
       escapeDismiss: true,
   };
-  const { userName, userCompany, userEmail, userToken, userCode } = useRecoilValue(userDataRecoil)
+  const { userToken, userCode } = useRecoilValue(userDataRecoil)
+  const token = userToken
+
+  useEffect(() => {
+    var data = ''
+    var config = {
+      method: 'get',
+      url: 'http://localhost:3000/users/me',
+      headers: { 
+        'Authorization': `Bearer ${token}`
+      },
+      data: data
+    };
+    axios(config)
+    .then(function (res) {
+      setName(res.data.name);
+        setEmail(res.data.email);
+        setCompany(res.data.company);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, []);
 
   const handleUpdate = async (event) => {
     event.preventDefault()
+    setName(nameChange)
+    setEmail(emailChange)
+    setCompany(companyChange)
     const token = userToken
     const data = {
-      name: name,
-      email: email,
-      company: company
+      name: nameChange,
+      email: emailChange,
+      company: companyChange
     }
     axios({
       method: "patch",
@@ -46,11 +73,6 @@ function DashboardSettings() {
       data
     })
       .then((res) => {
-        // setUserData((obj) => ({
-        //   userName: res.data.name,
-        //   userEmail: res.data.email,
-        //   userCompany: res.data.company
-        // }))
         console.log(res)
       })
       .catch((err) => {
@@ -70,7 +92,7 @@ function DashboardSettings() {
             <a data-w-id="6c1ab2ed-325a-4759-0792-678146ef4f08" href="#" className="link-block-2 inline w-inline-block">
               <img src={userIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
             </a>
-            <div className="text-block-10">{userName}</div>
+            <div className="text-block-10">{name}</div>
           </div>
           <div className="div-block-47">
             <a href="#" data-w-id="6c1ab2ed-325a-4759-0792-678146ef4f12" className="link-11" onClick={() => {setOverlay(true);}}>
@@ -83,7 +105,7 @@ function DashboardSettings() {
             <a data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51cd" href="#" className="link-block-2 inline w-inline-block">
               <img src={emailIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
             </a>
-            <div className="text-block-10">{userEmail}</div>
+            <div className="text-block-10">{email}</div>
           </div>
           <div className="div-block-47">
             <a href="#" data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51d2" className="link-11">
@@ -96,7 +118,7 @@ function DashboardSettings() {
             <a data-w-id="1d238b13-8207-3da3-6897-9ddf61c52676" href="#" className="link-block-2 inline w-inline-block">
               <img src={eyeIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt="" />
             </a>
-            <div className="text-block-10">{userCompany}</div>
+            <div className="text-block-10">{company}</div>
           </div>
           <div className="div-block-47">
             <a href="#" data-w-id="1d238b13-8207-3da3-6897-9ddf61c5267b" className="link-11">
@@ -124,13 +146,13 @@ function DashboardSettings() {
             <div style={{}} className="pop-up-modal-content video step-one">
               <form id="loginForm" onSubmit={handleUpdate} name="loginForm" data-name="Email Form" method="get" className="form login">
                 <label htmlFor="name" className="field-label">Name</label>
-                <input type="name" onChange={(e) => setName(e.target.value)} className="text-field w-input" maxLength="256" name="name" data-name="name" placeholder="a.lovelace@email.com" id="email" required="" />
+                <input type="name" onChange={(e) => setNameChange(e.target.value)} className="text-field w-input" maxLength="256" name="name" data-name="name" placeholder="New Name" id="email" required="" />
                 <label htmlFor="email" className="field-label">Email</label>
-                <input type="email" onChange={(e) => setEmail(e.target.value)} className="text-field w-input" maxLength="256" name="email" data-name="email" placeholder="***********" id="password" required="" />
+                <input type="email" onChange={(e) => setEmailChange(e.target.value)} className="text-field w-input" maxLength="256" name="email" data-name="email" placeholder="New Email" id="password" required="" />
                 <label htmlFor="company" className="field-label">Company</label>
-                <input type="company" onChange={(e) => setCompany(e.target.value)} className="text-field w-input" maxLength="256" name="company" data-name="company" placeholder="***********" id="password" required="" />
+                <input type="company" onChange={(e) => setCompanyChange(e.target.value)} className="text-field w-input" maxLength="256" name="company" data-name="company" placeholder="New Company" id="password" required="" />
                 <div className="div-block-2 hero video">
-                  <input type="submit" className="button w-button" value="Save Changes" />
+                  <input type="submit" className="button w-button" value="Save Changes" onClick={() => {setOverlay(false);}} />
                   <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332da" href="#" className="link-7" onClick={() => {setOverlay(false);}}>Cancel</a>
                 </div>
               </form>

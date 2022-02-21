@@ -7,6 +7,7 @@ import { userDataRecoil } from "../data/atom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
+import { useEffect } from "react"
 
 const axios = require("axios")
 const title = "Login"
@@ -20,6 +21,7 @@ function Login(props) {
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useRecoilState(userDataRecoil)
   const { userId, userName, userCompany, userRole, userEmail, userCode } = useRecoilValue(userDataRecoil)
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     const data = {
@@ -46,9 +48,9 @@ function Login(props) {
         setSuccess(true)
         setFail(false)
         setLoading(false)
-        if (userRole === "Admin") {
+        if (res.data.user.role === "Admin") {
           navigate("/dashboard/user", { replace: true })
-        } else if (userRole === "User") {
+        } else if (res.data.user.role === "User") {
           navigate("/dashboard", { replace: true })
         } else {
           navigate("/login", { replace: true })
