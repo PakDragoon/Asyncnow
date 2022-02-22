@@ -4,7 +4,7 @@ import editFill from "@iconify/icons-eva/edit-fill"
 import { Link as RouterLink } from "react-router-dom"
 import trash2Outline from "@iconify/icons-eva/trash-2-outline"
 import moreVerticalFill from "@iconify/icons-eva/more-vertical-fill"
-import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText, Box, Typography, Button, Modal } from "@mui/material"
+import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText, Box, Typography, Modal, Button, TextField } from "@mui/material"
 import PropTypes from "prop-types"
 import { confirmAlert } from "react-confirm-alert"
 import { useRecoilValue } from "recoil"
@@ -142,15 +142,16 @@ export default function UserMoreMenu(props) {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <form onSubmit={handleUpdate}>
-                  <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                <TextField fullWidth id="outlined-basic-status" select label="Status" value={status} onChange={(e) => setStatus(e.target.value)} size="small" margin="normal">
                     {options.map((option) => (
-                      <option value={option.value}>{option.label}</option>
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
                     ))}
-                  </select>
+                  </TextField>
                 </form>
-                <button type="submit" name="submit" onClick={handleUpdate}>
-                  Change
-                </button>
+                <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleUpdate}>Change</Button>
+                <Button variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
               </Typography>
             </Box>
           </Modal>
