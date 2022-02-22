@@ -48,6 +48,8 @@ function Login() {
         sessionStorage.setItem("isAuthenticated", "true")
         sessionStorage.setItem("isRole", res.data.user.role)
         sessionStorage.setItem("token", res.data.token)
+        sessionStorage.setItem("name", res.data.user.name)
+        sessionStorage.setItem("email", res.data.user.email)
         setSuccess(true)
         setLoading(false)
         if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {

@@ -4,6 +4,8 @@ import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from "recoil"
+import { userDataRecoil } from "../../components/data/atom"
 // material
 import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
@@ -37,7 +39,10 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  // const { userEmail } = useRecoilValue(userDataRecoil)
+  const adminName = sessionStorage.getItem("name")
   const token = sessionStorage.getItem("token")
+  const adminEmail = sessionStorage.getItem("email")
   const anchorRef = useRef(null);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -100,10 +105,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {adminName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+            {adminEmail}
           </Typography>
         </Box>
 
