@@ -24,7 +24,7 @@ const style = {
 
 const options = [
   {
-    label: "-select status-",
+    label: "-Select Status-",
     value: null
   },
   {
