@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Overlay from "react-overlay-component";
-import { userDataRecoil } from "../data/atom"
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
@@ -15,7 +13,6 @@ function Header() {
     const navigate = useNavigate();
     const [isOpen, setOverlay] = useState(false);
     const closeOverlay = () => setOverlay(false);
-    const { userToken } = useRecoilValue(userDataRecoil)
     const configs = {
         animate: true,
         clickDismiss: true,
@@ -23,7 +20,7 @@ function Header() {
     };
     const Logout = (event) => {
         event.preventDefault();
-        const token = userToken
+        const token = sessionStorage.getItem("token")
         const config = {
             method: 'post',
             url: 'http://localhost:3000/users/logoutall',

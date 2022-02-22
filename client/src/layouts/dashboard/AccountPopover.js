@@ -4,8 +4,6 @@ import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { userDataRecoil } from "../../components/data/atom"
-import { useRecoilValue } from "recoil"
 // material
 import { alpha } from '@mui/material/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@mui/material';
@@ -39,6 +37,7 @@ const MENU_OPTIONS = [
 // ----------------------------------------------------------------------
 
 export default function AccountPopover() {
+  const token = sessionStorage.getItem("token")
   const anchorRef = useRef(null);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -48,10 +47,8 @@ export default function AccountPopover() {
   const handleClose = () => {
     setOpen(false);
   };
-  const { userToken } = useRecoilValue(userDataRecoil)
   const Logout = (event) => {
     event.preventDefault();
-    const token = userToken
     const config = {
       method: 'post',
       url: 'http://localhost:3000/users/logoutall',
@@ -63,7 +60,7 @@ export default function AccountPopover() {
     .then(function (response) {
       console.log(JSON.stringify(response.data));
       sessionStorage.clear()
-      navigate('/login', { replace: true })
+      navigate('/', { replace: true })
     })
     .catch(function (error) {
       console.log(error);

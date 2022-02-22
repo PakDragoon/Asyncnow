@@ -1,86 +1,164 @@
-import { Icon } from '@iconify/react';
-import { useRef, useState } from 'react';
-import editFill from '@iconify/icons-eva/edit-fill';
-import { Link as RouterLink } from 'react-router-dom';
-import trash2Outline from '@iconify/icons-eva/trash-2-outline';
-import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
-// material
-import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
-import PropTypes from 'prop-types';
-import { confirmAlert } from 'react-confirm-alert';
-import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Icon } from "@iconify/react"
+import { useRef, useState } from "react"
+import editFill from "@iconify/icons-eva/edit-fill"
+import { Link as RouterLink } from "react-router-dom"
+import trash2Outline from "@iconify/icons-eva/trash-2-outline"
+import moreVerticalFill from "@iconify/icons-eva/more-vertical-fill"
+import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText, Box, Typography, Button, Modal } from "@mui/material"
+import PropTypes from "prop-types"
+import { confirmAlert } from "react-confirm-alert"
+import { useRecoilValue } from "recoil"
+import "react-confirm-alert/src/react-confirm-alert.css"
 
-const axios = require('axios');
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+}
+
+const options = [
+  {
+    label: "-select status-",
+    value: null
+  },
+  {
+    label: "Active",
+    value: true,
+  },
+  {
+    label: "Banned",
+    value: false,
+  },
+]
+const axios = require("axios")
+// const { userRole } = useRecoilValue(userDataRecoil)
+const isRole = sessionStorage.getItem("isRole")
 
 // ----------------------------------------------------------------------
 
 export default function UserMoreMenu(props) {
-  const ref = useRef(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [status, setStatus] = useState(null)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+  const ref = useRef(null)
+  const [isOpen, setIsOpen] = useState(false)
   function DeleteUserById(userId) {
-    confirmAlert({
-      title: 'Confirm to proceed',
-      message: 'Are you sure to delete this user?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            axios
-              .delete(`http://localhost:3000/users/${userId}`)
-              .then((res) => {
-                console.log('Result:', res);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-        },
-        {
-          label: 'No'
-        }
-      ]
-    });
+    if (isRole === "Super Admin") {
+      confirmAlert({
+        title: "Confirm to proceed",
+        message: "Are you sure to delete this user?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: () => {
+              axios
+                .delete(`http://localhost:3000/user/delete/${userId}`)
+                .then((res) => {
+                  console.log("Result:", res)
+                })
+                .catch((error) => {
+                  console.log(error)
+                })
+            },
+          },
+          {
+            label: "No",
+          },
+        ],
+      })
+    } else {
+      confirmAlert({
+        title: "Unauthorized Action",
+        message: "You are not authorize to perform this action.",
+        buttons: [
+          {
+            label: "Ok",
+          },
+        ],
+      })
+    }
   }
-
+  const handleUpdate = async (event) => {
+    event.preventDefault()
+    console.log(status)
+    const data = {
+      status,
+    }
+    axios({
+      method: "patch",
+      url: `http://localhost:3000/user/update/${props.Id}`,
+      data,
+    })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err.res.data)
+      })
+  }
   return (
     <>
       <IconButton ref={ref} onClick={() => setIsOpen(true)}>
         <Icon icon={moreVerticalFill} width={20} height={20} />
       </IconButton>
-
       <Menu
         open={isOpen}
         anchorEl={ref.current}
         onClose={() => setIsOpen(false)}
         PaperProps={{
-          sx: { width: 200, maxWidth: '100%' }
+          sx: { width: 200, maxWidth: "100%" },
         }}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
+        <MenuItem sx={{ color: "text.secondary" }}>
           <ListItemIcon>
             <Icon icon={trash2Outline} width={24} height={24} />
           </ListItemIcon>
           <ListItemText
             primary="Delete"
             onClick={() => {
-              DeleteUserById(props.Id);
+              DeleteUserById(props.Id)
             }}
-            primaryTypographyProps={{ variant: 'body2' }}
+            primaryTypographyProps={{ variant: "body2" }}
           />
         </MenuItem>
-
-        <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+        <MenuItem component={RouterLink} to="#" sx={{ color: "text.secondary" }}>
           <ListItemIcon>
             <Icon icon={editFill} width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText primary="Edit" onClick={handleOpen} primaryTypographyProps={{ variant: "body2" }} />
+          <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Edit user status
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <form onSubmit={handleUpdate}>
+                  <select value={status} onChange={(e) => setStatus(e.target.value)}>
+                    {options.map((option) => (
+                      <option value={option.value}>{option.label}</option>
+                    ))}
+                  </select>
+                </form>
+                <button type="submit" name="submit" onClick={handleUpdate}>
+                  Change
+                </button>
+              </Typography>
+            </Box>
+          </Modal>
         </MenuItem>
       </Menu>
     </>
-  );
+  )
 }
 UserMoreMenu.propType = {
-  Id: PropTypes.Object
-};
+  Id: PropTypes.Object,
+}

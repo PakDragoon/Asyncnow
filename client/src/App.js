@@ -1,10 +1,5 @@
 import React, { Fragment } from "react"
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-//styles
-import ".//assets/css/normalize.css"
-import ".//assets/css/asyncnow.webflow.css"
-import ".//assets/css/webflow.css"
-//components
+import { Routes, Route, Navigate } from "react-router-dom"
 import Header from "./components/headerComponent/header.component"
 import Footer from "./components/footerComponent/footer.component"
 import HomePage from "./components/homePage/home.component"
@@ -17,29 +12,29 @@ import DashboardVideos from "./components/dashboardPage/dashboardVideos/dashboar
 import DashboardInsights from "./components/dashboardPage/dashboardInsights/dashboardInsights.component"
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
 import Register from "./components/registerPage/register.component"
-import ProtectedComponent from "./components/ProtectedComponent/401protected.component"
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
 import { useRecoilValue } from "recoil"
 import { userDataRecoil } from "./components/data/atom"
-// theme
 import ThemeConfig from './theme';
 import GlobalStyles from './theme/globalStyles';
-// components
 import ScrollToTop from './components/ScrollToTop';
 import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
 import DashboardLayout from './layouts/dashboard';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/User';
+import ".//assets/css/normalize.css"
+import ".//assets/css/asyncnow.webflow.css"
+import ".//assets/css/webflow.css"
 
 function App() {
-  const { userRole } = useRecoilValue(userDataRecoil)
+  // const { userRole } = useRecoilValue(userDataRecoil)
   const isAuthenticated = sessionStorage.getItem("isAuthenticated")
-  const isRole = userRole
+  const isRole = sessionStorage.getItem("isRole")
   return (
     <div>
-      {isAuthenticated && isRole === "Admin" ? (
+      { isAuthenticated && ( isRole === "Admin" || isRole === "Super Admin" ) ? (
         <ThemeConfig>
           <ScrollToTop />
           <GlobalStyles />
@@ -52,7 +47,7 @@ function App() {
           </Routes>
         </ThemeConfig>
       ) : (
-<Fragment>
+        <Fragment>
           <Header />
           <Routes>
             <Route exact path="/" element={<HomePage title="Home" />} />
@@ -61,7 +56,6 @@ function App() {
             <Route path="thanks" element={<Thanks title="Thanks" />} />
             {isAuthenticated && isRole === "User" ? (
               <>
-                {/* <Route path="protected" element={<ProtectedComponent title="Protected Page" />} /> */}
                 <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
                 <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
                 <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
@@ -80,7 +74,6 @@ function App() {
           <Footer />
         </Fragment>
       )}
-        
     </div>
   )
 }

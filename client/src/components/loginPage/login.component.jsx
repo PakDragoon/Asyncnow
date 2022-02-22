@@ -2,17 +2,16 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import { useNavigate } from "react-router-dom"
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 import { userDataRecoil } from "../data/atom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
-import { useEffect } from "react"
 
 const axios = require("axios")
 const title = "Login"
 
-function Login(props) {
+function Login() {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -21,7 +20,6 @@ function Login(props) {
   const [banned, setBanned] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useRecoilState(userDataRecoil)
-  const { userId, userName, userCompany, userRole, userEmail, userCode } = useRecoilValue(userDataRecoil)
 
   const handleSubmit = async (event) => {
     setBanned(false)
@@ -48,14 +46,17 @@ function Login(props) {
           userCode: res.data.user.code,
         }))
         sessionStorage.setItem("isAuthenticated", "true")
+        sessionStorage.setItem("isRole", res.data.user.role)
+        sessionStorage.setItem("token", res.data.token)
         setSuccess(true)
         setLoading(false)
-        if (res.data.user.role === "Admin") {
+        if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
           navigate("/dashboard/user", { replace: true })
         } else if (res.data.user.role === "User" && res.data.user.status ) {
           navigate("/dashboard", { replace: true })
         } else {
           navigate("/login", { replace: true })
+          sessionStorage.clear()
           setFail(false)
           setSuccess(false)
           setBanned(true)

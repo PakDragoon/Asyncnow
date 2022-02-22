@@ -1,10 +1,8 @@
 import { filter } from 'lodash';
 import { Icon } from '@iconify/react';
-// import { sentenceCase } from 'change-case';
 import { useState, useEffect } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink } from 'react-router-dom';
-// material
 import {
   Card,
   Table,
@@ -19,13 +17,11 @@ import {
   TableContainer,
   TablePagination
 } from '@mui/material';
-// components
 import Page from '../components/Page';
 import Label from '../components/Label';
 import Scrollbar from '../components/Scrollbar';
 import SearchNotFound from '../components/SearchNotFound';
 import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dashboard/user';
-//
 
 const axios = require('axios');
 
@@ -84,7 +80,6 @@ export default function User() {
       .get('http://localhost:3000/users')
       .then((res) => {
         setData(res.data);
-        // console.log('Result:', data);
       })
       .catch((error) => {
         console.log(error);
@@ -139,9 +134,7 @@ export default function User() {
   };
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
-
   const filteredUsers = applySortFilter(data, getComparator(order, orderBy), filterName);
-
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
@@ -160,14 +153,12 @@ export default function User() {
             New User
           </Button>
         </Stack>
-
         <Card>
           <UserListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
           />
-
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -207,8 +198,8 @@ export default function User() {
                           <TableCell>{row.company}</TableCell>
                           <TableCell>{row.role}</TableCell>
                           <TableCell>
-                            <Label variant="ghost" color="success">
-                              Active
+                            <Label variant="ghost" color={row.status ? 'success' : 'error'}>
+                              {row.status ? 'Active' : 'Banned'}
                             </Label>
                           </TableCell>
                           <TableCell>
@@ -235,7 +226,6 @@ export default function User() {
               </Table>
             </TableContainer>
           </Scrollbar>
-
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"

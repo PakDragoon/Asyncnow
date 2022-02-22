@@ -1,9 +1,15 @@
+import { useRecoilValue } from "recoil"
+import { userDataRecoil } from "../components/data/atom"
+
 // ----------------------------------------------------------------------
 
-const account = {
-  displayName: 'Admin Name',
-  email: 'demo@minimals.cc',
-  photoURL: '/static/mock-images/avatars/avatar_default.jpg'
-};
+// const { userName } = useRecoilValue(userDataRecoil)
+// const adminName = userName
 
-export default account;
+const account = {
+  displayName: "adminm name",
+  email: "demo@minimals.cc",
+  photoURL: "/static/mock-images/avatars/avatar_default.jpg",
+}
+
+export default account

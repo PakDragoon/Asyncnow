@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import { Helmet } from "react-helmet"
 import { userDataRecoil } from "../../data/atom"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilValue } from "recoil"
 import DashboardSubTitle from "../title.component"
 import DashboardSubText from "../subtext.component"
 import userIcon from "../../../assets/images/user.png"

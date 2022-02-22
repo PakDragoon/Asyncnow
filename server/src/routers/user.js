@@ -25,6 +25,7 @@ router.post('/users', async (req, res) => {
         res.status(400).send(error)
     }
 })
+
 //Login User
 router.post('/users/login', async (req, res) => {
     try {
@@ -35,6 +36,7 @@ router.post('/users/login', async (req, res) => {
         res.status(404).send(error)
     }
 })
+
 //Get User Profile
 router.get('/users/me', auth, async (req, res) => {
     try {
@@ -43,29 +45,17 @@ router.get('/users/me', auth, async (req, res) => {
         res.status(400).send(error)
     }    
 })
-//Delete User
-// router.delete('/users/me', auth, async (req, res) => {
-//     try {
-//         await req.user.remove()
-//         res.status(200).send(req.user)
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-// })
-//Delete User By ID
-router.delete('/users/:id', async (req, res) => {
+
+//Get all Users by Admin
+router.get('/users', async (req, res) => {
     try {
-        const id = req.params.id
-        console.log(id)
-        const deleteUser = await User.findByIdAndDelete(req.params.id)
-        if (!deleteUser){
-            return res.status(404).send()
-        }
-        res.status(200).send(deleteUser)
+        const users = await User.find({})
+        res.status(201).send(users)
     } catch (error) {
         res.status(400).send(error)
     }
 })
+
 //Update User
 router.patch('/users/me', auth, async (req, res) =>{
     const updates = Object.keys(req.body)
@@ -82,15 +72,52 @@ router.patch('/users/me', auth, async (req, res) =>{
         res.status(400).send(error)
     }
 })
-//Get all Users
-router.get('/users', async (req, res) => {
+
+//Update User By Admin
+router.patch('/user/update/:id', async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['status']
+    const isValid = updates.every((update) => allowedUpdates.includes(update))
+    if(!isValid){
+        return res.status(400).send({error: 'Not allowed to update this'})
+    }
     try {
-        const users = await User.find({})
-        res.status(201).send(users)
+        const userUpdate = await User.findByIdAndUpdate(req.params.id)
+        updates.forEach((update) => userUpdate[update] = req.body[update])
+        await userUpdate.save()
+        if(!userUpdate){
+            return res.status(404).send()
+        }
+        res.status(201).send(userUpdate)
     } catch (error) {
         res.status(400).send(error)
     }
 })
+
+//Delete User By Admin
+router.delete('/user/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id
+        console.log(id)
+        const deleteUser = await User.findByIdAndDelete(req.params.id)
+        if (!deleteUser){
+            return res.status(404).send()
+        }
+        res.status(200).send(deleteUser)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+// //Delete User
+// router.delete('/users/me', auth, async (req, res) => {
+//     try {
+//         await req.user.remove()
+//         res.status(200).send(req.user)
+//     } catch (error) {
+//         res.status(400).send(error)
+//     }
+// })
 // //Upload Profile picture
 // const upload = multer({
 //     limits: {
@@ -135,6 +162,7 @@ router.get('/users', async (req, res) => {
 //         res.status(404).send(error)        
 //     }
 // })
+
 //Logout User
 router.post('/users/logout', auth, async (req, res) => {
     try {
@@ -147,6 +175,7 @@ router.post('/users/logout', auth, async (req, res) => {
         res.status(500).send(error)
     }
 })
+
 //Logout user from all sessions 
 router.post('/users/logoutall', auth, async (req, res) => {
     try {
@@ -157,4 +186,5 @@ router.post('/users/logoutall', auth, async (req, res) => {
         res.status(500).send(error)
     }
 })
+
 module.exports = router
