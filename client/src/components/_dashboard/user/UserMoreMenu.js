@@ -9,6 +9,7 @@ import PropTypes from "prop-types"
 import { confirmAlert } from "react-confirm-alert"
 import { useRecoilValue } from "recoil"
 import "react-confirm-alert/src/react-confirm-alert.css"
+import "./UserMoreMenu.style.css"
 
 const style = {
   position: "absolute",
@@ -151,7 +152,7 @@ export default function UserMoreMenu(props) {
                   </TextField>
                 </form>
                 <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleUpdate}>Change</Button>
-                <Button variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
+                <Button className="modal-close-button" variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
               </Typography>
             </Box>
           </Modal>

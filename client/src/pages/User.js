@@ -210,7 +210,7 @@ export default function User() {
                   </TextField>
                 </form>
                 <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleNewSubmit}>Submit</Button>
-                <Button variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
+                <Button className="modal-close-button" variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
               </Typography>
             </Box>
           </Modal>
