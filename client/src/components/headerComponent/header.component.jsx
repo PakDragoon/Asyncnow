@@ -65,7 +65,7 @@ function Header() {
                 <Link to="/login" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Back to Login →</Link>
             : location.pathname === '/awesome' ?
                 <a href="../index.html" class="nav-link-3 b-nav-link">Visit asyncnow.com</a>
-            : location.pathname.match(/^.*dashboard.*$/) && !location.pathname === '/dashboard/app' ?
+            : location.pathname.match(/^.*dashboard.*$/) && location.pathname !== '/dashboard/user' ?
                 <Link to='/' onClick={Logout} className="nav-link-3 b-nav-link">Sign Out</Link>
             :   ''
             }

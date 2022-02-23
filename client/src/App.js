@@ -53,7 +53,7 @@ function App() {
           <Route path="register" element={<Register title="Register" />} />
           <Route path="thanks" element={<Thanks title="Thanks" />} />
           {isAuthenticated && (isRole === "Admin" || isRole === "Super Admin") ? (
-            <Route path="dashboard" element={<DashboardL />}>
+            <Route path="/dashboard" element={<DashboardL />}>
               <Route path="app" element={<DashboardApp />} />
               <Route path="user" element={<User />} />
             </Route>
@@ -62,7 +62,7 @@ function App() {
               <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
               <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
               <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
-              <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
+              <Route path="/dashboard" element={<Dashboard title="Dashboard" />}>
                 <Route path="main" element={<DashboardMain />} />
                 <Route path="videos" element={<DashboardVideos />} />
                 <Route path="insights" element={<DashboardInsights />} />

@@ -55,7 +55,7 @@ function Login() {
         if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
           navigate("/dashboard/user", { replace: true })
         } else if (res.data.user.role === "User" && res.data.user.status ) {
-          navigate("/dashboard", { replace: true })
+          navigate("/dashboard/main", { replace: true })
         } else {
           navigate("/login", { replace: true })
           sessionStorage.clear()
@@ -70,6 +70,12 @@ function Login() {
         setFail(true)
         setLoading(false)
       })
+      if(banned){
+        sessionStorage.clear()
+        setSuccess(false)
+        setFail(false)
+        setLoading(false)
+      }    
       if(!banned){
         setSuccess(false)
         setFail(true)

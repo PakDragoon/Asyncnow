@@ -104,7 +104,7 @@ class Register extends React.Component {
                     <div>Thank you! Your submission has been received!</div>
                   </div>
                   <div className={`${this.state.fail ? "w-form-fail" : "w-condition-invisible"}`}>
-                    <div>Oops! Something went wrong while submitting the form.</div>
+                    <div>This email has already registered.</div>
                   </div>
                 </div>
               </div>
