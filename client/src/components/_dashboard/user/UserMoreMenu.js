@@ -26,7 +26,7 @@ const style = {
 const options = [
   {
     label: "-Select Status-",
-    value: null
+    value: null,
   },
   {
     label: "Active",
@@ -87,22 +87,35 @@ export default function UserMoreMenu(props) {
     }
   }
   const handleUpdate = async (event) => {
-    event.preventDefault()
-    console.log(status)
-    const data = {
-      status,
+    if (isRole === "Super Admin") {
+      event.preventDefault()
+      console.log(status)
+      const data = {
+        status,
+      }
+      axios({
+        method: "patch",
+        url: `http://localhost:3000/user/update/${props.Id}`,
+        data,
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err.res.data)
+        })
+    } else {
+      setOpen(false)
+      confirmAlert({
+        title: "Unauthorized Action",
+        message: "You are not authorize to perform this action.",
+        buttons: [
+          {
+            label: "Ok",
+          },
+        ],
+      })
     }
-    axios({
-      method: "patch",
-      url: `http://localhost:3000/user/update/${props.Id}`,
-      data,
-    })
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.log(err.res.data)
-      })
   }
   return (
     <>
@@ -143,7 +156,7 @@ export default function UserMoreMenu(props) {
               </Typography>
               <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                 <form onSubmit={handleUpdate}>
-                <TextField fullWidth id="outlined-basic-status" select label="Status" value={status} onChange={(e) => setStatus(e.target.value)} size="small" margin="normal">
+                  <TextField fullWidth id="outlined-basic-status" select label="Status" value={status} onChange={(e) => setStatus(e.target.value)} size="small" margin="normal">
                     {options.map((option) => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
@@ -151,8 +164,12 @@ export default function UserMoreMenu(props) {
                     ))}
                   </TextField>
                 </form>
-                <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleUpdate}>Change</Button>
-                <Button className="modal-close-button" variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
+                <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleUpdate}>
+                  Change
+                </Button>
+                <Button className="modal-close-button" variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>
+                  Close
+                </Button>
               </Typography>
             </Box>
           </Modal>
