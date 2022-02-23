@@ -43,10 +43,10 @@ function Header() {
   return (
     <>
     <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner"
-        className={`w-nav ${location.pathname.match(/^.*dashboard.*$/) ? 'navbbar-app' : 'navbar'} ${location.pathname === '/checkout' || location.pathname === '/paypal' || location.pathname === '/order' || location.pathname === '/protected' || location.pathname === '/error' ? 'none' : ''}`}>
+        className={`w-nav ${location.pathname.match(/^.*dashboard.*$/) ? 'navbbar-app' : 'navbar'} ${location.pathname === '/checkout' || location.pathname === '/paypal' || location.pathname === '/order' || location.pathname === '/protected' || location.pathname === '/error' || location.pathname === '/dashboard/app' || location.pathname === '/dashboard/user' ? 'none' : ''}`}>
         <div className={`w-container ${location.pathname.match(/^.*dashboard.*$/) ? 'container-4' : 'nav-container'}`}>
             <Link to="/" aria-current="page" className="brand w-nav-brand w--current">
-                <div className={`brand-logo ${location.pathname.match(/^.*dashboard.*$/) ? 'app' : ''}`}>async<span className="text-span">.</span></div>
+                <div className={`brand-logo ${location.pathname.match(/^.*dashboard.*$/) ? 'app' : ''} ${location.pathname === '/dashboard/app' && !location.pathname === '/dashboard/user' ? 'none' : ''}`}>async<span className="text-span">.</span></div>
             </Link>
             <nav role="navigation" className={`${location.pathname.match(/^.*dashboard.*$/) ? '' : 'nav-menu'} w-nav-menu`}>
             {location.pathname === '/' ?
@@ -65,7 +65,7 @@ function Header() {
                 <Link to="/login" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">Back to Login →</Link>
             : location.pathname === '/awesome' ?
                 <a href="../index.html" class="nav-link-3 b-nav-link">Visit asyncnow.com</a>
-            : location.pathname.match(/^.*dashboard.*$/) ?
+            : location.pathname.match(/^.*dashboard.*$/) && !location.pathname === '/dashboard/app' ?
                 <Link to='/' onClick={Logout} className="nav-link-3 b-nav-link">Sign Out</Link>
             :   ''
             }

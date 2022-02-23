@@ -17,16 +17,27 @@ import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheck
 import OrderConfirmationComponent from "./components/orderConfirmationPage/orderConfirnation.component"
 import { useRecoilValue } from "recoil"
 import { userDataRecoil } from "./components/data/atom"
-import ThemeConfig from './theme';
-import GlobalStyles from './theme/globalStyles';
-import ScrollToTop from './components/ScrollToTop';
-import { BaseOptionChartStyle } from './components/charts/BaseOptionChart';
-import DashboardLayout from './layouts/dashboard';
-import DashboardApp from './pages/DashboardApp';
-import User from './pages/User';
+import ThemeConfig from "./theme"
+import GlobalStyles from "./theme/globalStyles"
+import ScrollToTop from "./components/ScrollToTop"
+import { BaseOptionChartStyle } from "./components/charts/BaseOptionChart"
+import DashboardLayout from "./layouts/dashboard"
+import DashboardApp from "./pages/DashboardApp"
+import User from "./pages/User"
 import ".//assets/css/normalize.css"
 import ".//assets/css/asyncnow.webflow.css"
 import ".//assets/css/webflow.css"
+
+function DashboardL() {
+  return (
+    <ThemeConfig>
+      <ScrollToTop />
+      <GlobalStyles />
+      <BaseOptionChartStyle />
+      <DashboardLayout />
+    </ThemeConfig>
+  )
+}
 
 function App() {
   // const { userRole } = useRecoilValue(userDataRecoil)
@@ -34,46 +45,37 @@ function App() {
   const isRole = sessionStorage.getItem("isRole")
   return (
     <div>
-      { isAuthenticated && ( isRole === "Admin" || isRole === "Super Admin" ) ? (
-        <ThemeConfig>
-          <ScrollToTop />
-          <GlobalStyles />
-          <BaseOptionChartStyle />
-          <Routes>
-            <Route path="/dashboard" element={<DashboardLayout />}>
+      <Fragment>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<HomePage title="Home" />} />
+          <Route path="login" element={<Login title="Login" />} />
+          <Route path="register" element={<Register title="Register" />} />
+          <Route path="thanks" element={<Thanks title="Thanks" />} />
+          {isAuthenticated && (isRole === "Admin" || isRole === "Super Admin") ? (
+            <Route path="dashboard" element={<DashboardL />}>
               <Route path="app" element={<DashboardApp />} />
               <Route path="user" element={<User />} />
             </Route>
-          </Routes>
-        </ThemeConfig>
-      ) : (
-        <Fragment>
-          <Header />
-          <Routes>
-            <Route exact path="/" element={<HomePage title="Home" />} />
-            <Route path="login" element={<Login title="Login" />} />
-            <Route path="register" element={<Register title="Register" />} />
-            <Route path="thanks" element={<Thanks title="Thanks" />} />
-            {isAuthenticated && isRole === "User" ? (
-              <>
-                <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
-                <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
-                <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
-                <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
-                  <Route path="main" element={<DashboardMain />} />
-                  <Route path="videos" element={<DashboardVideos />} />
-                  <Route path="insights" element={<DashboardInsights />} />
-                  <Route path="settings" element={<DashboardSettings />} />
-                </Route>
-              </>
-            ) : (
-              <Route path="dashboard" element={<Navigate to="/login" />} />
-            )}
-            <Route path="*" exact={true} element={<Error title="404" />} />
-          </Routes>
-          <Footer />
-        </Fragment>
-      )}
+          ) : isAuthenticated && isRole === "User" ? (
+            <>
+              <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
+              <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
+              <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
+              <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
+                <Route path="main" element={<DashboardMain />} />
+                <Route path="videos" element={<DashboardVideos />} />
+                <Route path="insights" element={<DashboardInsights />} />
+                <Route path="settings" element={<DashboardSettings />} />
+              </Route>
+            </>
+          ) : (
+            <Route path="dashboard" element={<Navigate to="/login" />} />
+          )}
+          <Route path="*" exact={true} element={<Error title="404" />} />
+        </Routes>
+        <Footer />
+      </Fragment>
     </div>
   )
 }
