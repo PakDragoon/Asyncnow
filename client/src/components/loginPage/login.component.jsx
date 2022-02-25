@@ -7,9 +7,11 @@ import { userDataRecoil } from "../data/atom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
+import { delay } from "lodash"
 
 const axios = require("axios")
 const title = "Login"
+const preDelay = require('delay');
 
 function Login() {
   const navigate = useNavigate()
@@ -50,8 +52,11 @@ function Login() {
         sessionStorage.setItem("token", res.data.token)
         sessionStorage.setItem("name", res.data.user.name)
         sessionStorage.setItem("email", res.data.user.email)
+        sessionStorage.setItem("company", res.data.user.company)
+        sessionStorage.setItem("code", res.data.user.code)
         setSuccess(true)
         setLoading(false)
+        // await preDelay(3000)
         if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
           navigate("/dashboard/user", { replace: true })
         } else if (res.data.user.role === "User" && res.data.user.status ) {
@@ -72,11 +77,7 @@ function Login() {
       })
       if(banned){
         sessionStorage.clear()
-        setSuccess(false)
-        setFail(false)
-        setLoading(false)
-      }    
-      if(!banned){
+      } else {
         setSuccess(false)
         setFail(true)
         setLoading(false)

@@ -5403,7 +5403,7 @@ border: 2px solid #454ade !important;
   }
 
   .navbar-4 {
-    position: fixed;
+    position: fixed !important;
     left: 0%;
     top: auto;
     right: 0%;

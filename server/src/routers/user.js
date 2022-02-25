@@ -4,6 +4,12 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 const multer = require('multer')
 const sharp = require('sharp')
+const sgMail = require("@sendgrid/mail")
+const sendGridAPI = "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"
+
+sgMail.setApiKey(sendGridAPI)
+
+//Send mail
 
 //Create User
 router.post('/users', async (req, res) => {

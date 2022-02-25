@@ -15,7 +15,8 @@ import DashboardSubText from "../subtext.component"
 const title = "Dashboard | Main"
 
 function DashboardMain() {
-  const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
+  // const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
+  const userName = sessionStorage.getItem("name")
   return (
     <>
       <Helmet>

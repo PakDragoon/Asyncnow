@@ -88,3 +88,21 @@ const main = async () => {
     // console.log(user.tasks)
 } 
 main()  
+
+// router.post("/mail", async (req, res) => {
+//     const mail = {
+//       to: "thronerush748_7@yahoo.com",
+//       from: "hassan748_7@hotmail.com",
+//       subject: "Asyncnow - Getting Started",
+//       text: "You can register yourself by clicking on the given link below:",
+//       html: `<p>You can register yourself by clicking on the given link below:</p><br><a href="http://localhost:3001/register">http://localhost:3001/register</a>`,
+//     }
+//     sgMail
+//       .send(mail)
+//       .then(() => {
+//         console.log("Email sent")
+//       })
+//       .catch((error) => {
+//         console.error(error)
+//       })
+//   })

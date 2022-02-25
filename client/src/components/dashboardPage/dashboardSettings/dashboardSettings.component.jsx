@@ -17,9 +17,9 @@ const axios = require("axios")
 const title = "Dashboard | Settings"
 
 function DashboardSettings() {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [company, setCompany] = useState("")
+  const [name, setName] = useState(sessionStorage.getItem("name"))
+  const [email, setEmail] = useState(sessionStorage.getItem("email"))
+  const [company, setCompany] = useState(sessionStorage.getItem("company"))
   const [nameChange, setNameChange] = useState("")
   const [emailChange, setEmailChange] = useState("")
   const [companyChange, setCompanyChange] = useState("")
@@ -29,8 +29,9 @@ function DashboardSettings() {
       clickDismiss: true,
       escapeDismiss: true,
   };
-  const { userToken, userCode } = useRecoilValue(userDataRecoil)
-  const token = userToken
+  const { userToken } = useRecoilValue(userDataRecoil)
+  const token = sessionStorage.getItem("token")
+  const userCode = sessionStorage.getItem("code")
 
   useEffect(() => {
     var data = ''
@@ -58,7 +59,6 @@ function DashboardSettings() {
     setName(nameChange)
     setEmail(emailChange)
     setCompany(companyChange)
-    const token = userToken
     const data = {
       name: nameChange,
       email: emailChange,
