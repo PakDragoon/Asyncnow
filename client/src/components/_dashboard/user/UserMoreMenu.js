@@ -8,6 +8,7 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText, Box, Typography
 import PropTypes from "prop-types"
 import { confirmAlert } from "react-confirm-alert"
 import { useRecoilValue } from "recoil"
+import { userDataRecoil } from "../../data/atom"
 import "react-confirm-alert/src/react-confirm-alert.css"
 import "./UserMoreMenu.style.css"
 
@@ -38,12 +39,13 @@ const options = [
   },
 ]
 const axios = require("axios")
-// const { userRole } = useRecoilValue(userDataRecoil)
-const isRole = sessionStorage.getItem("isRole")
 
 // ----------------------------------------------------------------------
 
 export default function UserMoreMenu(props) {
+  const { userRole } = useRecoilValue(userDataRecoil)
+  const isRole = userRole
+  // const isRole = sessionStorage.getItem("isRole")
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState(null)
   const handleOpen = () => setOpen(true)

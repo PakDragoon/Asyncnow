@@ -52,26 +52,26 @@ function App() {
           <Route path="login" element={<Login title="Login" />} />
           <Route path="register" element={<Register title="Register" />} />
           <Route path="thanks" element={<Thanks title="Thanks" />} />
-          {/* {isAuthenticated && (isRole === "Admin" || isRole === "Super Admin") ? ( */}
-          <Route path="/dashboard" element={<DashboardL />}>
-            <Route path="app" element={<DashboardApp />} />
-            <Route path="user" element={<User />} />
-          </Route>
-          {/* ) : isAuthenticated && isRole === "User" ? ( */}
-          {/* <> */}
-          <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
-          <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
-          <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
-          <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
-            <Route path="main" element={<DashboardMain />} />
-            <Route path="videos" element={<DashboardVideos />} />
-            <Route path="insights" element={<DashboardInsights />} />
-            <Route path="settings" element={<DashboardSettings />} />
-          </Route>
-          {/* </> */}
-          {/* ) : ( */}
-          {/* <Route path="dashboard" element={<Navigate to="/login" />} /> */}
-          {/* )} */}
+          {isAuthenticated && (isRole === "Admin" || isRole === "Super Admin") ? (
+            <Route path="/dashboard" element={<DashboardL />}>
+              <Route path="app" element={<DashboardApp />} />
+              <Route path="user" element={<User />} />
+            </Route>
+          ) : isAuthenticated && isRole === "User" ? (
+            <>
+              <Route path="checkout" element={<CheckoutComponent title="Checkout" />} />
+              <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
+              <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
+              <Route path="dashboard" element={<Dashboard title="Dashboard" />}>
+                <Route path="main" element={<DashboardMain />} />
+                <Route path="videos" element={<DashboardVideos />} />
+                <Route path="insights" element={<DashboardInsights />} />
+                <Route path="settings" element={<DashboardSettings />} />
+              </Route>
+            </>
+          ) : (
+            <Route path="dashboard" element={<Navigate to="/login" />} />
+          )}
           <Route path="*" exact={true} element={<Error title="404" />} />
         </Routes>
         <Footer />
