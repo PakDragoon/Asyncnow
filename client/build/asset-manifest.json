@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f0ac52b3.css",
+    "main.js": "/static/js/main.7fd4b89d.js",
+    "static/js/787.b939f09f.chunk.js": "/static/js/787.b939f09f.chunk.js",
+    "static/media/user.png": "/static/media/user.89377d06f61820ccee1f.png",
+    "static/media/share.png": "/static/media/share.5db52f0f7b137c14762c.png",
+    "static/media/eyeglasses.png": "/static/media/eyeglasses.1069f7d63abfc072dd5e.png",
+    "static/media/more.png": "/static/media/more.57b90e813adb91e65fe3.png",
+    "static/media/link.png": "/static/media/link.4909064f201d1898d209.png",
+    "static/media/laura-adai-BFmhzQNLyaA-unsplash-2.jpg": "/static/media/laura-adai-BFmhzQNLyaA-unsplash-2.f0691908c1ba5dd0a926.jpg",
+    "static/media/focus.png": "/static/media/focus.f5249cfb8d1876ff80c0.png",
+    "static/media/email-3.png": "/static/media/email-3.e2b1453236db351a7778.png",
+    "static/media/menu.png": "/static/media/menu.5d9fe2b7410759ebd9fa.png",
+    "static/media/laura-adai-AF50O2MtgOU-unsplash-2.jpg": "/static/media/laura-adai-AF50O2MtgOU-unsplash-2.62e0beb9a7e4a436555d.jpg",
+    "static/media/add.png": "/static/media/add.dc162bf162868631821b.png",
+    "static/media/laura-adai-O0bNT7gH1xg-unsplash-3.jpg": "/static/media/laura-adai-O0bNT7gH1xg-unsplash-3.01681def58ef4a59ebfc.jpg",
+    "static/media/laura-adai-enkfbbb9yf8-unsplash-2.jpg": "/static/media/laura-adai-enkfbbb9yf8-unsplash-2.4bf395df642b06179edf.jpg",
+    "static/media/cazoo_brand_logo.svg": "/static/media/cazoo_brand_logo.568b620a09990bc78351c095562b8f3f.svg",
+    "static/media/twitter-3.png": "/static/media/twitter-3.93ef1c7de00cd1f8db8b.png",
+    "static/media/medium.png": "/static/media/medium.0b30b1b62c51d91a71a7.png",
+    "static/media/pointed-star.png": "/static/media/pointed-star.bc1323bf818704151c5d.png",
+    "static/media/revolut_brand_logo.svg": "/static/media/revolut_brand_logo.fe980332bcb8fe0dc2f1e300866987b3.svg",
+    "static/media/linkedin-6.png": "/static/media/linkedin-6.a417189ea2f25749e85b.png",
+    "static/media/gymshark_brand_logo.svg": "/static/media/gymshark_brand_logo.e4d27c79c9f9291ce233a5c777b5a423.svg",
+    "index.html": "/index.html",
+    "static/media/glovo-1.svg": "/static/media/glovo-1.a7fead976401a8599fb88f731197e115.svg",
+    "static/media/deliveroo.svg": "/static/media/deliveroo.580261376db09f333aeb9b334fd53073.svg",
+    "static/media/houzz.svg": "/static/media/houzz.b1a77c6c2fc054e87eacaadaba8f3a83.svg",
+    "main.f0ac52b3.css.map": "/static/css/main.f0ac52b3.css.map",
+    "main.7fd4b89d.js.map": "/static/js/main.7fd4b89d.js.map",
+    "787.b939f09f.chunk.js.map": "/static/js/787.b939f09f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0ac52b3.css",
+    "static/js/main.7fd4b89d.js"
+  ]
+}

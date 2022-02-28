@@ -9,6 +9,7 @@ const bodyParser = require("body-parser")
 const nodemailer = require("nodemailer")
 const sendGridTransport = require("nodemailer-sendgrid-transport")
 const { SENDGRID_API } = require("./config/keys")
+const path = require('path');
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -20,7 +21,7 @@ const transporter = nodemailer.createTransport(
     },
   })
 )
-
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 //Result in JSON format
 app.use(express.json())
 

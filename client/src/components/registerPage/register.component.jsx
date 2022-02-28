@@ -53,11 +53,11 @@ class Register extends React.Component {
     })
       .then((res) => {
         console.log(res)
-        this.setState({ loading: false, success: true, message: res.data })
+        this.setState({ loading: false, success: true, fail: false, message: res.data })
       })
       .catch((err) => {
         console.log(err.response.data)
-        this.setState({ loading: false, fail: true })
+        this.setState({ loading: false, fail: true, success: false })
       })
   }
   showMsg() {
