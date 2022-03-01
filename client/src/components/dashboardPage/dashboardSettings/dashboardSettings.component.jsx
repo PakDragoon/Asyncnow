@@ -108,7 +108,7 @@ function DashboardSettings() {
             <div className="text-block-10">{email}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51d2" className="link-11">
+            <a href="#" data-w-id="509bebb8-7a5d-25a8-c0ea-51b4855e51d2" className="link-11" onClick={() => {setOverlay(true);}}>
               Update
             </a>
           </div>
@@ -121,7 +121,7 @@ function DashboardSettings() {
             <div className="text-block-10">{company}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="1d238b13-8207-3da3-6897-9ddf61c5267b" className="link-11">
+            <a href="#" data-w-id="1d238b13-8207-3da3-6897-9ddf61c5267b" className="link-11" onClick={() => {setOverlay(true);}}>
               Update
             </a>
           </div>
@@ -134,7 +134,7 @@ function DashboardSettings() {
             <div className="text-block-10">{userCode}</div>
           </div>
           <div className="div-block-47">
-            <a href="#" data-w-id="70d5e562-7fa1-d234-68f8-7b7e440688d8" className="link-11">
+            <a href="#" data-w-id="70d5e562-7fa1-d234-68f8-7b7e440688d8" className="link-11" onClick={() => {setOverlay(true);}}>
               Update
             </a>
           </div>

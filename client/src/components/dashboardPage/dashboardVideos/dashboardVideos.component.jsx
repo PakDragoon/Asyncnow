@@ -80,15 +80,15 @@ function DashboardVideos () {
                         </div>
                     </div>
                     <div className="div-block-47">
-                        <a href="../app/awesome-video.html" target="_blank" className="link-11">Watch</a>
+                        <a href="https://www.youtube.com/watch?v=w7ejDZ8SWv8" target="_blank" className="link-11">Watch</a>
                         <div className="div-block-48">
                             <div className="text-block-10">|</div>
                         </div>
-                        <a href="../app/insights.html" className="link-11">Insights</a>
+                        <a href="#top" className="link-11">Insights</a>
                         <div className="div-block-48">
                             <div className="text-block-10">|</div>
                         </div>
-                        <a href="#" data-w-id="d171a671-d3c3-ae8d-71c8-7575c94780d8" className="link-11">Copy Link</a>
+                        <a href="#" data-w-id="d171a671-d3c3-ae8d-71c8-7575c94780d8" className="link-11" onClick={() =>  navigator.clipboard.writeText('https://www.youtube.com/watch?v=w7ejDZ8SWv8')}>Copy Link</a>
                     </div>
                 </div>
                 )
