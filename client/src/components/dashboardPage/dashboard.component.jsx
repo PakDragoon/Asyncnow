@@ -19,10 +19,14 @@ import DashboardInsights from './dashboardInsights/dashboardInsights.component';
 import DashboardSettings from './dashboardSettings/dashboardSettings.component';
 import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
+const axios = require("axios")
+
 function Dashboard(props) {
     PageTitle(props.title)
     const location = useLocation();
+    const token = sessionStorage.getItem("token")
     const [isOpen, setOverlay] = useState(false);
+    const [description, setDescription] = useState('');
     const configs = {
         animate: true,
         clickDismiss: true,
@@ -40,7 +44,27 @@ function Dashboard(props) {
       OverlayThree.current.style.display = 'block';
       OverlayTwo.current.style.display = 'none';
     }
-    
+    const handleSubmitVideo = async (event) => {
+        event.preventDefault()
+        const data = {
+            description: description
+        }
+        var config = {
+            method: 'post',
+            url: 'http://localhost:3000/create/tasks',
+            headers: { 
+              'Authorization': `Bearer ${token}`
+            },
+            data: data
+        };
+        axios(config)
+          .then((res) => {
+              console.log(res)
+          })
+          .catch((err) => {
+            console.log(err.res.data)
+          })  
+      }
   return (
     <>
     <div data-animation="default" data-collapse="medium" data-duration={400} data-easing="ease" data-easing2="ease" role="banner" className="navbar-4 w-nav">
@@ -139,14 +163,19 @@ function Dashboard(props) {
                     <div className="text-block-14">(3/3)</div>
                 </div>
                 <div className="form-block w-form">
-                    <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/app/videos" data-redirect="/app/videos" method="get" className="form join"><label htmlFor="Title" className="field-label">VIDEO&nbsp;TITLE</label><input type="text" className="text-field w-input" maxLength={256} name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required /><label htmlFor="CTA" className="field-label">CTA&nbsp;(OPTIONAL)</label><input type="text" className="text-field w-input" maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required /><label htmlFor="Title" className="field-label">VIDEO&nbsp;LINK</label>
+                    <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/app/videos" data-redirect="/app/videos" method="get" className="form join">
+                        <label htmlFor="Title" className="field-label">VIDEO&nbsp;TITLE</label>
+                        <input type="text" className="text-field w-input" onChange={(e) => setDescription(e.target.value)} maxLength={256} name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required />
+                        {/* <label htmlFor="CTA" className="field-label">CTA&nbsp;(OPTIONAL)</label>
+                        <input type="text" className="text-field w-input" maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required /> */}
+                        <label htmlFor="Title" className="field-label">VIDEO&nbsp;LINK</label>
                     <div className="div-block-51">
                         <div className="text-block-12">/@alovelace/save-10%</div>
                         <a href="#" className="link-block-2 small w-inline-block">
                         <img src={linkIcon} loading="lazy" sizes="100vw" alt="" /></a>
                     </div>
                     <div className="div-block-12 low">
-                        <button type="submit" data-wait="Please wait..." className="submit-button w-button" >Save & Copy</button>
+                        <button type="submit" data-wait="Please wait..." className="submit-button w-button" onClick={handleSubmitVideo}>Save & Copy</button>
                         <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d533307" href="#" className="link-7" onClick={() => {setOverlay(false);}}>Cancel</a>
                     </div>
                     </form>

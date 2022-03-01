@@ -4,9 +4,10 @@ const auth = require('../middleware/auth')
 const router = new express.Router()
 
 //Enter Task
-router.post('/tasks', auth, async (req, res) => {
+router.post('/create/tasks', auth, async (req, res) => {
     const task = new Task({
-        ...req.body,
+        description: req.body.description,
+        // ...req.body,
         owner: req.user._id
     })
     try {
@@ -77,7 +78,7 @@ router.patch('/tasks/:id', auth, async (req, res) => {
     }
 })
 //Delete Task by ID
-router.delete('/tasks/:id', auth, async (req, res) => {
+router.delete('/delete/tasks/:id', auth, async (req, res) => {
     try {
         const deleteTask = await Task.findOneAndDelete({_id: req.params.id, owner: req.user._id})
         if (!deleteTask){

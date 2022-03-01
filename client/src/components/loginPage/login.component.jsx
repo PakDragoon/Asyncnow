@@ -7,11 +7,9 @@ import { userDataRecoil } from "../data/atom"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
-import { delay } from "lodash"
 
 const axios = require("axios")
 const title = "Login"
-const preDelay = require('delay');
 
 function Login() {
   const navigate = useNavigate()
@@ -80,6 +78,7 @@ function Login() {
       } else {
         setSuccess(false)
         setFail(true)
+        setTimeout(() => setFail(false), 3000)
         setLoading(false)
       }    
       // setTimeout(() => setSuccess(false), 3000)
