@@ -7,6 +7,7 @@ const router = new express.Router()
 router.post('/create/tasks', auth, async (req, res) => {
     const task = new Task({
         description: req.body.description,
+        link: req.body.link,
         // ...req.body,
         owner: req.user._id
     })

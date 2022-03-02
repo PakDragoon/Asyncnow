@@ -10,6 +10,8 @@
     "@iconify/icons-eva": "1.1.0",
     "@iconify/icons-ic": "1.1.10",
     "@iconify/react": "3.0.1",
+    "@loomhq/loom-embed": "^1.2.18",
+    "@loomhq/record-sdk": "^2.35.9",
     "@material-ui/core": "4.11.3",
     "@mui/lab": "5.0.0-alpha.47",
     "@mui/material": "5.0.0",

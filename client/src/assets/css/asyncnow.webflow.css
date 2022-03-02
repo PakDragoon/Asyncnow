@@ -2692,7 +2692,7 @@ border: 2px solid #454ade !important;
 
 .pop-up-modal-content.video {
   max-height: 460px;
-  max-width: 350px;
+  max-width: 450px;
 }
 
 .pop-up-modal-content.video.step-one {
@@ -3247,8 +3247,8 @@ border: 2px solid #454ade !important;
 }
 
 .text-block-10.middle.video {
-  max-width: 240px;
-  margin-bottom: 0px;
+  max-width: 400px;
+  margin-bottom: -5px;
   text-align: center;
 }
 
@@ -3551,7 +3551,7 @@ border: 2px solid #454ade !important;
 }
 
 .div-block-50.image {
-  background-image: url('../images/laura-adai-enkfbbb9yf8-unsplash-2.jpg');
+  /* background-image: url('../images/laura-adai-enkfbbb9yf8-unsplash-2.jpg'); */
   background-position: 0px 0px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -3591,6 +3591,7 @@ border: 2px solid #454ade !important;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  overflow: overlay;
 }
 
 .text-block-13 {
