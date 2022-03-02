@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import Overlay from "react-overlay-component";
 import { isSupported, setup } from "@loomhq/record-sdk";
 import { oembed } from "@loomhq/loom-embed";
+
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
@@ -14,7 +15,6 @@ import insightsIcon from '../../assets/images/share.png'
 import settingsIcon from '../../assets/images/more.png'
 import createIcon from  '../../assets/images/add.png'
 import linkIcon from  '../../assets/images/link.png'
-import playBtn from '../../assets/images/play-button.png'
 import DashboardVideos from './dashboardVideos/dashboardVideos.component';
 import DashboardMain from './dashboardMain/dashboardMain.component';
 import DashboardInsights from './dashboardInsights/dashboardInsights.component';
@@ -82,7 +82,7 @@ function Dashboard(props) {
       OverlayTwo.current.style.display = 'none';
       OverlayOne.current.style.display = 'block';
     }
-    
+
     const handleSubmitVideo = async (event) => {
         event.preventDefault()
         const data = {
