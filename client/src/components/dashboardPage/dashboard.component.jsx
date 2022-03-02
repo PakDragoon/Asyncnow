@@ -76,12 +76,13 @@ function Dashboard(props) {
       OverlayTwo.current.style.display = 'none';
       OverlayOne.current.style.display = 'none';
     }
-    
+
     function handleClickThree() {
       OverlayThree.current.style.display = 'none';
       OverlayTwo.current.style.display = 'none';
       OverlayOne.current.style.display = 'block';
     }
+    
     const handleSubmitVideo = async (event) => {
         event.preventDefault()
         const data = {
