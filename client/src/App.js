@@ -7,15 +7,12 @@ import ".//assets/css/asyncnow.webflow.css"
 import ".//assets/css/webflow.css"
 
 function App() {
-
   return (
-    <div>
-      <Fragment>
-        <Header />
-          <MainRoutes />
-        <Footer />
-      </Fragment>
-    </div>
+    <Fragment>
+      <Header />
+      <MainRoutes />
+      <Footer />
+    </Fragment>
   )
 }
 
