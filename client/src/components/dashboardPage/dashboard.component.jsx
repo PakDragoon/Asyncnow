@@ -209,7 +209,7 @@ function Dashboard(props) {
                     <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/app/videos" data-redirect="/app/videos" method="get" className="form join">
                         <label htmlFor="Title" className="field-label">VIDEO&nbsp;TITLE</label>
                         <input type="text" className="text-field w-input" onChange={(e) => setDescription(e.target.value)} maxLength={256} name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required />
-                        <label htmlFor="CTA" className="field-label">CTA&nbsp;(OPTIONAL)</label>
+                        <label htmlFor="CTA" className="field-label">VIDEO LINK</label>
                         <input type="text" className="text-field w-input" onChange={(e) => setVideoLink(e.target.value)} maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required />
                         <label htmlFor="Title" className="field-label">VIDEO&nbsp;LINK</label>
                     <div className="div-block-51">
