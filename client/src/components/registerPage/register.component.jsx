@@ -17,15 +17,19 @@ class Register extends React.Component {
       loading: false,
       success: false,
       fail: false,
+      passStatusOne: true,
+      passStatusTwo: true,
       message: "",
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   handleChange = (event) => {
-    const { name, value } = event.target
-    this.setState({ [name]: value })
+      const { name, value } = event.target
+      this.setState({ [name]: value })
   }
+
   handleSubmit = async (event) => {
     event.preventDefault()
     const codeObj = referralCodes.generate({
@@ -53,11 +57,19 @@ class Register extends React.Component {
     })
       .then((res) => {
         console.log(res)
-        this.setState({ loading: false, success: true, fail: false, message: res.data })
+        this.setState({ loading: false, success: true, fail: false, passStatusOne: true, passStatusTwo: true, message: res.data })
       })
       .catch((err) => {
         console.log(err.response.data)
-        this.setState({ loading: false, fail: true, success: false })
+        if(this.state.password === 'password') {
+          this.setState({ loading: false, fail: false, success: false, passStatusOne: true, passStatusTwo: false })
+        }
+        else if((this.state.password).length < 7) {
+          this.setState({ loading: false, fail: false, success: false, passStatusOne: false, passStatusTwo: true })
+        }
+        else {
+          this.setState({ loading: false, fail: true, success: false, passStatusOne: true, passStatusTwo: true })
+        }
       })
   }
   showMsg() {
@@ -105,6 +117,12 @@ class Register extends React.Component {
                   </div>
                   <div className={`${this.state.fail ? "w-form-fail" : "w-condition-invisible"}`}>
                     <div>This email has already registered.</div>
+                  </div>
+                  <div className={`${this.state.passStatusOne ? "w-condition-invisible" : "w-form-fail"}`}>
+                    <div>Password should not be less then 7 characters.</div>
+                  </div>
+                  <div className={`${this.state.passStatusTwo ? "w-condition-invisible" : "w-form-fail"}`}>
+                    <div>Password can't be 'password'.</div>
                   </div>
                 </div>
               </div>

@@ -107,6 +107,7 @@ function Dashboard(props) {
         handleClickThree()
         setOverlay(false)
         setVideoHTML("")
+        setVideoLink("")
       }
   return (
     <>
