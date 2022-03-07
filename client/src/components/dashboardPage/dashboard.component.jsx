@@ -160,10 +160,10 @@ function Dashboard(props) {
                         <img src={createIcon} loading="lazy" sizes="(max-width: 479px) 100vw, 40px" alt=""/></a>
                 </div>
             </div>
-                {location.pathname === '/dashboard/main' ? <DashboardMain /> 
-                : location.pathname === '/dashboard/videos' ? <DashboardVideos />
-                : location.pathname === '/dashboard/insights' ? <DashboardInsights /> 
-                : location.pathname === '/dashboard/settings' ? <DashboardSettings /> 
+                {location.pathname === '/dashboarduser/main' ? <DashboardMain /> 
+                : location.pathname === '/dashboarduser/videos' ? <DashboardVideos />
+                : location.pathname === '/dashboarduser/insights' ? <DashboardInsights /> 
+                : location.pathname === '/dashboarduser/settings' ? <DashboardSettings /> 
                 : <DashboardMain />}
         </div>
     </div>

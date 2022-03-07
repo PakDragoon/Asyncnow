@@ -56,11 +56,11 @@ function Login() {
         setLoading(false)
         // await preDelay(3000)
         if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
-          navigate("/dashboard/user", { replace: true })
+          navigate("/dashboardadmin/user")
         } else if (res.data.user.role === "User" && res.data.user.status ) {
-          navigate("/dashboard/main", { replace: true })
+          navigate("/dashboarduser/main")
         } else {
-          navigate("/login", { replace: true })
+          navigate("/login")
           sessionStorage.clear()
           setFail(false)
           setSuccess(false)
