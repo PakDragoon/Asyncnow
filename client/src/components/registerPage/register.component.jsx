@@ -57,7 +57,7 @@ class Register extends React.Component {
     })
       .then((res) => {
         console.log(res)
-        this.setState({ loading: false, success: true, fail: false, passStatusOne: true, passStatusTwo: true, message: res.data })
+        this.setState({ name: '', email: '', company: '', password: '', loading: false, success: true, fail: false, passStatusOne: true, passStatusTwo: true, message: res.data })
       })
       .catch((err) => {
         console.log(err.response.data)
