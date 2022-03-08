@@ -17,6 +17,7 @@ function Header() {
   const [isOpen, setOverlay] = useState(false)
   const closeOverlay = () => setOverlay(false)
   const isAuthenticated = sessionStorage.getItem("isAuthenticated")
+  const isRole = sessionStorage.getItem("isRole")
   const configs = {
     animate: true,
     clickDismiss: true,
@@ -107,7 +108,7 @@ function Header() {
               </a>
             ) : location.pathname === "/" && isAuthenticated ? (
               <Link
-                to="/dashboard/user"
+                to={`${isRole === "Admin" || isRole === "Super Admin" ? '/dashboardadmin/user' : '/dashboarduser/main'}`}
                 data-w-id="3c79f708-d66c-1e9b-7848-197101407da7"
                 className="nav-link w-nav-link"
               >

@@ -1,3 +1,4 @@
+// Methods and Types (from the Loom Docs)
 
 type SetupFunction = (a: {
     apiKey: string;
