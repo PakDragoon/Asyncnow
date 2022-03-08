@@ -16,6 +16,7 @@ function Header() {
   const navigate = useNavigate()
   const [isOpen, setOverlay] = useState(false)
   const closeOverlay = () => setOverlay(false)
+  const isAuthenticated = sessionStorage.getItem("isAuthenticated")
   const configs = {
     animate: true,
     clickDismiss: true,
@@ -80,7 +81,7 @@ function Header() {
             </div>
           </Link>
           <nav role="navigation" className={`${location.pathname.match(/^.*dashboard.*$/) ? "" : "nav-menu"} w-nav-menu`}>
-            {location.pathname === "/" ? (
+            {location.pathname === "/" && !isAuthenticated ? (
               <Link to="login" className="nav-link login w-nav-link">
                 Login
               </Link>
@@ -88,10 +89,12 @@ function Header() {
               <Link to="/" className="nav-link login w-nav-link">
                 Home
               </Link>
-            ) : (
-              ""
-            )}
-            {location.pathname === "/" ? (
+            ) : location.pathname === "/" && isAuthenticated ? (
+              <a href="#" onClick={Logout} className="nav-link login w-nav-link">
+                Logout
+              </a>
+            ) : ("")}
+            {location.pathname === "/" && !isAuthenticated ? (
               <a
                 href="#top"
                 data-w-id="3c79f708-d66c-1e9b-7848-197101407da7"
@@ -102,6 +105,14 @@ function Header() {
               >
                 Join for FREE →
               </a>
+            ) : location.pathname === "/" && isAuthenticated ? (
+              <Link
+                to="/dashboard/user"
+                data-w-id="3c79f708-d66c-1e9b-7848-197101407da7"
+                className="nav-link w-nav-link"
+              >
+                Dashboard →
+              </Link>
             ) : location.pathname === "/thanks" ? (
               <Link to="/" data-w-id="3c79f708-d66c-1e9b-7848-197101407da7" className="nav-link w-nav-link">
                 Return Home →
