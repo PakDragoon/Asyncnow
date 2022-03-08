@@ -34,6 +34,7 @@ function Dashboard(props) {
     const [videoLink, setVideoLink] = useState('');
     const [videoHTML, setVideoHTML] = useState("");
     const [shortVideoLink, setShortVideoLink] = useState("");
+    const [isBrowser, setIsBrowser] = useState(true);
     const [cta, setCTA] = useState("");
 
     const configs = {
@@ -50,8 +51,10 @@ function Dashboard(props) {
           const { supported, error } = await isSupported();
           if (!supported) {
             console.warn(`Error setting up Loom: ${error}`);
+            setIsBrowser(false)
             return;
           }
+          setIsBrowser(true)
           const button = document.getElementById(BUTTON_ID);
           if (!button) {
             return;
@@ -201,7 +204,12 @@ function Dashboard(props) {
                     <div className="text-block-14">(2/3)</div>
                 </div>
                 <div className="div-block-50 image">
-                    <div className="text-block-10 middle video" dangerouslySetInnerHTML={{ __html: videoHTML }}></div>
+                    {isBrowser ? (
+                        <div className="text-block-10 middle video" dangerouslySetInnerHTML={{ __html: videoHTML }}></div>
+                    ) : (
+                        <div className="text-block-10 middle video">Your browser does not support recording extension</div>
+                    )}
+                    
                 </div>
                 <div className="div-block-2 hero video">
                     <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332e9" href="#" className="button w-button" onClick={handleClickTwo}>Save Video</a>
