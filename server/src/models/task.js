@@ -15,6 +15,10 @@ const taskSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    cta: {
+        type: String,
+        trim: true
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

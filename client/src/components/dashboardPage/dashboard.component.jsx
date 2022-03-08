@@ -33,6 +33,9 @@ function Dashboard(props) {
     const [description, setDescription] = useState('');
     const [videoLink, setVideoLink] = useState('');
     const [videoHTML, setVideoHTML] = useState("");
+    const [shortVideoLink, setShortVideoLink] = useState("");
+    const [cta, setCTA] = useState("");
+
     const configs = {
         animate: true,
         clickDismiss: true,
@@ -58,6 +61,9 @@ function Dashboard(props) {
           });
           const sdkButton = configureButton({ element: button });
           sdkButton.on("insert-click", async (video) => {
+            setVideoLink(video.sharedUrl)
+            const svl = (video.sharedUrl).replace('https://www.loom.com/share', '')
+            setShortVideoLink(svl)
             const { html } = await oembed(video.sharedUrl, { width: 400 });
             setVideoHTML(html);
           });
@@ -87,7 +93,8 @@ function Dashboard(props) {
         event.preventDefault()
         const data = {
             description: description,
-            link: videoLink
+            link: videoLink,
+            cta: cta
         }
         var config = {
             method: 'post',
@@ -108,6 +115,8 @@ function Dashboard(props) {
         setOverlay(false)
         setVideoHTML("")
         setVideoLink("")
+        setShortVideoLink("")
+        setCTA("")
       }
   return (
     <>
@@ -209,13 +218,13 @@ function Dashboard(props) {
                     <form id="wf-form-Email-Form" name="wf-form-Email-Form" data-name="Email Form" redirect="/app/videos" data-redirect="/app/videos" method="get" className="form join">
                         <label htmlFor="Title" className="field-label">VIDEO&nbsp;TITLE</label>
                         <input type="text" className="text-field w-input" onChange={(e) => setDescription(e.target.value)} maxLength={256} name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required />
-                        <label htmlFor="CTA" className="field-label">VIDEO LINK</label>
-                        <input type="text" className="text-field w-input" onChange={(e) => setVideoLink(e.target.value)} maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" required />
+                        <label htmlFor="CTA" className="field-label">CTA (OPTIONAL)</label>
+                        <input type="text" className="text-field w-input" onChange={(e) => setCTA(e.target.value)} maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" />
                         <label htmlFor="Title" className="field-label">VIDEO&nbsp;LINK</label>
                     <div className="div-block-51">
-                        <div className="text-block-12">{videoLink}</div>
-                        <a href="#" className="link-block-2 small w-inline-block">
+                        <a href="#" className="link-block-2 small w-inline-block" onClick={() =>  navigator.clipboard.writeText(`${videoLink}`)}>
                         <img src={linkIcon} loading="lazy" sizes="100vw" alt="" /></a>
+                        <div className="text-block-12">{shortVideoLink}</div>
                     </div>
                     <div className="div-block-12 low">
                         <button type="submit" data-wait="Please wait..." className="submit-button w-button" onClick={handleSubmitVideo}>Save & Copy</button>
