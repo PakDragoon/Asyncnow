@@ -225,7 +225,7 @@ export default function User() {
                   {filteredUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                     const isItemSelected = selected.indexOf(row.name) !== -1
                     return (
-                      <TableRow key={row.id} hover tabIndex={-1} role="checkbox" selected={isItemSelected} aria-checked={isItemSelected}>
+                      <TableRow key={row.uniqueId} hover tabIndex={-1} role="checkbox" selected={isItemSelected} aria-checked={isItemSelected}>
                         <TableCell padding="checkbox">
                           <Checkbox checked={isItemSelected} onChange={(event) => handleClick(event, row.name)} />
                         </TableCell>
