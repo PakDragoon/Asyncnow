@@ -68,7 +68,7 @@ function Login() {
         }
       })
       .catch((err) => {
-        console.log(err.res.data)
+        console.log(err)
         setSuccess(false)
         setFail(true)
         setLoading(false)
@@ -76,12 +76,9 @@ function Login() {
       if(banned){
         sessionStorage.clear()
       } else {
-        setSuccess(false)
-        setFail(true)
         setTimeout(() => setFail(false), 3000)
         setLoading(false)
       }    
-      // setTimeout(() => setSuccess(false), 3000)
   }
   return (
     <>
