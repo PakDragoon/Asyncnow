@@ -84,6 +84,7 @@ export default function User() {
   const [filterName, setFilterName] = useState("")
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
+  const [createSuccess, setCreateSuccess] = useState(false)
   const [data, setData] = useState([])
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -148,6 +149,8 @@ export default function User() {
     })
       .then((res) => {
         console.log(res)
+        setCreateSuccess(true)
+        setTimeout(() => setCreateSuccess(false), 3000)
       })
       .catch((err) => {
         console.log(err.response.data)
@@ -218,6 +221,9 @@ export default function User() {
                 <Button variant="contained" type="submit" name="submit" size="medium" margin="normal" onClick={handleNewSubmit}>Submit</Button>
                 <Button className="modal-close-button" variant="contained" type="button" name="close" size="medium" margin="normal" onClick={handleClose}>Close</Button>
               </Typography>
+              <div className={`${createSuccess ? "w-form-done" : "none"}`}>
+                <div>New user has been created.</div>
+              </div>
             </Box>
           </Modal>
         </Stack>
