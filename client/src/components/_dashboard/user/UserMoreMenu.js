@@ -52,6 +52,9 @@ export default function UserMoreMenu(props) {
   const handleClose = () => setOpen(false)
   const ref = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
+  const [updateSuccess, setUpdateSuccess] = useState(false)
+  const [fail, setFail] = useState(false)
+
   function DeleteUserById(userId) {
     if (isRole === "Super Admin") {
       confirmAlert({
@@ -65,6 +68,7 @@ export default function UserMoreMenu(props) {
                 .delete(`http://localhost:3000/user/delete/${userId}`)
                 .then((res) => {
                   console.log("Result:", res)
+                  sessionStorage.setItem("deleteSuccess","true")
                 })
                 .catch((error) => {
                   console.log(error)
@@ -102,9 +106,13 @@ export default function UserMoreMenu(props) {
       })
         .then((res) => {
           console.log(res)
+          setUpdateSuccess(true)
+          setTimeout(() => setUpdateSuccess(false), 3000)
         })
         .catch((err) => {
           console.log(err.res.data)
+          setFail(true)
+          setTimeout(() => setFail(false), 3000)
         })
     } else {
       setOpen(false)
@@ -173,6 +181,12 @@ export default function UserMoreMenu(props) {
                   Close
                 </Button>
               </Typography>
+              <div className={`${updateSuccess ? "w-form-done" : "none"}`}>
+                <div>Status has been changed.</div>
+              </div>
+              <div className={`${fail ? "w-form-fail" : "none"}`}>
+                <div>Oops! Something went wrong.</div>
+              </div>
             </Box>
           </Modal>
         </MenuItem>

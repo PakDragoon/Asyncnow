@@ -83,6 +83,7 @@ export default function User() {
   const [orderBy, setOrderBy] = useState("name")
   const [filterName, setFilterName] = useState("")
   const [rowsPerPage, setRowsPerPage] = useState(5)
+  const [deleteSuccess, setDeleteSuccess] = useState(false)
   const [data, setData] = useState([])
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -94,7 +95,12 @@ export default function User() {
       })
       .catch((error) => {
         console.log(error)
-      })
+      }) 
+    if(sessionStorage.getItem("deleteSuccess") === "true"){
+      setDeleteSuccess(true)
+      setTimeout(() => setDeleteSuccess(false), 3000)
+    }
+    sessionStorage.setItem("deleteSuccess","false")
   }, [data])
 
   const handleRequestSort = (event, property) => {
@@ -266,6 +272,9 @@ export default function User() {
           </Scrollbar>
           <TablePagination rowsPerPageOptions={[5, 10, 25]} component="div" count={data.length} rowsPerPage={rowsPerPage} page={page} onPageChange={handleChangePage} onRowsPerPageChange={handleChangeRowsPerPage} />
         </Card>
+        <div className={`${deleteSuccess ? "w-form-done" : "none"}`}>
+          <div>User has been deleted.</div>
+        </div>
       </Container>
     </Page>
   )
