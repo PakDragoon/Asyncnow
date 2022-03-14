@@ -10,7 +10,7 @@ function HomeComponentFive() {
           <div className="div-block-17">
             <div className="div-block-9">
             {[...Array(5)].map((elementInArray, index) => ( 
-                <img src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
+                <img key={index.uniqueId} src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
                 ) 
             )}           
             </div>
@@ -22,7 +22,7 @@ function HomeComponentFive() {
           <div>
             <div className="div-block-9">
             {[...Array(5)].map((elementInArray, index) => ( 
-                <img src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
+                <img key={index.uniqueId} src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
                 ) 
             )}
             </div>
@@ -34,7 +34,7 @@ function HomeComponentFive() {
           <div>
             <div className="div-block-9">
             {[...Array(5)].map((elementInArray, index) => ( 
-                <img src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
+                <img key={index.uniqueId} src={starsImage} loading="lazy" width="25" height="25" sizes="(max-width: 479px) 100vw, (max-width: 767px) 25px, (max-width: 991px) 3vw, 25px" alt="" className="image-2"/>
                 ) 
             )}
             </div>

@@ -3369,6 +3369,17 @@ border: 2px solid #454ade !important;
   font-weight: 400;
   text-decoration: none;
 }
+.link-11i {
+  display: block;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  font-family: Poppins, sans-serif;
+  color: #000;
+  font-weight: 400;
+  text-decoration: none;
+}
 
 .link-11:hover {
   margin: 0px;
