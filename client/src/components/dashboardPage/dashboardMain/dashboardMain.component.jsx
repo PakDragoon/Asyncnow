@@ -1,5 +1,5 @@
-import React from "react"
-import { Link } from 'react-router-dom';
+import React, {useState, useEffect} from "react"
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet"
 import "../../../assets/css/normalize.css"
 import "../../../assets/css/asyncnow.webflow.css"
@@ -11,12 +11,87 @@ import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "reco
 import { userDataRecoil } from "../../data/atom"
 import DashboardSubTitle from "../title.component"
 import DashboardSubText from "../subtext.component"
+import Button from '@mui/material/Button';
+import { Icon } from '@iconify/react';
+import searchFill from '@iconify/icons-eva/search-fill';
+// material
+import { styled } from '@mui/material/styles';
+import {
+  Box,
+  OutlinedInput,
+  InputAdornment
+} from '@mui/material';
 
+const axios = require('axios')
 const title = "Dashboard | Main"
+
+const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
+  width: 240,
+  height: 37.5,
+  transition: theme.transitions.create(['box-shadow', 'width'], {
+    easing: theme.transitions.easing.easeInOut,
+    duration: theme.transitions.duration.shorter
+  }),
+  '&.Mui-focused': { width: 320 },
+  '& fieldset': {
+    borderWidth: `1px !important`,
+    borderColor: `${theme.palette.grey[500_32]} !important`
+  }
+}));
 
 function DashboardMain() {
   // const { userId, userName, userCompany, userRole, userEmail } = useRecoilValue(userDataRecoil)
   const userName = sessionStorage.getItem("name")
+  const navigate = useNavigate()
+  const [linkToSend, setLinkToSend] = useState('')
+  const [data, setData] = useState([])
+  const [description, setDescription] = useState('')
+  const [createdAt, setCreatedAt] = useState('')
+  const [videoId, setVideoId] = useState('')
+  const [videoViews, setVideoViews] = useState('')
+  const [videoClicks, setVideoClicks] = useState('')
+  const [isData, setIsData] = useState(false)
+
+  const handleSearch = async (event) => {
+    event.preventDefault()
+    let config = {
+      method: 'get',
+      url: `http://localhost:3000/others/tasks/${linkToSend}`
+    };
+    axios(config)
+      .then((res) => {
+        setData(res.data)
+        setDescription(res.data.description)
+        setCreatedAt(res.data.createdAt)
+        setVideoId(res.data._id)
+        setVideoViews(res.data.views)
+        setVideoClicks(res.data.clicks)
+        setIsData(true)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
+  function UpdateVideoViews (videoI, videoV, videoC) {
+    const updateData = {
+      views: videoV + 1,
+      clicks: videoC + 1
+      }
+  let configPatch = {
+      method: 'patch',
+      url: `http://localhost:3000/others/tasks/${videoI}`,
+      data: updateData
+    };
+    axios(configPatch)
+      .then((res) => {
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    navigate("/awesome")
+}
+
   return (
     <>
       <Helmet>
@@ -65,7 +140,42 @@ function DashboardMain() {
           </div>
         </div>
       </div>
-      <div className="div-block-49"></div>
+      <div className="div-block-49m">
+        <div className="div-block-43">
+          <h2 className="heading-8 contacts">WATCH OTHER PEOPLE VIDEOS</h2>
+        </div>
+        <form className="div-block-43">
+          <SearchStyle
+            placeholder="Search link..."
+            onChange={(e) => setLinkToSend(e.target.value)}
+            startAdornment={
+              <InputAdornment position="start">
+                <Box component={Icon} icon={searchFill} sx={{ color: 'text.disabled' }} />
+              </InputAdornment>
+            }
+          />
+          <Button className="search-btn-main" type="button" onClick={handleSearch} variant="outlined">Search</Button>
+        </form>
+      </div>
+      <div className="div-block-39">
+                {isData ? (<div className="div-block-41">
+                    <div className="div-block-42">
+                        <a href="../app/awesome-video.html" target="_blank" className="link-block-2 inline w-inline-block">
+                        <img src={videosIcon} loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 7vw, 40px" alt=""/></a>
+                        <div className="text-block-10">{description} | Created {createdAt}</div>
+                    </div>
+                    <div className="div-block-47">
+                        <a href='#' onClick={() => {sessionStorage.setItem("videoId", videoId);UpdateVideoViews(videoId, videoViews, videoClicks)}} className="link-11">Watch</a>
+                        <div className="div-block-48">
+                            <div className="text-block-10"></div>
+                        </div>
+                    </div>
+                </div>) : (
+                  <div className="center-text-main">
+                    -- Enter video link in the search bar --
+                  </div>
+                )}
+        </div>
     </>
   )
   // }

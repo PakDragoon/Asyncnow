@@ -11,6 +11,7 @@ import DashboardMain from "./components/dashboardPage/dashboardMain/dashboardMai
 import DashboardVideos from "./components/dashboardPage/dashboardVideos/dashboardVideos.component"
 import DashboardInsights from "./components/dashboardPage/dashboardInsights/dashboardInsights.component"
 import DashboardSettings from "./components/dashboardPage/dashboardSettings/dashboardSettings.component"
+import AwesomeVideo from "./components/awesomeVideosPage/awesomeVideos.component"
 import Register from "./components/registerPage/register.component"
 import CheckoutComponent from "./components/checkoutPage/checkout.component"
 import PaypalCheckoutComponent from "./components/paypalCheckoutPage/paypalCheckout.component"
@@ -69,6 +70,7 @@ const MainRoutes = () => (
     <Route path="paypal" element={<PaypalCheckoutComponent title="Paypal Checkout" />} />
     <Route path="order" element={<OrderConfirmationComponent title="Order Confirmation" />} />
     <Route path="thanks" element={<Thanks title="Thanks" />} />
+    <Route path="awesome" element={<AwesomeVideo title="Awesome" />} />
     <Route path="*" element={<Error title="404" />} />
   </Routes>
 )

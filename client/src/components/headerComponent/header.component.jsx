@@ -127,9 +127,9 @@ function Header() {
                 Back to Login →
               </Link>
             ) : location.pathname === "/awesome" ? (
-              <a href="../index.html" class="nav-link-3 b-nav-link">
-                Visit asyncnow.com
-              </a>
+              <Link to="/dashboarduser/videos" class="nav-link-3 b-nav-link">
+                &#8592; Back to videos
+              </Link>
             ) : location.pathname.match(/^.*dashboard.*$/) && location.pathname !== "/dashboard/user" ? (
               <Link to="/" onClick={Logout} className="nav-link-3 b-nav-link">
                 Sign Out

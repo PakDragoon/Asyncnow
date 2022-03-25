@@ -12,11 +12,20 @@ const taskSchema = new mongoose.Schema({
     },
     link: {
         type: String,
-        required: true,
-        trim: true
+        required: true
     },
     cta: {
         type: String,
+        trim: true
+    },
+    views: {
+        type: Number,
+        trim: true,
+        default: 0
+    },
+    clicks: {
+        type: Number,
+        default: 0,
         trim: true
     },
     owner: {

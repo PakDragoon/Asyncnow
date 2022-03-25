@@ -1,14 +1,14 @@
 const express = require("express")
-require("./db/mongoose")
-const userRouter = require("./routers/user")
-const taskRouter = require("./routers/task")
-const Task = require("./models/task")
-const User = require("./models/user")
+require("./src/db/mongoose")
+const userRouter = require("./src/routers/user")
+const taskRouter = require("./src/routers/task")
+const Task = require("./src/models/task")
+const User = require("./src/models/user")
 const multer = require("multer")
 const bodyParser = require("body-parser")
 const nodemailer = require("nodemailer")
 const sendGridTransport = require("nodemailer-sendgrid-transport")
-const { SENDGRID_API } = require("./config/keys")
+const { SENDGRID_API } = require("./src/config/keys")
 const path = require('path');
 
 const app = express()
@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport(
     },
   })
 )
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, 'client/build')));
 //Result in JSON format
 app.use(express.json())
 

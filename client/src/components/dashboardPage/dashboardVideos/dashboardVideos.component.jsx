@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import videosIcon from '../../../assets/images/focus.png'
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
@@ -13,6 +13,7 @@ const axios = require("axios")
 const title = 'Dashbaord | Videos'
 
 function DashboardVideos () {
+    const navigate = useNavigate()
     const [data, setData] = useState([])
     const token = sessionStorage.getItem("token")
     useEffect(() => {
@@ -61,6 +62,27 @@ function DashboardVideos () {
             ],
         })
     }
+    function UpdateVideoViews (videoId, videoViews, videoClicks) {
+        const updateData = {
+            views: videoViews + 1,
+            clicks: videoClicks + 1
+            }
+        let configPatch = {
+            method: 'patch',
+            url: `http://localhost:3000/tasks/${videoId}`,
+            headers: { 
+              'Authorization': `Bearer ${token}`
+            },
+            data: updateData
+          };
+          axios(configPatch)
+            .then((res) => {
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        navigate("/awesome")
+    }
     return (
         <>
         <Helmet>
@@ -80,11 +102,11 @@ function DashboardVideos () {
                         </div>
                     </div>
                     <div className="div-block-47">
-                        <a href={row.link} target="_blank" className="link-11">Watch</a>
+                        <a href='#' onClick={() => {sessionStorage.setItem("videoId", row._id);UpdateVideoViews(row._id, row.views, row.clicks)}} className="link-11">Watch</a>
                         <div className="div-block-48">
                             <div className="text-block-10">|</div>
                         </div>
-                        <a href="#top" className="link-11">Insights</a>
+                        <Link to="insights" className="link-11">Insights</Link>
                         <div className="div-block-48">
                             <div className="text-block-10">|</div>
                         </div>
