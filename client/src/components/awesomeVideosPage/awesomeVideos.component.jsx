@@ -10,6 +10,7 @@ const axios = require("axios")
 
 function AwesomeVideos(props) {
   const [link, setLink] = useState('')
+  const [videoTitle, setVideoTitle] = useState('')
   const videoId = sessionStorage.getItem("videoId")
   const token = sessionStorage.getItem("token")
 
@@ -24,11 +25,8 @@ function AwesomeVideos(props) {
       };
       axios(config)
         .then((res) => {
-          console.log('url',res.data.link)
-          const url = res.data.link
-          // const url1 = url0.replace('.mp4','')
-          setLink(url)
-          console.log(url1)
+          setVideoTitle(res.data.description)
+          setLink(res.data.link)
         })
         .catch((error) => {
           console.log(error)
@@ -42,7 +40,7 @@ function AwesomeVideos(props) {
   return (
   <div className="container-3 w-container">
     <div className="div-block-36 video">
-      <h2 className="heading-8 contacts video">Awesome Video</h2>
+      <h2 className="heading-8 contacts video">{videoTitle}</h2>
       <div className="text-block-10 middle short">Hey, Ada Lovelace from Google Inc. sent you a video 🍿</div>
       <div className="div-block-53v">
         {/* <a data-w-id="4cee6207-5192-ea9f-25d1-1d00dab21982" href="#" className="play-button small w-inline-block">

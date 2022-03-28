@@ -44,7 +44,6 @@ function DashboardMain() {
   const userName = sessionStorage.getItem("name")
   const navigate = useNavigate()
   const [linkToSend, setLinkToSend] = useState('')
-  const [data, setData] = useState([])
   const [description, setDescription] = useState('')
   const [createdAt, setCreatedAt] = useState('')
   const [videoId, setVideoId] = useState('')
@@ -60,7 +59,6 @@ function DashboardMain() {
     };
     axios(config)
       .then((res) => {
-        setData(res.data)
         setDescription(res.data.description)
         setCreatedAt(res.data.createdAt)
         setVideoId(res.data._id)
@@ -140,13 +138,14 @@ function DashboardMain() {
           </div>
         </div>
       </div>
-      <div className="div-block-49m">
-        <div className="div-block-43">
+      <div className="div-block-37 search-container search-margin">
+        <div className="div-block-38 search-subitems">
           <h2 className="heading-8 contacts">WATCH OTHER PEOPLE VIDEOS</h2>
         </div>
-        <form className="div-block-43">
+        <form className="div-block-40 search-subitems">
           <SearchStyle
             placeholder="Search link..."
+            className="sub-item"
             onChange={(e) => setLinkToSend(e.target.value)}
             startAdornment={
               <InputAdornment position="start">
@@ -154,7 +153,7 @@ function DashboardMain() {
               </InputAdornment>
             }
           />
-          <Button className="search-btn-main" type="button" onClick={handleSearch} variant="outlined">Search</Button>
+          <Button className="search-btn-main sub-item" type="button" onClick={handleSearch} variant="outlined">Search</Button>
         </form>
       </div>
       <div className="div-block-39">
