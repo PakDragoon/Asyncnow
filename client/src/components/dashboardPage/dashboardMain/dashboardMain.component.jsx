@@ -142,7 +142,7 @@ function DashboardMain() {
         <div className="div-block-38 search-subitems">
           <h2 className="heading-8 contacts">WATCH OTHER PEOPLE VIDEOS</h2>
         </div>
-        <form className="div-block-40 search-subitems">
+        <form className="div-block-40 search-subitems" onSubmit={handleSearch}>
           <SearchStyle
             placeholder="Search link..."
             className="sub-item"
@@ -156,7 +156,7 @@ function DashboardMain() {
           <Button className="search-btn-main sub-item" type="button" onClick={handleSearch} variant="outlined">Search</Button>
         </form>
       </div>
-      <div className="div-block-39">
+      <div className="div-block-39 search-result-margin">
                 {isData ? (<div className="div-block-41">
                     <div className="div-block-42">
                         <a href="../app/awesome-video.html" target="_blank" className="link-block-2 inline w-inline-block">

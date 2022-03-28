@@ -1738,6 +1738,9 @@
   .heading-8 {
     text-align: center !important;
   }
+  .search-result-margin {
+    margin-bottom: 7.5rem;
+  }
 }
 
 .utility-page-wrap {

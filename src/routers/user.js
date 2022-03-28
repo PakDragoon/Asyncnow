@@ -27,8 +27,8 @@ router.post('/users', async (req, res) => {
         const token = await user.generateAuthToken()
         res.status(200).send({user, token})
     } catch (error) {
-        console.log(req.body)
-        res.status(400).send(error)
+        // console.log(req.body)
+        res.status(400).send({ message: 'user created' })
     }
 })
 

@@ -85,6 +85,10 @@ export default function User() {
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [deleteSuccess, setDeleteSuccess] = useState(false)
   const [createSuccess, setCreateSuccess] = useState(false)
+  const [isFail, setIsFail] = useState(false)
+  const [isValidEmail, setIsValidEmail] = useState(false)
+  const [passStatusOne, setPassStatusOne] = useState(true)
+  const [passStatusTwo, setPassStatusTwo] = useState(true)
   const [data, setData] = useState([])
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -121,7 +125,6 @@ export default function User() {
   }
 
   const handleNewSubmit = async (event) => {
-    console.log("haha")
     event.preventDefault()
     const codeObj = referralCodes.generate({
       count: 1,
@@ -151,9 +154,41 @@ export default function User() {
         console.log(res)
         setCreateSuccess(true)
         setTimeout(() => setCreateSuccess(false), 3000)
+        setIsValidEmail(false)
+        setIsFail(false)
+        setCreateSuccess(false)
+        setPassStatusOne(true)
+        setPassStatusTwo(true)
       })
       .catch((err) => {
         console.log(err.response.data)
+        const emailValid = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)
+        if(!emailValid) {
+          setIsValidEmail(true)
+          setIsFail(false)
+          setCreateSuccess(false)
+          setPassStatusOne(true)
+          setPassStatusTwo(true)
+        }
+        else if (password === "password") {
+          setIsValidEmail(false)
+          setIsFail(false)
+          setCreateSuccess(false)
+          setPassStatusOne(true)
+          setPassStatusTwo(false)
+        } else if (password.length < 7) {
+          setIsValidEmail(false)
+          setIsFail(false)
+          setCreateSuccess(false)
+          setPassStatusOne(false)
+          setPassStatusTwo(true)
+        } else {
+          setIsValidEmail(false)
+          setIsFail(true)
+          setCreateSuccess(false)
+          setPassStatusOne(true)
+          setPassStatusTwo(true)
+        }
       })
   }
 
@@ -223,6 +258,18 @@ export default function User() {
               </Typography>
               <div className={`${createSuccess ? "w-form-done" : "none"}`}>
                 <div>New user has been created.</div>
+              </div>
+              <div className={`${isFail ? "w-form-fail" : "none"}`}>
+                <div>This email has already registered.</div>
+              </div>
+              <div className={`${isValidEmail ? "w-form-fail" : "none"}`}>
+                <div>This email is not valid.</div>
+              </div>
+              <div className={`${passStatusOne ? "none" : "w-form-fail"}`}>
+                <div>Password should not be less then 7 characters.</div>
+              </div>
+              <div className={`${passStatusTwo ? "none" : "w-form-fail"}`}>
+                <div>Password can't be 'password'.</div>
               </div>
             </Box>
           </Modal>

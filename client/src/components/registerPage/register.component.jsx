@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
+import { set, stubFalse } from "lodash"
 
 const axios = require("axios")
 const title = "Register"
@@ -18,6 +19,7 @@ function Register() {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [fail, setFail] = useState(false)
+  const [isValidEmail, setIsValidEmail] = useState(false)
   const [passStatusOne, setPassStatusOne] = useState(true)
   const [passStatusTwo, setPassStatusTwo] = useState(true)
 
@@ -56,20 +58,32 @@ function Register() {
         navigate("/thanks", { replace: true })
       })
       .catch((err) => {
-        console.log(err.response.data)
-        if (password === "password") {
+        console.log('error',err.data)
+        const emailValid = new RegExp(/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,15}/g).test(email)
+        if(!emailValid) {
+          setIsValidEmail(true)
+          setLoading(false)
+          setFail(false)
+          setSuccess(false)
+          setPassStatusOne(true)
+          setPassStatusTwo(true)
+        }
+        else if (password === "password") {
+          setIsValidEmail(false)
           setLoading(false)
           setFail(false)
           setSuccess(false)
           setPassStatusOne(true)
           setPassStatusTwo(false)
         } else if (password.length < 7) {
+          setIsValidEmail(false)
           setLoading(false)
           setFail(false)
           setSuccess(false)
           setPassStatusOne(false)
           setPassStatusTwo(true)
         } else {
+          setIsValidEmail(false)
           setLoading(false)
           setFail(true)
           setSuccess(false)
@@ -120,6 +134,9 @@ function Register() {
                 </div>
                 <div className={`${fail ? "w-form-fail" : "w-condition-invisible"}`}>
                   <div>This email has already registered.</div>
+                </div>
+                <div className={`${isValidEmail ? "w-form-fail" : "w-condition-invisible"}`}>
+                  <div>This email is not valid.</div>
                 </div>
                 <div className={`${passStatusOne ? "w-condition-invisible" : "w-form-fail"}`}>
                   <div>Password should not be less then 7 characters.</div>
