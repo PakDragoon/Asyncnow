@@ -15,11 +15,11 @@ import insightsIcon from '../../assets/images/share.png'
 import settingsIcon from '../../assets/images/more.png'
 import createIcon from  '../../assets/images/add.png'
 import linkIcon from  '../../assets/images/link.png'
-import DashboardVideos from './dashboardVideos/dashboardVideos.component';
-import DashboardMain from './dashboardMain/dashboardMain.component';
-import DashboardInsights from './dashboardInsights/dashboardInsights.component';
-import DashboardSettings from './dashboardSettings/dashboardSettings.component';
-import PageTitle from '../pageTitlesComponent/pageTitles.component'
+import DashboardVideos from '../client/src/components/dashboardPage/dashboardVideos/dashboardVideos.component';
+import DashboardMain from '../client/src/components/dashboardPage/dashboardMain/dashboardMain.component';
+import DashboardInsights from '../client/src/components/dashboardPage/dashboardInsights/dashboardInsights.component';
+import DashboardSettings from '../client/src/components/dashboardPage/dashboardSettings/dashboardSettings.component';
+import PageTitle from '../client/src/components/pageTitlesComponent/pageTitles.component'
 
 const axios = require("axios")
 const PUBLIC_APP_ID = "292f722a-a38a-4f9d-bcf7-eea9ba10cbec";
