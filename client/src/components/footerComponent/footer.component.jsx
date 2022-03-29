@@ -1,7 +1,8 @@
+import { useLocation } from 'react-router-dom';
+
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
-import { useLocation } from 'react-router-dom';
 
 function Footer() {
     const location = useLocation();

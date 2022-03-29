@@ -2,10 +2,12 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useLocation, useNavigate } from "react-router-dom"
 import Overlay from "react-overlay-component"
+
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
 import "./header.style.css"
+
 const axios = require("axios")
 
 function Header() {

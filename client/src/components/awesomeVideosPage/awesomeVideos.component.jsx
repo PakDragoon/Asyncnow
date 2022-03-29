@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
+
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
-
-import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
 const axios = require("axios")
 
@@ -33,7 +33,6 @@ function AwesomeVideos(props) {
         })
     }
     GetVideoData()
-
   }, [])
 
   PageTitle(props.title)
@@ -43,16 +42,6 @@ function AwesomeVideos(props) {
       <h2 className="heading-8 contacts video">{videoTitle}</h2>
       <div className="text-block-10 middle short">Hey, Ada Lovelace from Google Inc. sent you a video 🍿</div>
       <div className="div-block-53v">
-        {/* <a data-w-id="4cee6207-5192-ea9f-25d1-1d00dab21982" href="#" className="play-button small w-inline-block">
-            <img src={awesomeVid} loading="lazy" width="35" height="35" alt="" className="image-5 small"/></a> */}
-            {/* <ReactPlayer
-              className='react-player'
-              // url={`/static/media/${link}.d19ee82a78da3fed839d.mp4`}
-              width='100%'
-              height='100%'
-              controls
-              volume={null}
-            /> */}
             <video src={`./assets/videos/${link}`} width='100%' height='100%' controls autoPlay></video>
       </div>
       <div className="div-block-41 short">

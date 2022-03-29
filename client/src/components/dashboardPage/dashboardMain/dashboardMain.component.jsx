@@ -1,26 +1,22 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet"
-import "../../../assets/css/normalize.css"
-import "../../../assets/css/asyncnow.webflow.css"
-import "../../../assets/css/webflow.css"
-import videosIcon from "../../../assets/images/focus.png"
-import insightsIcon from "../../../assets/images/share.png"
-import settingsIcon from "../../../assets/images/more.png"
 import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
 import { userDataRecoil } from "../../data/atom"
-import DashboardSubTitle from "../title.component"
-import DashboardSubText from "../subtext.component"
 import Button from '@mui/material/Button';
 import { Icon } from '@iconify/react';
 import searchFill from '@iconify/icons-eva/search-fill';
-// material
 import { styled } from '@mui/material/styles';
-import {
-  Box,
-  OutlinedInput,
-  InputAdornment
-} from '@mui/material';
+import { Box,OutlinedInput,InputAdornment } from '@mui/material';
+
+import DashboardSubTitle from "../title.component"
+import videosIcon from "../../../assets/images/focus.png"
+import insightsIcon from "../../../assets/images/share.png"
+import settingsIcon from "../../../assets/images/more.png"
+
+import "../../../assets/css/normalize.css"
+import "../../../assets/css/asyncnow.webflow.css"
+import "../../../assets/css/webflow.css"
 
 const axios = require('axios')
 const title = "Dashboard | Main"

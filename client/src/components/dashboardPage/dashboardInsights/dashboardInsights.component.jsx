@@ -1,15 +1,13 @@
 import React, {useState,useEffect} from "react"
 import { Helmet } from "react-helmet"
-import { Link } from "react-router-dom"
+
+import videosIcon from "../../../assets/images/focus.png"
+import DashboardSubTitle from "../title.component"
+import DashboardSubText from "../subtext.component"
+
 import "../../../assets/css/normalize.css"
 import "../../../assets/css/asyncnow.webflow.css"
 import "../../../assets/css/webflow.css"
-import videosIcon from "../../../assets/images/focus.png"
-import insightsIcon from "../../../assets/images/share.png"
-import settingsIcon from "../../../assets/images/more.png"
-
-import DashboardSubTitle from "../title.component"
-import DashboardSubText from "../subtext.component"
 
 const axios = require("axios")
 const title = "Dashboard | Insights"
@@ -18,22 +16,6 @@ function DashboardInsights() {
   const [data, setData] = useState([])
     const token = sessionStorage.getItem("token")
   useEffect(() => {
-    // let configGet = {
-    //   method: 'get',
-    //   url: `http://localhost:3000/tasks/${videoId}`,
-    //   headers: { 
-    //     'Authorization': `Bearer ${token}`
-    //   }
-    // };
-    // axios(configGet)
-    // .then((res) => {
-    //   setData(res.data)
-    //   console.log(res.data)
-    // })
-    // .catch((error) => {
-    //   console.log(error)
-    // })
-
     var config = {
       method: 'get',
       url: 'http://localhost:3000/tasks',

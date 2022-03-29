@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import { useNavigate } from "react-router-dom"
 import { useRecoilState } from "recoil"
 import { userDataRecoil } from "../data/atom"
+
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
@@ -54,7 +55,6 @@ function Login() {
         sessionStorage.setItem("code", res.data.user.code)
         setSuccess(true)
         setLoading(false)
-        // await preDelay(3000)
         if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
           navigate("/dashboardadmin/user")
         } else if (res.data.user.role === "User" && res.data.user.status ) {

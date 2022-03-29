@@ -2,13 +2,15 @@ import React, {useState, useEffect} from "react"
 import { Helmet } from "react-helmet"
 import { userDataRecoil } from "../../data/atom"
 import { useRecoilValue } from "recoil"
+import Overlay from "react-overlay-component";
+
 import DashboardSubTitle from "../title.component"
 import DashboardSubText from "../subtext.component"
 import userIcon from "../../../assets/images/user.png"
-import Overlay from "react-overlay-component";
 import emailIcon from "../../../assets/images/email-3.png"
 import eyeIcon from "../../../assets/images/eyeglasses.png"
 import linkIcon from "../../../assets/images/link.png"
+
 import "../../../assets/css/normalize.css"
 import "../../../assets/css/asyncnow.webflow.css"
 import "../../../assets/css/webflow.css"
@@ -24,11 +26,7 @@ function DashboardSettings() {
   const [emailChange, setEmailChange] = useState("")
   const [companyChange, setCompanyChange] = useState("")
   const [isOpen, setOverlay] = useState(false);
-  const configs = {
-      animate: true,
-      clickDismiss: true,
-      escapeDismiss: true,
-  };
+  const configs = { animate: true, clickDismiss: true, escapeDismiss: true };
   const { userToken } = useRecoilValue(userDataRecoil)
   const token = sessionStorage.getItem("token")
   const userCode = sessionStorage.getItem("code")

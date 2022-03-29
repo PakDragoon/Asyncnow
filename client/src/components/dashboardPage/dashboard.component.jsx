@@ -4,10 +4,6 @@ import { useLocation } from 'react-router-dom';
 import Overlay from "react-overlay-component";
 import { useReactMediaRecorder } from "react-media-recorder";
 
-import '../../assets/css/normalize.css'
-import '../../assets/css/asyncnow.webflow.css'
-import '../../assets/css/webflow.css'
-
 import dashboardIcon from '../../assets/images/menu.png'
 import videosIcon from '../../assets/images/focus.png'
 import insightsIcon from '../../assets/images/share.png'
@@ -18,6 +14,10 @@ import DashboardMain from './dashboardMain/dashboardMain.component';
 import DashboardInsights from './dashboardInsights/dashboardInsights.component';
 import DashboardSettings from './dashboardSettings/dashboardSettings.component';
 import PageTitle from '../pageTitlesComponent/pageTitles.component'
+
+import '../../assets/css/normalize.css'
+import '../../assets/css/asyncnow.webflow.css'
+import '../../assets/css/webflow.css'
 
 const axios = require("axios")
 

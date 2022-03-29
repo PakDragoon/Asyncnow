@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet'
+import { confirmAlert } from "react-confirm-alert"
+
 import videosIcon from '../../../assets/images/focus.png'
 import DashboardSubTitle from '../title.component'
 import DashboardSubText from '../subtext.component'
-import { Helmet } from 'react-helmet'
-import { confirmAlert } from "react-confirm-alert"
+
 import '../../../assets/css/normalize.css'
 import '../../../assets/css/asyncnow.webflow.css'
 import '../../../assets/css/webflow.css'

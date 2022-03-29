@@ -1,7 +1,7 @@
+import PageTitle from '../pageTitlesComponent/pageTitles.component'
 import "../../assets/css/normalize.css"
 import "../../assets/css/asyncnow.webflow.css"
 import "../../assets/css/webflow.css"
-import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
 function PaypalCheckoutComponent(props) {
     PageTitle(props.title)
