@@ -1,8 +1,12 @@
 const express = require('express')
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
 const Task = require('../models/task')
 const auth = require('../middleware/auth')
 const multer = require('multer')
 const router = new express.Router()
+const { uploadFile, getFileStream } = require('../bucket/s3')
 
 //Enter Task
 router.post('/create/tasks', auth, async (req, res) => {
@@ -127,7 +131,7 @@ router.delete('/delete/tasks/:id', auth, async (req, res) => {
 
 //upload video
 const storage = multer.diskStorage({
-    destination: 'client/public/assets/videos/',
+    destination: 'uploads/',
     filename: (req, file, cb) => {
       const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1E9)
       cb(null, (uniquePrefix + '-' + file.originalname).replace(/\s+/g, ''))
@@ -135,23 +139,46 @@ const storage = multer.diskStorage({
   })
 const upload = multer({ storage: storage, })
 
+// router.post('/upload/video', auth, upload.single('video'), async (req, res) => {
+//     const task = new Task({
+//         description: req.body.description,
+//         cta: req.body.cta,
+//         owner: req.user._id,
+//         link: req.file.filename.replace(/\s+/g, '')
+//     })
+//     try {
+//         await task.save()
+//         res.status(201).send(task)
+//     } catch (error) {
+//         res.status(400).send(error)
+//     }
+//     res.sendStatus(200)
+// }, (error, req, res, next) => {
+//     res.status(400).send({error: error.message})
+// })
+
+//s3 upload
 router.post('/upload/video', auth, upload.single('video'), async (req, res) => {
+    const file = req.file
+    const result = await uploadFile(file)
+    await unlinkFile(file.path)
     const task = new Task({
         description: req.body.description,
         cta: req.body.cta,
         owner: req.user._id,
-        link: req.file.filename.replace(/\s+/g, '')
+        // link: req.file.filename.replace(/\s+/g, '')
+        link: result.Key
     })
-    try {
-        await task.save()
-        res.status(201).send(task)
-    } catch (error) {
-        res.status(400).send(error)
-    }
-    console.log(req.file)
-    res.sendStatus(200)
+    res.send({imagePath: `/images/${result.Key}`})
+    await task.save()
 }, (error, req, res, next) => {
     res.status(400).send({error: error.message})
+})
+
+router.get('/images/:key', (req, res) => {
+    const key = req.params.key
+    const readStream = getFileStream(key)
+    readStream.pipe(res)
 })
 
 module.exports = router

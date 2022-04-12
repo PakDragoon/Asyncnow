@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "7.6.0",
+    "aws-sdk": "^2.1112.0",
     "bcryptjs": "2.4.3",
     "body-parser": "^1.19.1",
     "cheerio": "^1.0.0-rc.10",

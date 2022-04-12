@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Helmet } from "react-helmet"
 import { useNavigate } from "react-router-dom"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
 import { userDataRecoil } from "../data/atom"
 
 import "../../assets/css/normalize.css"
@@ -21,6 +21,7 @@ function Login() {
   const [banned, setBanned] = useState(false)
   const [loading, setLoading] = useState(false)
   const [userData, setUserData] = useRecoilState(userDataRecoil)
+  const { userRole } = useRecoilValue(userDataRecoil)
 
   const handleSubmit = async (event) => {
     setBanned(false)
@@ -30,22 +31,22 @@ function Login() {
       email: email,
       password: password,
     }
-    setLoading(true)
+    // setLoading(true)
     axios({
       method: "post",
       url: "http://localhost:3000/users/login",
       data,
     })
       .then((res) => {
+        setLoading(true)
         setUserData((obj) => ({
-          userId: res.data.user._id,
+          userRole: res.data.user.role,
           userName: res.data.user.name,
           userEmail: res.data.user.email,
           userCompany: res.data.user.company,
-          userToken: res.data.token,
-          userRole: res.data.user.role,
           userCode: res.data.user.code,
         }))
+        const userR = res.data.user.role
         sessionStorage.setItem("isAuthenticated", "true")
         sessionStorage.setItem("isRole", res.data.user.role)
         sessionStorage.setItem("token", res.data.token)
@@ -54,30 +55,36 @@ function Login() {
         sessionStorage.setItem("company", res.data.user.company)
         sessionStorage.setItem("code", res.data.user.code)
         setSuccess(true)
-        setLoading(false)
-        if (res.data.user.role === "Admin" || res.data.user.role === "Super Admin") {
+        // setLoading(false)
+        if (userR === "Admin" || userR === "Super Admin") {
           navigate("/dashboardadmin/user")
-        } else if (res.data.user.role === "User" && res.data.user.status ) {
+        } else if (userR === "User" && res.data.user.status ) {
           navigate("/dashboarduser/main")
-        } else {
+        } else if (res.data.user.status === false) {
           navigate("/login")
           sessionStorage.clear()
           setFail(false)
           setSuccess(false)
           setBanned(true)
+        } else {
+          navigate("/login")
+          setFail(true)
+          setSuccess(false)
+          setBanned(false)
         }
+        setLoading(false)
       })
       .catch((err) => {
         console.log(err)
         setSuccess(false)
         setFail(true)
-        setLoading(false)
+        // setLoading(false)
       })
       if(banned){
         sessionStorage.clear()
       } else {
         setTimeout(() => setFail(false), 3000)
-        setLoading(false)
+        // setLoading(false)
       }    
   }
   return (

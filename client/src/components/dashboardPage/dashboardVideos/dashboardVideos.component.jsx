@@ -34,6 +34,7 @@ function DashboardVideos () {
             console.log(error)
           })
       }, [data])
+      
     function handleDeleteVideo (taskId) {
         var config = {
             method: 'delete',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Overlay from "react-overlay-component";
 import { useReactMediaRecorder } from "react-media-recorder";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import VideoRecorder from 'react-video-recorder'
 
 import dashboardIcon from '../../assets/images/menu.png'
 import videosIcon from '../../assets/images/focus.png'
@@ -16,30 +16,11 @@ import DashboardInsights from './dashboardInsights/dashboardInsights.component';
 import DashboardSettings from './dashboardSettings/dashboardSettings.component';
 import PageTitle from '../pageTitlesComponent/pageTitles.component'
 
-import "./countdown.style.css";
 import '../../assets/css/normalize.css'
 import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
 
 const axios = require("axios")
-
-const renderTime = ({ remainingTime }) => {
-    if (remainingTime === 0) {
-      return <div className="timer">Starting now</div>;
-    }
-  
-    return (
-      <div className="timer">
-        <div className="text">
-            {`${remainingTime === 3 ? 'Starting in .' : 
-            remainingTime === 2 ? 'Starting in . .' : 
-            remainingTime === 1 ? 'Starting in . . .' : ''}`}
-        </div>
-        <div className="value">{remainingTime}</div>
-        <div className="text">seconds</div>
-      </div>
-    );
-  };
 
 function Dashboard(props) {
     PageTitle(props.title)
@@ -51,7 +32,6 @@ function Dashboard(props) {
     const [cta, setCTA] = useState("");
     const [fileData, setFileData] = useState();
     const [firstClick, setFirstClick] = useState(false)
-    const [countdownStart, setCountdownStart] = useState(false)
     const {status,previewStream,startRecording,stopRecording,mediaBlobUrl,} = useReactMediaRecorder({ video: true });
 
     const configs = {
@@ -66,17 +46,9 @@ function Dashboard(props) {
     useEffect(() => {
         if (videoRef.current && previewStream) {
             videoRef.current.srcObject = previewStream;
-            console.log('videoRef.current.srcObject',videoRef.current.srcObject)
-            console.log("previewStream", previewStream)
-            console.log('type of previewsteream' , typeof(previewStream))
+            console.log(videoRef.current.srcObject)
         }
     }, [previewStream]);
-
-    function recorderStart () {
-        startRecording()
-        setFirstClick(true)
-        setTimeout( function() { stopRecording(); }, 60000);
-    }
 
     function handleClickOne() {
         if(firstClick) {
@@ -89,9 +61,8 @@ function Dashboard(props) {
                 type: "video/mp4",
             })
             const url = URL.createObjectURL(blob)
-            console.log('videoref', videoRef)
-            console.log('videoref typee', typeof(videoRef))
-            console.log('mediablob', mediaBlobUrl)
+            console.log(videoRef)
+            console.log(mediaBlobUrl)
             const a = document.createElement("a")
             document.body.appendChild(a)
             a.style = "display: none"
@@ -100,8 +71,9 @@ function Dashboard(props) {
             a.click()
         }
         if(!firstClick){
-            setCountdownStart(true)
-            renderTime()
+            startRecording()
+            setFirstClick(true)
+            setTimeout( function() { stopRecording(); }, 60000);
         }
     }
 
@@ -216,28 +188,20 @@ function Dashboard(props) {
                     <div className="text-block-14">(1/3)</div>
                 </div>
                 <div className="div-block-50">
-                    <div className="text-block-10 middle video">
-                        {firstClick ? (
-                            <video ref={videoRef} className='record-video text-block-10 middle video' width="308" height="300" src={mediaBlobUrl} autoPlay />
-                        ) : countdownStart ? (
-                            <div className="timer-wrapper">
-                                <CountdownCircleTimer
-                                isPlaying
-                                duration={3}
-                                colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-                                colorsTime={[3, 2, 1, 0]}
-                                onComplete={() => { recorderStart();setCountdownStart(false) }}
-                                >
-                                {renderTime}
-                                </CountdownCircleTimer>
-                            </div>
-                        ) : (
-                            `Click 'Record Now' to start. Remember you have 60 seconds. And don't forget to smile 😀`
-                        )}
-                    </div>
+                    {/* <div className="text-block-10 middle video"> */}
+                            <VideoRecorder
+                                className="text-block-10 middle video"
+                                onClick={() => { 
+                                    console.log(mediaRecorder.state);
+                                    // Will return "recording"
+                                    console.log("recorder started");}}
+                                onRecordingComplete={videoBlob => {
+                                console.log('videoBlob', videoBlob)
+                             }} />
+                    {/* </div> */}
                 </div>
                 <div className="div-block-2 hero video">
-                    <a id="start" data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332d8" href="#" className="button w-button" onClick={handleClickOne}>{`${firstClick ? "Stop Recording" : "Record Now"}`}</a>
+                    <a id="start" data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332d8" href="#" className="button w-button" onClick={handleClickOne}>{`${firstClick ? "Review Video" : "Record Now"}`}</a>
                     <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332da" href="#" className="link-7" onClick={() => {setOverlay(false);handleClickThree();stopRecording();setFirstClick(false)}}>Cancel</a>
                 </div>
                 <p>{status}</p>

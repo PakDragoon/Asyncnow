@@ -9,7 +9,7 @@ mongoose
     console.error(`Error connecting to the database. \n${err}`)
   })
 
-// const password = `tdfxd0aog3QYV94x`
+// const password = process.env.MONGODB_Password
 
 // const url = `mongodb+srv://user1:${password}@cluster0.ld4pg.mongodb.net/async-now?retryWrites=true&w=majority&ssl=true`
 

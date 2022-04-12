@@ -12,3 +12,9 @@ export const userDataRecoil = atom({
         userToken: ""
     }
 });
+export const userRole = atom({
+    key: "userRole",
+    default: {
+        userRole: ""
+    }
+});

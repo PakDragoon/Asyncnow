@@ -134,7 +134,7 @@ function DashboardMain() {
           </div>
         </div>
       </div>
-      <div className="div-block-37 search-container search-margin">
+      {/* <div className="div-block-37 search-container search-margin">
         <div className="div-block-38 search-subitems">
           <h2 className="heading-8 contacts">WATCH OTHER PEOPLE VIDEOS</h2>
         </div>
@@ -170,7 +170,7 @@ function DashboardMain() {
                     -- Enter video link in the search bar --
                   </div>
                 )}
-        </div>
+        </div> */}
     </>
   )
   // }
