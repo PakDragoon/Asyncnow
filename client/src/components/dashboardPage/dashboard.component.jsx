@@ -255,7 +255,7 @@ function Dashboard(props) {
                 </div>
                 <div className="div-block-2 hero video">
                     <a id='stop' data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332e9" href="#" className="button w-button" onClick={handleClickTwo}>Save Video</a>
-                    <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332eb" href="#" className="link-7" onClick={() => {setOverlay(false);setStopRecord(true);handleClickThree();setFirstClick(false)}}>Cancel</a>
+                    <a data-w-id="a2e8d7ad-6795-c789-6128-48db5d5332eb" href="#" className="link-7" onClick={() => {setOverlay(false);handleClickThree();setFirstClick(false)}}>Cancel</a>
                 </div>
                 <p>{status}</p>
             </div>

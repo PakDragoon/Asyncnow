@@ -35,7 +35,14 @@ function DashboardVideos () {
           })
       }, [data])
       
-    function handleDeleteVideo (taskId) {
+    function handleDeleteVideo (taskId, taskLink) {
+        var configS3 = {
+            method: 'delete',
+            url: `/delete/s3obj/${taskLink}`,
+            headers: { 
+              'Authorization': `Bearer ${token}`
+            }
+        };
         var config = {
             method: 'delete',
             url: `/delete/tasks/${taskId}`,
@@ -51,6 +58,13 @@ function DashboardVideos () {
                 label: "Yes",
                 onClick: () => {
                 axios(config)
+                    .then((res) => {
+                    console.log("Result:", res)
+                    })
+                    .catch((error) => {
+                    console.log(error)
+                    })
+                axios(configS3)
                     .then((res) => {
                     console.log("Result:", res)
                     })
@@ -101,7 +115,7 @@ function DashboardVideos () {
                         <a href="../app/awesome-video.html" target="_blank" className="link-block-2 inline w-inline-block">
                         <img src={videosIcon} loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 7vw, 40px" alt=""/></a>
                         <div className="text-block-10">{row.description} | Created {row.createdAt} | 
-                            <a href="#" data-w-id="cdf8e958-4979-1242-fa13-88ab444c05f7" className="link-13" onClick={() => {handleDeleteVideo(row._id)}}>Delete</a>
+                            <a href="#" data-w-id="cdf8e958-4979-1242-fa13-88ab444c05f7" className="link-13" onClick={() => {handleDeleteVideo(row._id, row.link)}}>Delete</a>
                         </div>
                     </div>
                     <div className="div-block-47">
