@@ -18,7 +18,7 @@ function AwesomeVideos(props) {
     function GetVideoData () {
       let config = {
         method: 'get',
-        url: `http://localhost:3000/tasks/${videoId}`,
+        url: `/tasks/${videoId}`,
         headers: { 
           'Authorization': `Bearer ${token}`
         }
@@ -42,7 +42,7 @@ function AwesomeVideos(props) {
       <h2 className="heading-8 contacts video">{videoTitle}</h2>
       <div className="text-block-10 middle short">Hey, Ada Lovelace from Google Inc. sent you a video 🍿</div>
       <div className="div-block-53v">
-            <video src={`http://localhost:3000/images/${link}`} width='100%' height='100%' controls autoPlay></video>
+            <video src={`http://localhost:3000/play/video/${link}`} width='100%' height='100%' controls autoPlay></video>
       </div>
       <div className="div-block-41 short">
         <div className="div-block-42">

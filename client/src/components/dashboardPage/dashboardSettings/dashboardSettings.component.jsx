@@ -35,7 +35,7 @@ function DashboardSettings() {
     var data = ''
     var config = {
       method: 'get',
-      url: 'http://localhost:3000/users/me',
+      url: '/users/me',
       headers: { 
         'Authorization': `Bearer ${token}`
       },
@@ -64,7 +64,7 @@ function DashboardSettings() {
     }
     axios({
       method: "patch",
-      url: "http://localhost:3000/users/me",
+      url: "/users/me",
       headers: { 
         'Authorization': `Bearer ${token}`
       },

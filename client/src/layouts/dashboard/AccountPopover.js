@@ -56,7 +56,7 @@ export default function AccountPopover() {
     event.preventDefault();
     const config = {
       method: 'post',
-      url: 'http://localhost:3000/users/logoutall',
+      url: '/users/logoutall',
       headers: { 
         'Authorization': `Bearer ${token}`
       }

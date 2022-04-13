@@ -34,7 +34,7 @@ function Login() {
     // setLoading(true)
     axios({
       method: "post",
-      url: "http://localhost:3000/users/login",
+      url: "/users/login",
       data,
     })
       .then((res) => {

@@ -35,7 +35,7 @@ function Register() {
     setLoading(true)
     axios({
       method: "post",
-      url: "http://localhost:3000/users",
+      url: "/users",
       data: {
         name,
         email,

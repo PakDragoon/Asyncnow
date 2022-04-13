@@ -21,7 +21,7 @@ function DashboardVideos () {
     useEffect(() => {
         var config = {
             method: 'get',
-            url: 'http://localhost:3000/tasks',
+            url: '/tasks',
             headers: { 
               'Authorization': `Bearer ${token}`
             }
@@ -38,7 +38,7 @@ function DashboardVideos () {
     function handleDeleteVideo (taskId) {
         var config = {
             method: 'delete',
-            url: `http://localhost:3000/delete/tasks/${taskId}`,
+            url: `/delete/tasks/${taskId}`,
             headers: { 
               'Authorization': `Bearer ${token}`
             }
@@ -72,7 +72,7 @@ function DashboardVideos () {
             }
         let configPatch = {
             method: 'patch',
-            url: `http://localhost:3000/tasks/${videoId}`,
+            url: `/tasks/${videoId}`,
             headers: { 
               'Authorization': `Bearer ${token}`
             },
@@ -96,7 +96,7 @@ function DashboardVideos () {
             <DashboardSubText subText='Manage sent videos, record and send new ones 🎬' />
             {data.map((row) => {
                 return (
-                <div className="div-block-41">
+                <div className="div-block-41" key={row.link}>
                     <div className="div-block-42">
                         <a href="../app/awesome-video.html" target="_blank" className="link-block-2 inline w-inline-block">
                         <img src={videosIcon} loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 7vw, 40px" alt=""/></a>

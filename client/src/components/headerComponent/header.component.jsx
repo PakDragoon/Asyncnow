@@ -30,7 +30,7 @@ function Header() {
     const token = sessionStorage.getItem("token")
     const config = {
       method: "post",
-      url: "http://localhost:3000/users/logoutall",
+      url: "/users/logoutall",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -50,7 +50,7 @@ function Header() {
     event.preventDefault()
     const config = {
       method: "post",
-      url: "http://localhost:3000/mail",
+      url: "/mail",
       headers: {
         "Content-Type": "application/json",
       },

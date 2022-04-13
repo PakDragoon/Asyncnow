@@ -94,7 +94,7 @@ export default function User() {
   const handleClose = () => setOpen(false)
   useEffect(() => {
     axios
-      .get("http://localhost:3000/users")
+      .get("/users")
       .then((res) => {
         setData(res.data)
       })
@@ -140,7 +140,7 @@ export default function User() {
     const role = newRole
     axios({
       method: "post",
-      url: "http://localhost:3000/users",
+      url: "/users",
       data: {
         name,
         email,

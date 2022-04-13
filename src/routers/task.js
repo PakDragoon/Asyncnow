@@ -169,13 +169,13 @@ router.post('/upload/video', auth, upload.single('video'), async (req, res) => {
         // link: req.file.filename.replace(/\s+/g, '')
         link: result.Key
     })
-    res.send({imagePath: `/images/${result.Key}`})
+    res.send({imagePath: `/play/video${result.Key}`})
     await task.save()
 }, (error, req, res, next) => {
     res.status(400).send({error: error.message})
 })
 
-router.get('/images/:key', (req, res) => {
+router.get('/play/video/:key', (req, res) => {
     const key = req.params.key
     const readStream = getFileStream(key)
     readStream.pipe(res)

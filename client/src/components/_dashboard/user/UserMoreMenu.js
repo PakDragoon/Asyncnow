@@ -65,7 +65,7 @@ export default function UserMoreMenu(props) {
             label: "Yes",
             onClick: () => {
               axios
-                .delete(`http://localhost:3000/user/delete/${userId}`)
+                .delete(`/user/delete/${userId}`)
                 .then((res) => {
                   console.log("Result:", res)
                   sessionStorage.setItem("deleteSuccess","true")
@@ -101,7 +101,7 @@ export default function UserMoreMenu(props) {
       }
       axios({
         method: "patch",
-        url: `http://localhost:3000/user/update/${props.Id}`,
+        url: `/user/update/${props.Id}`,
         data,
       })
         .then((res) => {

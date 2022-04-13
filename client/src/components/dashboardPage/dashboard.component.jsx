@@ -129,7 +129,7 @@ function Dashboard(props) {
         formData.append("cta", cta);
         var configFile = {
             method: 'post',
-            url: 'http://localhost:3000/upload/video',
+            url: '/upload/video',
             headers: { 
               'Authorization': `Bearer ${token}`
             },

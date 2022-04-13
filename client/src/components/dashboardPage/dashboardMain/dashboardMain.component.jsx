@@ -51,7 +51,7 @@ function DashboardMain() {
     event.preventDefault()
     let config = {
       method: 'get',
-      url: `http://localhost:3000/others/tasks/${linkToSend}`
+      url: `/others/tasks/${linkToSend}`
     };
     axios(config)
       .then((res) => {
@@ -74,7 +74,7 @@ function DashboardMain() {
       }
   let configPatch = {
       method: 'patch',
-      url: `http://localhost:3000/others/tasks/${videoI}`,
+      url: `/others/tasks/${videoI}`,
       data: updateData
     };
     axios(configPatch)
