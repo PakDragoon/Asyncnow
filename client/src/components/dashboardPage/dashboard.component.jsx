@@ -66,9 +66,6 @@ function Dashboard(props) {
     useEffect(() => {
         if (videoRef.current && previewStream) {
             videoRef.current.srcObject = previewStream;
-            console.log('videoRef.current.srcObject',videoRef.current.srcObject)
-            console.log("previewStream", previewStream)
-            console.log('type of previewsteream' , typeof(previewStream))
         }
     }, [previewStream]);
 
@@ -78,20 +75,21 @@ function Dashboard(props) {
         setTimeout( function() { stopRecording(); }, 60000);
     }
 
-    function handleClickOne() {
+    function blobToFile(theBlob, fileName){       
+        return new File([theBlob], fileName, { lastModified: new Date().getTime(), type: theBlob.type })
+    }
+
+    async function handleClickOne() {
         if(firstClick) {
             OverlayOne.current.style.display = 'none';
             OverlayTwo.current.style.display = 'block';
             OverlayThree.current.style.display = 'none';
             stopRecording()
             setFirstClick(false)
-            const blob = new Blob([mediaBlobUrl], {
-                type: "video/mp4",
-            })
-            const url = URL.createObjectURL(blob)
-            console.log('videoref', videoRef)
-            console.log('videoref typee', typeof(videoRef))
-            console.log('mediablob', mediaBlobUrl)
+            const videoBlob = await fetch(mediaBlobUrl).then(e => e.blob());
+            const newFile = blobToFile(videoBlob, 'new-file.mp4')
+            setFileData(newFile)
+            console.log('videoBlob',videoBlob)
             const a = document.createElement("a")
             document.body.appendChild(a)
             a.style = "display: none"
@@ -119,11 +117,8 @@ function Dashboard(props) {
 
     const handleSubmitVideo = async (event) => {
         event.preventDefault()
-        const data = {
-            description: description,
-            cta: cta,
-        }
         const formData = new FormData();
+        console.log('newFile fileData:',fileData)
         formData.append("video", fileData);
         formData.append("description", description);
         formData.append("cta", cta);
@@ -271,8 +266,8 @@ function Dashboard(props) {
                         <input type="text" className="text-field w-input" onChange={(e) => setDescription(e.target.value)} maxLength={256} name="Title" data-name="Title" placeholder="Awesome video title!" id="Title" required />
                         <label htmlFor="CTA" className="field-label">CTA (OPTIONAL)</label>
                         <input type="text" className="text-field w-input" onChange={(e) => setCTA(e.target.value)} maxLength={256} name="CTA" data-name="CTA" placeholder="/@alovelace/save-10%" id="CTA" />
-                        <label htmlFor="CTA" className="field-label">File</label>
-                        <input type="file" className="text-field w-input" onChange={(e) => setFileData(e.target.files[0])} name="video" data-name="video" placeholder="Choose File" id="video" />
+                        {/* <label htmlFor="CTA" className="field-label">File</label>
+                        <input type="file" className="text-field w-input" onChange={(e) => setFileData(e.target.files[0])} name="video" data-name="video" placeholder="Choose File" id="video" /> */}
                         {/* <label htmlFor="Title" className="field-label">VIDEO&nbsp;LINK</label> */}
                     {/* <div className="div-block-51">
                         <a href="#" className="link-block-2 small w-inline-block" onClick={() =>  navigator.clipboard.writeText(`${videoLink}`)}>

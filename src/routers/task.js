@@ -151,24 +151,6 @@ const storage = multer.diskStorage({
   })
 const upload = multer({ storage: storage, })
 
-// router.post('/upload/video', auth, upload.single('video'), async (req, res) => {
-//     const task = new Task({
-//         description: req.body.description,
-//         cta: req.body.cta,
-//         owner: req.user._id,
-//         link: req.file.filename.replace(/\s+/g, '')
-//     })
-//     try {
-//         await task.save()
-//         res.status(201).send(task)
-//     } catch (error) {
-//         res.status(400).send(error)
-//     }
-//     res.sendStatus(200)
-// }, (error, req, res, next) => {
-//     res.status(400).send({error: error.message})
-// })
-
 //s3 upload
 router.post('/upload/video', auth, upload.single('video'), async (req, res) => {
     const file = req.file
