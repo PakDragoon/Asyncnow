@@ -7,6 +7,8 @@ import '../../assets/css/asyncnow.webflow.css'
 import '../../assets/css/webflow.css'
 
 const axios = require("axios")
+const siteUrl = process.env.REACT_APP_SITE_URL
+const serverPort = process.env.REACT_APP_SERVER_PORT
 
 function AwesomeVideos(props) {
   const [link, setLink] = useState('')
@@ -16,6 +18,8 @@ function AwesomeVideos(props) {
 
   useEffect(() => {
     function GetVideoData () {
+      console.log('site',siteUrl)
+      console.log('server',serverPort)
       let config = {
         method: 'get',
         url: `/tasks/${videoId}`,
@@ -42,7 +46,7 @@ function AwesomeVideos(props) {
       <h2 className="heading-8 contacts video">{videoTitle}</h2>
       <div className="text-block-10 middle short">Hey, Ada Lovelace from Google Inc. sent you a video 🍿</div>
       <div className="div-block-53v">
-            <video src={`http://localhost:3000/play/video/${link}`} width='100%' height='100%' controls autoPlay></video>
+            <video src={`${siteUrl}:${serverPort}/play/video/${link}`} width='100%' height='100%' controls autoPlay></video>
       </div>
       <div className="div-block-41 short">
         <div className="div-block-42">

@@ -10,9 +10,11 @@ const nodemailer = require("nodemailer")
 const sendGridTransport = require("nodemailer-sendgrid-transport")
 const { SENDGRID_API } = require("./src/config/keys")
 const path = require('path');
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
+const url = process.env.SITE_URL
 
 const transporter = nodemailer.createTransport(
   sendGridTransport({
@@ -44,7 +46,7 @@ app.post("/mail", (req, res) => {
       to: email,
       from: "hassan748_7@hotmail.com",
       subject: "Asyncnow - Getting Started",
-      html: `<p>You can register yourself by clicking on the given link below:</p><br><a href="http://localhost:3001/register">http://localhost:3001/register</a>`,
+      html: `<p>You can register yourself by clicking on the given link below:</p><br><a href="${url}/register">${url}/register</a>`,
     })
     .then((resp) => {
       res.json({ resp })
